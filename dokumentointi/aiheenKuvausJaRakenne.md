@@ -1,9 +1,9 @@
-Aihe: Ginirommi, kahden pelaajan korttipeli. Toteutetaan ginirommin s‰‰ntˆj‰ (https://en.wikipedia.org/wiki/Gin_rummy)
-noudattava korttipeli kahdelle pelaajalle. Peli toimii verkon v‰lityksell‰ kahdella pelaajalla, tai paikallisesti teko‰ly‰ vastaan.
+**Aihe:** Ginirommi, kahden pelaajan korttipeli. Toteutetaan ginirommin s√§√§nt√∂j√§ (https://en.wikipedia.org/wiki/Gin_rummy)
+noudattava korttipeli kahdelle pelaajalle. Peli toimii verkon v√§lityksell√§ kahdella pelaajalla, tai paikallisesti teko√§ly√§ vastaan.
 
-K‰ytt‰j‰t: Pelaaja
+**K√§ytt√§j√§t:** Pelaaja
 
-Toiminnot:
+**Toiminnot:**
     
     Hostaa peli
         Toimii jos pelaajalla on nimi ja toimiva portti on annettu.
@@ -11,4 +11,4 @@ Toiminnot:
     Liity peliin
         Toimii jos pelaajalla on nimi ja IP-osoite on annettu ja siihen saadaan yhteys.
     
-    Pelaa teko‰ly‰ vastaan
+    Pelaa teko√§ly√§ vastaan
