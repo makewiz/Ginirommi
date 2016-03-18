@@ -1,5 +1,6 @@
 **Aihe:** Ginirommi, kahden pelaajan korttipeli. Toteutetaan ginirommin sääntöjä (https://en.wikipedia.org/wiki/Gin_rummy)
 noudattava korttipeli kahdelle pelaajalle. Peli toimii verkon välityksellä kahdella pelaajalla, tai paikallisesti tekoälyä vastaan.
+Verkkopeli ominaisuus toteutetaan käyttämällä javan socketteja. Moninpeli on toteutettava kahdella tietokoneella verkon välityksellä, koska toisen pelaajan korttien näkeminen ei ole sallittua.
 
 **Käyttäjät:** Pelaaja
 
