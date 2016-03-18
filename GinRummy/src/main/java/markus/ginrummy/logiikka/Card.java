@@ -10,12 +10,15 @@ package markus.ginrummy.logiikka;
  * @author Markus
  */
 public class Card {
-    private Suit suit;
-    private int value;
+    private final Suit suit;
+    private final int value;
 
-    public Card(Suit suit, int value) {
+    public Card(int value, Suit suit) {
         this.suit = suit;
         this.value = value;
+        if (value < 1 || value > 13) {
+            throw new IllegalArgumentException("Illegal playing card value");
+        }
     }
 
     public Suit getSuit() {
