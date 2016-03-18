@@ -5,10 +5,10 @@ noudattava korttipeli kahdelle pelaajalle. Peli toimii verkon välityksellä kah
 
 **Toiminnot:**
     
-    Hostaa peli
-        Toimii jos pelaajalla on nimi ja toimiva portti on annettu.
+* Hostaa peli
+  * Toimii jos pelaajalla on nimi ja toimiva portti on annettu.
     
-    Liity peliin
-        Toimii jos pelaajalla on nimi ja IP-osoite on annettu ja siihen saadaan yhteys.
+* Liity peliin
+  * Toimii jos pelaajalla on nimi ja IP-osoite on annettu ja siihen saadaan yhteys.
     
-    Pelaa tekoälyä vastaan
+* Pelaa tekoälyä vastaan
