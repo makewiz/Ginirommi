@@ -6,7 +6,7 @@ Verkkopeli ominaisuus toteutetaan käyttämällä javan socketteja. Moninpeli on
 
 **Toiminnot:**
     
-* Hostaa peli
+* Isännöi peli
   * Toimii jos pelaajalla on nimi ja toimiva portti on annettu.
     
 * Liity peliin
