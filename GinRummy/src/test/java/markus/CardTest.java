@@ -50,7 +50,7 @@ public class CardTest {
     public void creatingWorks() {
         for (int i = 1; i < 14; i++) {
             for (Suit s : Suit.values()) {
-                Card c = new Card(i,s);
+                Card c = new Card(s,i);
                 assertEquals(c.getValue(), i);
                 assertEquals(c.getSuit(), s);
             }
@@ -63,7 +63,7 @@ public class CardTest {
         while (true) {
             boolean thrown = false;
             try {
-                Card c = new Card(i, Suit.CLUBS);
+                Card c = new Card(Suit.RUUTU, i);
             } catch(IllegalArgumentException e) {
                 thrown = true;
                 assertEquals(e.getMessage(), "Illegal playing card value");
@@ -79,7 +79,7 @@ public class CardTest {
     
     @Test
     public void stringPresentation() {
-        Card c = new Card(1, Suit.CLUBS);
-        assertEquals(c.toString(), "1 of CLUBS");
+        Card c = new Card(Suit.HERTTA, 1);
+        assertEquals(c.toString(), "HERTTA A");
     }
 }

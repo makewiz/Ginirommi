@@ -13,7 +13,7 @@ public class Card {
     private final Suit suit;
     private final int value;
 
-    public Card(int value, Suit suit) {
+    public Card(Suit suit, int value) {
         this.suit = suit;
         this.value = value;
         if (value < 1 || value > 13) {
@@ -31,7 +31,17 @@ public class Card {
 
     @Override
     public String toString() {
-        return value + " of " + suit;
+        if (value == 1) {
+            return suit + " A";
+        } else if (value == 11) {
+            return suit + " J";
+        } else if (value == 12) {
+            return suit + " Q";
+        } else if (value == 13) {
+            return suit + " K";
+        } else {
+            return suit + " " + value;
+        }
     }
     
     
