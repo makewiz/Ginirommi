@@ -6,3 +6,4 @@ Päivä | Tunnit | Kuvaus
 22.3.2016 | 3h | Luokat Pelaaja ja pakka
 23.3.2016 | 1h | Swing ja Socket harjoittelua
 24.3.2016 | 3.5h | Pelilogiikka ja pisteidenlaskenta
+27.3.2016 | 9h | Palvelin, logiikka, käyttöliittymä
