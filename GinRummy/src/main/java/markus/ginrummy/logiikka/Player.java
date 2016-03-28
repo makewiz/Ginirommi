@@ -134,10 +134,11 @@ public class Player implements Serializable{
     }
     
     public void printCards() {
-        out.println("Korttisi: ");
+        out.println("Korttisi:");
         for (Card c : hand) {
-            out.println("    " + hand.indexOf(c) + "    " + c.toString());
+            out.println(c.toString());
         }
+        out.println("Loppu");
     }
     
     public void emptyHand() {

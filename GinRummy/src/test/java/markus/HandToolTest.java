@@ -150,4 +150,32 @@ public class HandToolTest {
         HandTools tool = new HandTools();
         assertEquals(4, tool.calculateMinus(hand));
     }
+    
+    @Test
+    public void simpleTest() {
+        Card a = new Card(Suit.PATA, 1);
+        Card b = new Card(Suit.PATA, 2);
+        Card c = new Card(Suit.PATA, 3);
+        Card d = new Card(Suit.HERTTA, 4);
+        Card e = new Card(Suit.RISTI, 6);
+        Card f = new Card(Suit.PATA, 6);
+        Card g = new Card(Suit.RUUTU, 4);
+        Card h = new Card(Suit.RUUTU, 5);
+        Card i = new Card(Suit.RUUTU, 7);
+        Card j = new Card(Suit.HERTTA, 10);
+        
+        ArrayList<Card> hand = new ArrayList<>();
+        hand.add(a);
+        hand.add(b);
+        hand.add(c);
+        hand.add(d);
+        hand.add(e);
+        hand.add(f);
+        hand.add(g);
+        hand.add(h);
+        hand.add(i);
+        hand.add(j);
+        int minus = tool.calculateMinus(hand);
+        assertEquals(42, minus);
+    }
 }

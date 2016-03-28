@@ -57,7 +57,7 @@ public class GameThread extends Thread {
             }
             
             open.addCard(deck.takeCard());
-            printBoth("Ensimmäinen pöytäkortti on : " + open.topCard().toString());
+            printBoth("Pöytäkortti: &" + open.topCard().toString());
 
             boolean second = false;
             while (true) {
@@ -108,7 +108,7 @@ public class GameThread extends Thread {
             
             while (true) {
                 printBoth("Pelaajan " + currentPlayer().getName() + " vuoro");
-                printBoth("Pöytäkortti: " + open.topCard().toString());
+                printBoth("Pöytäkortti: &" + open.topCard().toString());
                 currentPlayer().printString("Nostatko avopakasta vai umpipakasta?. /1 = avo /2 = umpi.");
                 while (true) {
                     currentPlayer().printString("xxx");                    

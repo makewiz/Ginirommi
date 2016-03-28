@@ -31,18 +31,22 @@ public class Card {
 
     @Override
     public String toString() {
-        if (value == 1) {
-            return suit + " A";
-        } else if (value == 11) {
-            return suit + " J";
-        } else if (value == 12) {
-            return suit + " Q";
-        } else if (value == 13) {
-            return suit + " K";
-        } else {
-            return suit + " " + value;
-        }
+        return suit + ":" + value;
     }
     
+    public String valueString() {
+        if (value == 1) {
+            return "A";
+        } else if (value == 11) {
+            return "J";
+        } else if (value == 12) {
+            return "Q";
+        } else if (value == 13) {
+            return "K";
+        } else {
+            return "" + value;
+        }
+    }
+
     
 }

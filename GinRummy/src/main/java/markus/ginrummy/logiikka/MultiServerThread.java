@@ -302,7 +302,8 @@ public class MultiServerThread extends Thread{
                 if (t != null && t.getPlayer() != null) {
                     out.println("    " + threads.indexOf(t) + "    " + t.getPlayer().getName() + "    " + t.getPlayer().status());
                 }
-            } 
+            }
+            out.println("Loppu");
         }
     }
     

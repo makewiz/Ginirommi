@@ -9,7 +9,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JScrollPane;
 import markus.ginrummy.logiikka.Client;
-import markus.ginrummy.logiikka.ClientWriter;
 
 /**
  *

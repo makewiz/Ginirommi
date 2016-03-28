@@ -5,6 +5,12 @@
  */
 package markus.ginrummy.kayttoliittyma;
 
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JScrollPane;
+import markus.ginrummy.logiikka.Client;
+
 /**
  *
  * @author Markus
@@ -38,6 +44,11 @@ public class JoinScreen extends javax.swing.JFrame {
         jTextField2.setText("Portnumber");
 
         jButton1.setText("JOIN");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -65,6 +76,23 @@ public class JoinScreen extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        String host = this.jTextField1.getText();
+        int portNumber = Integer.parseInt(this.jTextField2.getText());
+        this.setVisible(false);
+        try {
+            Client client = new Client(host, portNumber);
+            LoginScreen screen = new LoginScreen(client);
+            JScrollPane c = screen.getTheContainer();
+            ClientWriter writer = new ClientWriter(client, c, screen);
+            writer.start();
+            screen.setVisible(true);
+        } catch (IOException ex) {
+            Logger.getLogger(HostScreen.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
