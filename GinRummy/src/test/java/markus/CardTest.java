@@ -80,6 +80,6 @@ public class CardTest {
     @Test
     public void stringPresentation() {
         Card c = new Card(Suit.HERTTA, 1);
-        assertEquals(c.toString(), "HERTTA A");
+        assertEquals(c.toString(), "HERTTA:1");
     }
 }

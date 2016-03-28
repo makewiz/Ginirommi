@@ -178,4 +178,60 @@ public class HandToolTest {
         int minus = tool.calculateMinus(hand);
         assertEquals(42, minus);
     }
+    
+    @Test
+    public void multipleOptionTest() {
+        Card a = new Card(Suit.PATA, 1);
+        Card b = new Card(Suit.PATA, 2);
+        Card c = new Card(Suit.PATA, 3);
+        Card d = new Card(Suit.HERTTA, 3);
+        Card e = new Card(Suit.RUUTU, 1);
+        Card f = new Card(Suit.RUUTU, 2);
+        Card g = new Card(Suit.RUUTU, 3);
+        Card h = new Card(Suit.RUUTU, 6);
+        Card i = new Card(Suit.RISTI, 2);
+        Card j = new Card(Suit.RISTI, 3);
+        
+        ArrayList<Card> hand = new ArrayList<>();
+        hand.add(a);
+        hand.add(b);
+        hand.add(c);
+        hand.add(d);
+        hand.add(e);
+        hand.add(f);
+        hand.add(g);
+        hand.add(h);
+        hand.add(i);
+        hand.add(j);
+        int minus = tool.calculateMinus(hand);
+        assertEquals(8, minus);        
+    }
+    
+    @Test
+    public void testMaxCombo() {
+        Card a = new Card(Suit.PATA, 1);
+        Card b = new Card(Suit.PATA, 2);
+        Card c = new Card(Suit.PATA, 3);
+        Card d = new Card(Suit.HERTTA, 3);
+        Card e = new Card(Suit.HERTTA, 1);
+        Card f = new Card(Suit.HERTTA, 2);
+        Card g = new Card(Suit.RUUTU, 3);
+        Card h = new Card(Suit.RUUTU, 1);
+        Card i = new Card(Suit.RUUTU, 2);
+        Card j = new Card(Suit.RUUTU, 4);
+        
+        ArrayList<Card> hand = new ArrayList<>();
+        hand.add(a);
+        hand.add(b);
+        hand.add(c);
+        hand.add(d);
+        hand.add(e);
+        hand.add(f);
+        hand.add(g);
+        hand.add(h);
+        hand.add(i);
+        hand.add(j);
+        int minus = tool.calculateMinus(hand);
+        assertEquals(0, minus);              
+    }
 }

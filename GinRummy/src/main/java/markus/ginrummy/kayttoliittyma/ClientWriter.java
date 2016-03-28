@@ -16,6 +16,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.text.DefaultCaret;
 import markus.ginrummy.logiikka.Card;
 import markus.ginrummy.logiikka.Client;
 import markus.ginrummy.logiikka.Suit;
@@ -151,6 +152,8 @@ public class ClientWriter extends Thread{
                         openDeckPanel.add(card);
                         openDeckPanel.validate();
                         frame.validate();
+                    } else if (fromServer.equals("xxx")) {
+                        client.print("/xxx");
                     } else {
                         JLabel label = new JLabel(fromServer);
                         label.setFont(label.getFont().deriveFont(24.0f));

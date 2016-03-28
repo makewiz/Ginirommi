@@ -89,6 +89,7 @@ public class GameScreen extends javax.swing.JFrame {
             .addGap(0, 0, Short.MAX_VALUE)
         );
 
+        messagePane.setAutoscrolls(true);
         messagePane.setPreferredSize(new java.awt.Dimension(300, 200));
 
         yesButton.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N

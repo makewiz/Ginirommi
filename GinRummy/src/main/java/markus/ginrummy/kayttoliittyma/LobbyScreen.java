@@ -64,6 +64,8 @@ public class LobbyScreen extends javax.swing.JFrame {
 
         jScrollPane1.setViewportView(playerPanel);
 
+        jScrollPane2.setAutoscrolls(true);
+
         javax.swing.GroupLayout messagePanelLayout = new javax.swing.GroupLayout(messagePanel);
         messagePanel.setLayout(messagePanelLayout);
         messagePanelLayout.setHorizontalGroup(

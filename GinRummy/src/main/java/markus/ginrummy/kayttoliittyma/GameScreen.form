@@ -165,6 +165,7 @@
     </Container>
     <Container class="javax.swing.JScrollPane" name="messagePane">
       <Properties>
+        <Property name="autoscrolls" type="boolean" value="true"/>
         <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
           <Dimension value="[300, 200]"/>
         </Property>

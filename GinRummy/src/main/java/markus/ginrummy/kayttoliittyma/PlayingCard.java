@@ -117,6 +117,8 @@ public class PlayingCard extends javax.swing.JPanel {
         // TODO add your handling code here:
         if (idx != 99) {
             client.print("/" + idx);
+        } else {
+            client.print("/1");
         }
     }//GEN-LAST:event_formMouseClicked
 
