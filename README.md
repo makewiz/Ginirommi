@@ -1,4 +1,4 @@
 # Ginirommi
 
-[aiheen kuvaus](dokumentaatio/aiheenKuvausJaRakenne.md)
-[tuntikirjanpito](dokumentaatio/tutnikirjanpito.md)
+*[aiheen kuvaus](/dokumentointi/aiheenKuvausJaRakenne.md)
+*[tuntikirjanpito](/dokumentointi/tutnikirjanpito.md)
