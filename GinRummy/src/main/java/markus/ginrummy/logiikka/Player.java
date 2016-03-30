@@ -14,8 +14,6 @@ import java.io.Serializable;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -37,11 +35,9 @@ public class Player implements Serializable{
         state = 0;
         this.socket = socket;
         try {
-            PrintWriter out = new PrintWriter(new OutputStreamWriter(socket.getOutputStream(), "UTF-8"), true);
-            BufferedReader in = new BufferedReader(new InputStreamReader(
+            out = new PrintWriter(new OutputStreamWriter(socket.getOutputStream(), "UTF-8"), true);
+            in = new BufferedReader(new InputStreamReader(
             socket.getInputStream(), "UTF-8"));
-            this.out = out;
-            this.in = in;
         } catch (Exception e) {            
         }
 

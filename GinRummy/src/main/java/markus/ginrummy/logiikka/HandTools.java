@@ -6,8 +6,6 @@
 package markus.ginrummy.logiikka;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 
 /**
  *
@@ -16,326 +14,82 @@ import java.util.List;
 public class HandTools {
     
     public int calculateMinus(ArrayList<Card> hand) {
-        ArrayList<ArrayList<Card>> sets = sortSets(hand);
+        ArrayList<ArrayList<Card>> chosenSets = chooseSets(hand);
+        return setValue(hand) - fullValue(chosenSets);
+    }
+    
+    public void loopingMethod(ArrayList<ArrayList<Card>> list, ArrayList<ArrayList<ArrayList<Card>>> permutations, ArrayList<ArrayList<Card>> permutation) {
+
+        int size = list.size();
+        if (size == 0 || permutation.size() == 3) {
+            
+            permutations.add((ArrayList<ArrayList<Card>>) permutation.clone());
+            permutation.clear();
+        } else {
+            for (int i = 0; i < size; i++) {
+                ArrayList<ArrayList<Card>> tempList = (ArrayList<ArrayList<Card>>) list.clone();
+                permutation.add(tempList.get(i));
+                tempList.remove(i);
+                loopingMethod(tempList, permutations, permutation);   
+            }
+        }
+
+    }
+    
+    public ArrayList<ArrayList<Card>> chooseSets(ArrayList<Card> hand) {
+                ArrayList<ArrayList<Card>> sets = sortSets(hand);
         ArrayList<ArrayList<Card>> straights = sortStraights(hand);
         ArrayList<ArrayList<Card>> allSets = new ArrayList<>();
         allSets.addAll(sets);
         allSets.addAll(straights);
-        if (allSets.size() == 1) {
-            return setValue(hand) - fullValue(allSets);
-        } else if (allSets.size() == 2) {
-            int first = 0;
-            int second = 0;
-            for (int i = 0; i < 2; i++) {
-                int b;
-                if (i == 0) {
-                    b = 1;
-                } else {
-                    b = 0;
-                }
-                ArrayList<Card> tempSet = (ArrayList<Card>) allSets.get(i).clone();
-                removeDuplicates(allSets.get(b), tempSet);
-                if (setCheck(tempSet) || straightCheck(tempSet)) {
-                    first = setValue(allSets.get(b)) + setValue(tempSet);
-                } else {
-                    first = setValue(allSets.get(b));
-                }
-                if (second < first) {
-                    second = first;
+        ArrayList<ArrayList<ArrayList<Card>>> permutations = listPermutations(allSets);
+        ArrayList<ArrayList<Card>> chosenSets = new ArrayList<>();
+        for (ArrayList<ArrayList<Card>> perm : permutations) {
+            ArrayList<ArrayList<Card>> permutation = new ArrayList<>();
+            for (ArrayList<Card> set : perm) {
+                permutation.add((ArrayList<Card>) set.clone());
+            }
+            ArrayList<ArrayList<Card>> tempSets = new ArrayList<>();
+            int size = permutation.size();
+            if (size > 3) {
+                size = 3;
+            }
+            for (int i = 0; i < size; i++) {
+                ArrayList<Card> set = (ArrayList<Card>) permutation.get(i);
+                if (setCheck(set) || straightCheck(set)) {
+                    tempSets.add(set);
+                    for (int a = i + 1; a < size; a++) {
+                        removeDuplicates(set, permutation.get(a));
+                    }
+
                 }
             }
-            return setValue(hand) - second;
-        } else if (allSets.size() == 3) {
-            int totalValue = 0;
-            for (int i = 0; i < 3; i++) {
-                ArrayList<ArrayList<Card>> tempSets = (ArrayList<ArrayList<Card>>) allSets.clone();
-                ArrayList<Card> firstSet = (ArrayList<Card>) tempSets.get(i).clone();
-                tempSets.remove(i);
-                for (int j = 0; j < 2; j++) {
-                    ArrayList<Card> secondSet = (ArrayList<Card>) tempSets.get(j).clone();
-                    int k;
-                    if (j == 0) {
-                        k = 1;
-                    } else {
-                        k = 0;
-                    }
-                    ArrayList<Card> thirdSet = (ArrayList<Card>) tempSets.get(k).clone();
-                    removeDuplicates(firstSet, secondSet);
-                    removeDuplicates(firstSet, thirdSet);
-
-                    int value = 0;
-                    value+= setValue(firstSet); 
-                    if (setCheck(secondSet) || straightCheck(secondSet)) {
-                        value+= setValue(secondSet);
-                        removeDuplicates(secondSet, thirdSet);                        
-                    }
-                    if (setCheck(thirdSet) || straightCheck(thirdSet)) {
-                        value+= setValue(thirdSet);
-                    }
-                    if (value > totalValue) {
-                        totalValue = value;
-                    }
-                }
+            if (fullValue(tempSets) > fullValue(chosenSets)) {
+                chosenSets = tempSets;
             }
-            return setValue(hand) - totalValue;
-        } else if (allSets.size() == 4) {
-            int totalValue = 0;
-            for (int i = 0; i < 4; i++) {
-                ArrayList<ArrayList<Card>> tempSets = (ArrayList<ArrayList<Card>>) allSets.clone();
-                ArrayList<Card> firstSet = (ArrayList<Card>) tempSets.get(i).clone();
-                tempSets.remove(i);
-                for (int j = 0; j < 3; j++) {
-                    ArrayList<ArrayList<Card>> secondTemp = (ArrayList<ArrayList<Card>>) tempSets.clone();
-                    ArrayList<Card> secondSet = (ArrayList<Card>) secondTemp.get(j).clone();
-                    secondTemp.remove(j);
-
-                    for (int l = 0; l < 2; l++) {
-                        ArrayList<Card> thirdSet = (ArrayList<Card>) secondTemp.get(l).clone();
-                    
-                        int k;
-                        if (j == 0) {
-                            k = 1;
-                        } else {
-                            k = 0;
-                        }
-                        ArrayList<Card> fourthSet = (ArrayList<Card>) tempSets.get(k).clone();
-                        removeDuplicates(firstSet, secondSet);
-                        removeDuplicates(firstSet, thirdSet);
-                        removeDuplicates(firstSet, fourthSet);
-
-                        int value = 0;
-                        value+= setValue(firstSet); 
-                        
-                        if (setCheck(secondSet) || straightCheck(secondSet)) {
-                            value+= setValue(secondSet);
-                            removeDuplicates(secondSet, thirdSet);                        
-                        }
-                        if (setCheck(thirdSet) || straightCheck(thirdSet)) {
-                            value+= setValue(thirdSet);
-                        }
-                        if (value > totalValue) {
-                            totalValue = value;
-                        }
-                    }
-                }
-            }
-            return setValue(hand) - totalValue;            
-        } else if (allSets.size() == 5) {
-            int totalValue = 0;
-            for (int i = 0; i < 5; i++) {
-                ArrayList<ArrayList<Card>> tempSets = (ArrayList<ArrayList<Card>>) allSets.clone();
-                ArrayList<Card> firstSet = (ArrayList<Card>) tempSets.get(i).clone();
-                tempSets.remove(i);
-                for (int j = 0; j < 4; j++) {
-                    ArrayList<ArrayList<Card>> secondTemp = (ArrayList<ArrayList<Card>>) tempSets.clone();
-                    ArrayList<Card> secondSet = (ArrayList<Card>) secondTemp.get(j).clone();
-                    secondTemp.remove(j);
-
-                    for (int l = 0; l < 3; l++) {
-                        ArrayList<ArrayList<Card>> thirdTemp = (ArrayList<ArrayList<Card>>) secondTemp.clone();
-                        ArrayList<Card> thirdSet = (ArrayList<Card>) thirdTemp.get(l).clone();
-                        thirdTemp.remove(l);
-                        
-                        for (int g = 0; g < 2; g++) {
-                            
-                        
-                            ArrayList<Card> fourthSet = (ArrayList<Card>) thirdTemp.get(g).clone();
-
-                            int k;
-                            if (j == 0) {
-                                k = 1;
-                            } else {
-                                k = 0;
-                            }
-                            ArrayList<Card> fifthSet = (ArrayList<Card>) tempSets.get(k).clone();
-                            removeDuplicates(firstSet, secondSet);
-                            removeDuplicates(firstSet, thirdSet);
-                            removeDuplicates(firstSet, fourthSet);
-                            removeDuplicates(firstSet, fifthSet);
-
-                            int value = 0;
-                            value+= setValue(firstSet); 
-
-                            if (setCheck(secondSet) || straightCheck(secondSet)) {
-                                value+= setValue(secondSet);
-                                removeDuplicates(secondSet, thirdSet);                        
-                            }
-                            if (setCheck(thirdSet) || straightCheck(thirdSet)) {
-                                value+= setValue(thirdSet);
-                            }
-
-                            if (value > totalValue) {
-                                totalValue = value;
-                            }
-                        }
-                    }
-                }
-            }
-            return setValue(hand) - totalValue;                   
-        } else if (allSets.size() == 6) {
-            int totalValue = 0;
-            for (int i = 0; i < 6; i++) {
-                ArrayList<ArrayList<Card>> tempSets = (ArrayList<ArrayList<Card>>) allSets.clone();
-                ArrayList<Card> firstSet = (ArrayList<Card>) tempSets.get(i).clone();
-                tempSets.remove(i);
-                for (int j = 0; j < 5; j++) {
-                    ArrayList<ArrayList<Card>> secondTemp = (ArrayList<ArrayList<Card>>) tempSets.clone();
-                    ArrayList<Card> secondSet = (ArrayList<Card>) secondTemp.get(j).clone();
-                    secondTemp.remove(j);
-
-                    for (int l = 0; l < 4; l++) {
-                        ArrayList<ArrayList<Card>> thirdTemp = (ArrayList<ArrayList<Card>>) secondTemp.clone();
-                        ArrayList<Card> thirdSet = (ArrayList<Card>) thirdTemp.get(l).clone();
-                        thirdTemp.remove(l);
-                        
-                        for (int g = 0; g < 3; g++) {
-                            ArrayList<ArrayList<Card>> fourthTemp = (ArrayList<ArrayList<Card>>) thirdTemp.clone();
-                            ArrayList<Card> fourthSet = (ArrayList<Card>) fourthTemp.get(g).clone();
-                            fourthTemp.remove(g);                            
-                            for (int h = 0; h < 2; h++) {
-                                
-                            
-                                ArrayList<Card> fifthSet = (ArrayList<Card>) fourthTemp.get(h).clone();
-
-                                int k;
-                                if (j == 0) {
-                                    k = 1;
-                                } else {
-                                    k = 0;
-                                }
-                                ArrayList<Card> sixthSet = (ArrayList<Card>) tempSets.get(k).clone();
-                                removeDuplicates(firstSet, secondSet);
-                                removeDuplicates(firstSet, thirdSet);
-                                removeDuplicates(firstSet, fourthSet);
-                                removeDuplicates(firstSet, fifthSet);
-                                removeDuplicates(firstSet, sixthSet);
-
-                                int value = 0;
-                                value+= setValue(firstSet); 
-
-                                if (setCheck(secondSet) || straightCheck(secondSet)) {
-                                    value+= setValue(secondSet);
-                                    removeDuplicates(secondSet, thirdSet);                        
-                                }
-                                if (setCheck(thirdSet) || straightCheck(thirdSet)) {
-                                    value+= setValue(thirdSet);
-                                }
-                                if (value > totalValue) {
-                                    totalValue = value;
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-            return setValue(hand) - totalValue; 
-        } else {
-            return setValue(hand);
         }
+        return chosenSets;
+    }
+    
+    public ArrayList<ArrayList<ArrayList<Card>>> listPermutations(ArrayList<ArrayList<Card>> list) {
+        ArrayList<ArrayList<ArrayList<Card>>> permutations = new ArrayList<>();
+        ArrayList<ArrayList<Card>> permutation = new ArrayList<>();
+        loopingMethod(list, permutations, permutation);
+        return permutations;
     }
     
     public void sortHand(ArrayList<Card> hand) {
-        ArrayList<ArrayList<Card>> sets = sortSets(hand);
-        ArrayList<ArrayList<Card>> straights = sortSets(hand);
-        ArrayList<ArrayList<Card>> allSets = new ArrayList<>();
-        allSets.addAll(sets);
-        allSets.addAll(straights);
-        if (allSets.size() == 1) {
-            ArrayList<Card> tempHand = (ArrayList<Card>) hand.clone();
-            ArrayList<Card> sortedHand = new ArrayList<>();
-            tempHand.removeAll(allSets.get(0));
-            sortedHand.addAll(allSets.get(0));
-            sortedHand.addAll(tempHand);
-            hand.clear();
-            hand.addAll(sortedHand);
-        } else if (allSets.size() == 2) {
-      
-            int first = 0;
-            int second = 0;
-            ArrayList<Card> sortedFinal = new ArrayList<>();            
-            for (int i = 0; i < 2; i++) {
-                ArrayList<Card> tempHand = (ArrayList<Card>) hand.clone();
-                ArrayList<Card> sortedHand = new ArrayList<>();                      
-                int b;
-                if (i == 0) {
-                    b = 1;
-                } else {
-                    b = 0;
-                }
-                ArrayList<Card> tempSet = (ArrayList<Card>) allSets.get(i).clone();
-                removeDuplicates(allSets.get(b), tempSet);
-                if (setCheck(tempSet) || straightCheck(tempSet)) {
-                    first = setValue(allSets.get(b)) + setValue(tempSet);
-                    tempHand.removeAll(allSets.get(b));
-                    tempHand.removeAll(tempSet);
-                    sortedHand.addAll(allSets.get(b));
-                    sortedHand.addAll(tempSet);
-                    sortedHand.addAll(tempHand);
-                } else {
-                    first = setValue(allSets.get(b));
-                    tempHand.removeAll(allSets.get(b));
-                    sortedHand.addAll(allSets.get(b));
-                    sortedHand.addAll(tempHand);
-                }
-                if (second < first) {
-                    second = first;
-                    sortedFinal = sortedHand;
-                }
-            }
-            hand.clear();
-            hand.addAll(sortedFinal);
-        } else if (allSets.size() == 3) {       
-            int totalValue = 0;
-            ArrayList<Card> sortedFinal = new ArrayList<>();        
-            for (int i = 0; i < 3; i++) {
-              
-                ArrayList<ArrayList<Card>> tempSets = (ArrayList<ArrayList<Card>>) allSets.clone();
-                ArrayList<Card> firstSet = (ArrayList<Card>) tempSets.get(i).clone();
-                tempSets.remove(i);
-                for (int j = 0; j < 2; j++) {
-                    ArrayList<Card> tempHand = (ArrayList<Card>) hand.clone();
-                    ArrayList<Card> sortedHand = new ArrayList<>();                          
-                    ArrayList<Card> secondSet = (ArrayList<Card>) tempSets.get(j).clone();
-                    int k;
-                    if (j == 0) {
-                        k = 1;
-                    } else {
-                        k = 0;
-                    }
-                    ArrayList<Card> thirdSet = (ArrayList<Card>) tempSets.get(k).clone();
-                    removeDuplicates(firstSet, secondSet);
-                    removeDuplicates(firstSet, thirdSet);
-
-                    int value = 0;
-                    value+= setValue(firstSet);
-                    tempHand.removeAll(firstSet);
-                    sortedHand.addAll(firstSet);
-                    
-                    if (setCheck(secondSet) || straightCheck(secondSet)) {
-                        value+= setValue(secondSet);
-                    removeDuplicates(secondSet, thirdSet);                        
-                        tempHand.removeAll(secondSet);
-                        sortedHand.addAll(secondSet);
-                    }
-                    if (setCheck(thirdSet) || straightCheck(thirdSet)) {
-                        value+= setValue(thirdSet);
-                        tempHand.removeAll(thirdSet);
-                        sortedHand.addAll(thirdSet);
-                    }
-                    sortedHand.addAll(tempHand);
-                    if (value > totalValue) {
-                        totalValue = value;
-                        sortedFinal = sortedHand;
-                    }
-                }
-            }
-            hand.clear();
-            hand.addAll(sortedFinal);
-
-        } else {
-            SuitValueComparator comp = new SuitValueComparator();
-            hand.sort(comp);
-        }        
+        ArrayList<ArrayList<Card>> chosenSets = chooseSets(hand);
+        ArrayList<Card> newHand = new ArrayList<>();
+        for (ArrayList<Card> set : chosenSets) {
+            newHand.addAll(set);
+            hand.removeAll(set);
+        }
+        SuitValueComparator comp = new SuitValueComparator();
+        hand.sort(comp);
+        newHand.addAll(hand);
+        hand.clear();
+        hand.addAll(newHand);
     }
     
     public int setValue(ArrayList<Card> set) {

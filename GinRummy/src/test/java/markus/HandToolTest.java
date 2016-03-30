@@ -234,4 +234,72 @@ public class HandToolTest {
         int minus = tool.calculateMinus(hand);
         assertEquals(0, minus);              
     }
+    
+    @Test
+    public void permutationTest() {
+        ArrayList<ArrayList<Card>>  sets= new ArrayList<>();
+        for (int i = 0; i < 3; i++) {
+            sets.add(new ArrayList<>());
+        }
+        ArrayList<ArrayList<ArrayList<Card>>> permutations = tool.listPermutations(sets);
+        assertEquals(6, permutations.size());
+        assertEquals(3,permutations.get(0).size());
+        
+    }
+    
+    @Test
+    public void straightCheckRemovesCard() {
+        Card a = new Card(Suit.PATA, 1);
+        Card b = new Card(Suit.PATA, 2);
+        Card c = new Card(Suit.PATA, 3);
+        Card d = new Card(Suit.PATA, 4);
+        Card e = new Card(Suit.PATA, 5);
+        Card f = new Card(Suit.PATA, 10);
+        Card g = new Card(Suit.RUUTU, 4);
+        Card h = new Card(Suit.HERTTA, 4);
+        Card i = new Card(Suit.RISTI, 5);
+        Card j = new Card(Suit.HERTTA, 10);
+        
+        ArrayList<Card> hand = new ArrayList<>();
+        hand.add(a);
+        hand.add(b);
+        hand.add(c);
+        hand.add(d);
+        hand.add(e);
+        hand.add(f);
+        hand.add(g);
+        hand.add(h);
+        hand.add(i);
+        hand.add(j);
+        int minus = tool.calculateMinus(hand);
+        assertEquals(30, minus);        
+    }
+    
+    @Test
+    public void sortHandKeepsSameCards() {
+        Card a = new Card(Suit.PATA, 1);
+        Card b = new Card(Suit.PATA, 2);
+        Card c = new Card(Suit.PATA, 3);
+        Card d = new Card(Suit.PATA, 4);
+        Card e = new Card(Suit.PATA, 5);
+        Card f = new Card(Suit.PATA, 10);
+        Card g = new Card(Suit.RUUTU, 4);
+        Card h = new Card(Suit.HERTTA, 4);
+        Card i = new Card(Suit.RISTI, 5);
+        Card j = new Card(Suit.HERTTA, 10);
+        
+        ArrayList<Card> hand = new ArrayList<>();
+        hand.add(a);
+        hand.add(b);
+        hand.add(c);
+        hand.add(d);
+        hand.add(e);
+        hand.add(f);
+        hand.add(g);
+        hand.add(h);
+        hand.add(i);
+        hand.add(j);
+        tool.sortHand(hand);
+        assertEquals(10, hand.size());        
+    }
 }
