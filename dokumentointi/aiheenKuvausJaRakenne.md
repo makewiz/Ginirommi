@@ -16,5 +16,5 @@ Verkkopeli ominaisuus toteutetaan käyttämällä javan socketteja. Moninpeli on
 
 **Luokkakaavio**
 
-![Luokkakaavio](Ginirommi/dokumentointi/Luokkakaavio.png)
+![Luokkakaavio](dokumentointi/Luokkakaavio.png)
 
