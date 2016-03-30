@@ -13,3 +13,8 @@ Verkkopeli ominaisuus toteutetaan käyttämällä javan socketteja. Moninpeli on
   * Toimii jos pelaajalla on nimi ja IP-osoite on annettu ja siihen saadaan yhteys.
     
 * Pelaa tekoälyä vastaan
+
+**Luokkakaavio**
+
+![Luokkakaavio](Ginirommi/dokumentointi/Luokkakaavio.png)
+
