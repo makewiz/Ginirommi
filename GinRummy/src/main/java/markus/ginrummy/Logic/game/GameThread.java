@@ -5,10 +5,10 @@
  */
 package markus.ginrummy.logic.game;
 
-import markus.ginrummy.gameObjects.OpenDeck;
-import markus.ginrummy.gameObjects.Player;
-import markus.ginrummy.gameObjects.Deck;
-import markus.ginrummy.gameObjects.Card;
+import markus.ginrummy.gameobjects.OpenDeck;
+import markus.ginrummy.gameobjects.Player;
+import markus.ginrummy.gameobjects.Deck;
+import markus.ginrummy.gameobjects.Card;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -24,7 +24,7 @@ public class GameThread extends Thread {
     private Random random;
     private HandTools tool;
     private int playerInt;
-    
+
     public GameThread(Player first, Player second) {
 
         deck = new Deck();
@@ -35,22 +35,24 @@ public class GameThread extends Thread {
         random = new Random();
         tool = new HandTools();
     }
-    
+
     public static String newline = System.getProperty("line.separator");
 
     @Override
     public void run() {
-        
+
         printBoth("Tervetuloa peliin.");
         printBoth("Voit lähettää viestin kirjoittamalla tavallisesti.");
         int starter = random.nextInt(1);
+        int round = 1;
         playerInt = starter;
         printBoth("Aloittajaksi arvottiin: " + currentPlayer().getName());
         while (true) {
             playerInt = starter;
             deck = new Deck();
+            open = new OpenDeck();
             deck.shuffle(10);
-            
+
             for (Player p : players) {
                 p.emptyHand();
                 for (int i = 0; i < 10; i++) {
@@ -59,14 +61,15 @@ public class GameThread extends Thread {
                 tool.sortHand((ArrayList<Card>) p.getHand());
                 p.printCards();
             }
-            
+
             open.addCard(deck.takeCard());
+            printBoth("Kierros: " + round);
             printBoth("Pöytäkortti: &" + open.topCard().toString());
 
             boolean second = false;
             while (true) {
                 otherPlayer().printString("Odotetaan pelaajan: " + currentPlayer().getName() + " päätöstä.");
-                currentPlayer().printString("Nostatko kortin. Vastaa kyllä, tai ei.");
+                currentPlayer().printString("Nostatko kortin.");
                 String a = null;
                 currentPlayer().printString("xxx");
                 a = currentPlayer().readString();
@@ -76,7 +79,7 @@ public class GameThread extends Thread {
 
                 if (a != null && a.equals("/k")) {
                     currentPlayer().addCard(open.takeCard());
-                    otherPlayer().printString(currentPlayer().getName() + " nosti pöytäkortin.");                    
+                    otherPlayer().printString(currentPlayer().getName() + " nosti pöytäkortin.");
                     break;
                 } else if (a != null && a.equals("/e")) {
                     otherPlayer().printString(currentPlayer().getName() + " ei nostanut pöytäkorttia.");
@@ -100,7 +103,7 @@ public class GameThread extends Thread {
                 a = currentPlayer().readString();
                 synchronized (this) {
                     notifyAll();
-                }                
+                }
                 if (a != null && a.matches("/[0-9]|/10")) {
                     int remowable = Integer.parseInt(a.substring(1));
                     open.addCard(currentPlayer().removeCard(remowable));
@@ -109,21 +112,21 @@ public class GameThread extends Thread {
                     break;
                 }
             }
-            
+
             while (true) {
                 printBoth("Pelaajan " + currentPlayer().getName() + " vuoro");
                 printBoth("Pöytäkortti: &" + open.topCard().toString());
-                currentPlayer().printString("Nostatko avopakasta vai umpipakasta?. /1 = avo /2 = umpi.");
+                currentPlayer().printString("Nostatko avopakasta vai umpipakasta?.");
                 while (true) {
-                    currentPlayer().printString("xxx");                    
+                    currentPlayer().printString("xxx");
                     String option = currentPlayer().readString();
                     synchronized (this) {
                         notifyAll();
                     }
-                    if (option != null && option.equals("/1")) {
+                    if (option != null && option.equals("/k")) {
                         currentPlayer().addCard(open.takeCard());
                         break;
-                    } else if (option != null && option.equals("/2")) {
+                    } else if (option != null && option.equals("/e")) {
                         Card token = deck.takeCard();
                         currentPlayer().addCard(token);
                         currentPlayer().printString("Sait kortin: " + token.toString());
@@ -131,12 +134,12 @@ public class GameThread extends Thread {
                     }
                 }
                 tool.sortHand((ArrayList<Card>) currentPlayer().getHand());
-                currentPlayer().printCards();                
+                currentPlayer().printCards();
                 int minus = tool.calculateMinus((ArrayList<Card>) currentPlayer().getHand());
-                currentPlayer().printString("Miinuspisteesi tällä hetkellä: " + minus);                
+                currentPlayer().printString("Miinuspisteesi tällä hetkellä: " + minus);
                 int minusTwo = tool.calculateMinus((ArrayList<Card>) otherPlayer().getHand());
                 if (minus == 0) {
-                    
+
                     printBoth(currentPlayer().getName() + " Sai ison ginin! Bonus 31 pistettä ja jäännöspisteet: " + minusTwo);
                     currentPlayer().addPoints(31 + minusTwo);
                     starter = nextPlayer(starter);
@@ -167,14 +170,14 @@ public class GameThread extends Thread {
                     }
                     if (bestMinus <= 10) {
                         currentPlayer().printString("Jos poistat kortin: " + toRemove.toString() + " miinuspisteesi on: " + bestMinus + newline
-                        + " Haluatko lopettaa? /k: kyllä, /e: ei");
+                                + " Haluatko lopettaa?");
                         boolean stop = false;
                         while (true) {
-                            currentPlayer().printString("xxx");                            
+                            currentPlayer().printString("xxx");
                             String option = currentPlayer().readString();
                             synchronized (this) {
                                 notifyAll();
-                            }                            
+                            }
 
                             if (option != null && option.equals("/k")) {
                                 open.addCard(currentPlayer().removeCard(idx));
@@ -183,10 +186,10 @@ public class GameThread extends Thread {
                                     currentPlayer().addPoints(25 + minusTwo);
                                 } else {
                                     printBoth(currentPlayer().getName() + " Koputti jäännöspisteillä: " + bestMinus + newline
-                                    + otherPlayer().getName() + "n jäännöspisteet ovat: " + minusTwo);
+                                            + otherPlayer().getName() + "n jäännöspisteet ovat: " + minusTwo);
                                     if (minusTwo <= bestMinus) {
                                         printBoth(currentPlayer().getName() + "lla oli enemmän, tai yhtäpaljon jäännöspisteitä kuin " + newline
-                                        + otherPlayer().getName() + "lla, joten " + otherPlayer().getName() + " Saa altalyönnistä 25 bonuspistettä + " + (bestMinus - minusTwo) + " jäännöspistettä");
+                                                + otherPlayer().getName() + "lla, joten " + otherPlayer().getName() + " Saa altalyönnistä 25 bonuspistettä + " + (bestMinus - minusTwo) + " jäännöspistettä");
                                         otherPlayer().addPoints(25 + bestMinus - minusTwo);
                                     } else {
                                         printBoth(currentPlayer().getName() + " Sai " + (minusTwo - bestMinus) + " pistettä.");
@@ -208,7 +211,7 @@ public class GameThread extends Thread {
                 currentPlayer().printString("Valitse poistettava kortti komennolla: '/numero'");
                 a = null;
                 while (true) {
-                    currentPlayer().printString("xxx");                    
+                    currentPlayer().printString("xxx");
                     a = currentPlayer().readString();
                     synchronized (this) {
                         notifyAll();
@@ -220,13 +223,13 @@ public class GameThread extends Thread {
                         tool.sortHand((ArrayList<Card>) currentPlayer().getHand());
                         currentPlayer().printCards();
                         minus = tool.calculateMinus((ArrayList<Card>) currentPlayer().getHand());
-                        currentPlayer().printString("Miinuspisteesi tällä hetkellä: " + minus);                          
+                        currentPlayer().printString("Miinuspisteesi tällä hetkellä: " + minus);
                         changePlayer();
                         break;
                     }
-                }                
+                }
             }
-            
+            round++;
             Player winner = null;
             Player loser = null;
             for (Player p : players) {
@@ -237,8 +240,8 @@ public class GameThread extends Thread {
             }
             if (winner != null && loser != null) {
                 printBoth(winner.getName() + " Saavutti sadan pisteen rajan " + winner.getPoints() + " pisteellä. Onnea voittajalle"
-                + newline + loser.getName() + " Saavutti " + loser.getPoints() + " pistettä.");
-                for (Player p: players) {
+                        + newline + loser.getName() + " Saavutti " + loser.getPoints() + " pistettä.");
+                for (Player p : players) {
                     p.resetPoints();
                 }
                 break;
@@ -253,13 +256,13 @@ public class GameThread extends Thread {
 
         System.out.println("Valmista");
     }
-    
+
     public void printBoth(String string) {
         for (Player p : players) {
             p.printString(string);
         }
     }
-    
+
     public int nextPlayer(int current) {
         if (current == 0) {
             return 1;
@@ -267,15 +270,15 @@ public class GameThread extends Thread {
             return 0;
         }
     }
-    
+
     public Player currentPlayer() {
         return players.get(playerInt);
     }
-    
+
     public Player otherPlayer() {
         return players.get(nextPlayer(playerInt));
     }
-    
+
     public void changePlayer() {
         playerInt = nextPlayer(playerInt);
     }

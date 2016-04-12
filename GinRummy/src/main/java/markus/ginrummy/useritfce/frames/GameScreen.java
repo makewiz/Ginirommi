@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package markus.ginrummy.userInterface.frames;
+package markus.ginrummy.useritfce.frames;
 
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -14,13 +14,16 @@ import markus.ginrummy.logic.net.Client;
  * @author Markus
  */
 public class GameScreen extends javax.swing.JFrame {
+
     private Client client;
+
     /**
      * Creates new form GameScreen
      */
     public GameScreen() {
         initComponents();
     }
+
     public GameScreen(Client client) {
         this.client = client;
         initComponents();
@@ -233,12 +236,12 @@ public class GameScreen extends javax.swing.JFrame {
 
     private void openDeckPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_openDeckPanelMouseClicked
         // TODO add your handling code here:
-        client.print("/1");
+        client.print("/k");
     }//GEN-LAST:event_openDeckPanelMouseClicked
 
     private void deckPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deckPanelMouseClicked
         // TODO add your handling code here:
-        client.print("/2");
+        client.print("/e");
     }//GEN-LAST:event_deckPanelMouseClicked
 
     /**
@@ -275,23 +278,23 @@ public class GameScreen extends javax.swing.JFrame {
             }
         });
     }
-    
+
     public JScrollPane getMessageChain() {
         return this.messagePane;
     }
-    
+
     public JPanel getDeckPanel() {
         return this.deckPanel;
     }
-    
+
     public JPanel getHandPanel() {
         return this.handPanel;
     }
-    
+
     public JPanel getOpenDeckPanel() {
         return this.openDeckPanel;
     }
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel deckPanel;
     private javax.swing.JPanel handPanel;

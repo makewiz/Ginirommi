@@ -6,9 +6,9 @@
 package markus.ginrummy.logic.game;
 
 import java.util.ArrayList;
-import markus.ginrummy.gameObjects.Card;
+import markus.ginrummy.gameobjects.Card;
 import markus.ginrummy.logic.game.HandTools;
-import markus.ginrummy.gameObjects.Suit;
+import markus.ginrummy.gameobjects.Suit;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -314,7 +314,7 @@ public class HandToolTest {
         hand.add(d);
         hand.add(e);
         hand.add(f);
-        ArrayList<ArrayList<Card>> set = tool.sortSets(hand);
+        ArrayList<ArrayList<Card>> set = tool.sortSets(hand, 3);
         assertEquals(1, set.size());
     }
 }

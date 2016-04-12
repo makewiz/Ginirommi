@@ -6,9 +6,9 @@
 package markus.ginrummy.gameObjects;
 
 import java.util.ArrayList;
-import markus.ginrummy.gameObjects.Card;
-import markus.ginrummy.gameObjects.Deck;
-import markus.ginrummy.gameObjects.Suit;
+import markus.ginrummy.gameobjects.Card;
+import markus.ginrummy.gameobjects.Deck;
+import markus.ginrummy.gameobjects.Suit;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;

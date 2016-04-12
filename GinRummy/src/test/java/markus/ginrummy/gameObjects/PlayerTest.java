@@ -5,6 +5,8 @@
  */
 package markus.ginrummy.gameObjects;
 
+import markus.ginrummy.gameobjects.Card;
+import markus.ginrummy.gameobjects.Suit;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -15,7 +17,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import markus.ginrummy.gameObjects.Player;
+import markus.ginrummy.gameobjects.Player;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;

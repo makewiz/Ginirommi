@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package markus.ginrummy.userInterface;
+package markus.ginrummy.useritfce;
 
-import markus.ginrummy.userInterface.frames.StartScreen;
+import markus.ginrummy.useritfce.frames.StartScreen;
 
 /**
  *
@@ -20,5 +20,5 @@ public class StartApplication {
         // TODO code application logic here
         StartScreen.main(null);
     }
-    
+
 }

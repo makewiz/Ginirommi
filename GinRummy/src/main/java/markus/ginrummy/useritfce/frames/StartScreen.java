@@ -3,7 +3,19 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package markus.ginrummy.userInterface.frames;
+package markus.ginrummy.useritfce.frames;
+
+import java.io.IOException;
+import java.net.ServerSocket;
+import java.net.Socket;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import markus.ginrummy.gameobjects.Player;
+import markus.ginrummy.logic.game.Bot;
+import markus.ginrummy.logic.game.GameThread;
+import markus.ginrummy.logic.net.Client;
+import markus.ginrummy.logic.net.Server;
+import markus.ginrummy.useritfce.logic.FrameController;
 
 /**
  *
@@ -56,6 +68,11 @@ public class StartScreen extends javax.swing.JFrame {
 
         jButton3.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jButton3.setText("Local game");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -105,6 +122,28 @@ public class StartScreen extends javax.swing.JFrame {
         this.setVisible(false);
         screen.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+
+        try {
+            ServerSocket sSocket = new ServerSocket(5555);
+            Client playerClient = new Client("localhost", 5555);
+            Socket playerSocket = sSocket.accept();
+            Client botClient = new Client("localhost", 5555);
+            Socket botSocket = sSocket.accept();
+            FrameController controller = new FrameController(playerClient);
+            Bot bot = new Bot(botClient);
+            Player player = new Player("You", playerSocket);
+            Player botPlayer = new Player("Bot", botSocket);
+            GameThread gameThread = new GameThread(player, botPlayer);
+            controller.start();
+            gameThread.start();
+
+        } catch (IOException ex) {
+            Logger.getLogger(StartScreen.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments

@@ -14,30 +14,30 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import markus.ginrummy.gameObjects.Card;
-import markus.ginrummy.gameObjects.OpenDeck;
-import markus.ginrummy.gameObjects.Suit;
+import markus.ginrummy.gameobjects.Card;
+import markus.ginrummy.gameobjects.OpenDeck;
+import markus.ginrummy.gameobjects.Suit;
+import markus.ginrummy.gameobjects.ValueComparator;
 import markus.ginrummy.logic.net.Client;
-import markus.ginrummy.userInterface.graphics.PlayingCard;
+import markus.ginrummy.useritfce.graphics.PlayingCard;
 
 /**
  *
  * @author Markus
  */
-public class Bot extends Thread{
+public class Bot extends Thread {
+
     private Client client;
     private ArrayList<Card> hand;
     private OpenDeck open;
     private HandTools tool;
 
-    public Bot(int port) throws IOException {
+    public Bot(Client client) throws IOException {
         String host = "localhost";
-        client = new Client(host, port);
+        this.client = client;
         hand = new ArrayList<>();
         tool = new HandTools();
     }
-    
-    
 
     @Override
     public void run() {
@@ -61,7 +61,7 @@ public class Bot extends Thread{
                             hand.add(c);
                         }
                     }
-                }                
+                }
                 if (fromServer.equals("Pöytäkortti: &")) {
                     String[] messageSplit = fromServer.split("&");
                     String[] cardSplit = messageSplit[1].split(":");
@@ -72,17 +72,40 @@ public class Bot extends Thread{
                     Card c = new Card(s, v);
                     open.addCard(c);
                 }
-                if (fromServer.equals("Nostatko kortin. Vastaa kyllä, tai ei.")) {
-                    int minus = tool.calculateMinus(hand);
+                if (fromServer.equals("Nostatko kortin.") || fromServer.equals("Nostatko avopakasta vai umpipakasta?.")) {
+                    int firstMinus = tool.calculateMinus(hand);
+                    hand.add(open.topCard());
+                    int secondMinus = tool.calculateMinus(hand);
+                    if (firstMinus > secondMinus) {
+                        client.print("/e");
+                    } else {
+                        client.print("/k");
+                    }
+                }
+                if (fromServer.equals("Valitse poistettava kortti komennolla: '/numero'")) {
+                    ArrayList<ArrayList<Card>> sets = tool.chooseSets(hand);
                     ArrayList<Card> clonedHand = (ArrayList<Card>) hand.clone();
-                    
+                    for (ArrayList<Card> set : sets) {
+                        clonedHand.removeAll(set);
+                    }
+                    ValueComparator comp = new ValueComparator();
+                    clonedHand.sort(comp);
+                    Card toRemove = clonedHand.get(clonedHand.size() - 1);
+                    int idx = hand.indexOf(toRemove);
+                    client.print("/" + idx);
+                }
+                if (fromServer.startsWith("Jos poistat kortin: ")) {
+                    client.print("/k");
+                }
+                if (fromServer.startsWith("Kierros: ")) {
+                    open = new OpenDeck();
                 }
             } catch (IOException ex) {
                 Logger.getLogger(Bot.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }
-    
+
     public Suit importSuit(String suit) {
         Suit s;
         if (suit.equals("PATA")) {
@@ -95,6 +118,6 @@ public class Bot extends Thread{
             s = Suit.RISTI;
         }
         return s;
-    }    
-    
+    }
+
 }

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package markus.ginrummy.userInterface.frames;
+package markus.ginrummy.useritfce.frames;
 
 import java.awt.Container;
 import java.io.IOException;
@@ -18,15 +18,16 @@ import markus.ginrummy.logic.net.Client;
  * @author Markus
  */
 public class LoginScreen extends javax.swing.JFrame {
-    
+
     private Client client;
+
     /**
      * Creates new form LoginScreen
      */
     public LoginScreen() {
         initComponents();
     }
-    
+
     public LoginScreen(Client client) {
         this.client = client;
         initComponents();
@@ -130,12 +131,11 @@ public class LoginScreen extends javax.swing.JFrame {
             }
         });
     }
-    
+
     public JScrollPane getTheContainer() {
         return this.jScrollPane1;
     }
-    
-    
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;

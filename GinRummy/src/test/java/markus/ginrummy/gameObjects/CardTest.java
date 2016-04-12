@@ -6,8 +6,8 @@ package markus.ginrummy.gameObjects;
  * and open the template in the editor.
  */
 
-import markus.ginrummy.gameObjects.Card;
-import markus.ginrummy.gameObjects.Suit;
+import markus.ginrummy.gameobjects.Card;
+import markus.ginrummy.gameobjects.Suit;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;

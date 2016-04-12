@@ -5,6 +5,9 @@
  */
 package markus.ginrummy.gameObjects;
 
+import markus.ginrummy.gameobjects.Card;
+import markus.ginrummy.gameobjects.OpenDeck;
+import markus.ginrummy.gameobjects.Suit;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;

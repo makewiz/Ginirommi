@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package markus.ginrummy.userInterface.frames;
+package markus.ginrummy.useritfce.frames;
 
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -14,14 +14,16 @@ import markus.ginrummy.logic.net.Client;
  * @author Markus
  */
 public class LobbyScreen extends javax.swing.JFrame {
+
     private Client client;
+
     /**
      * Creates new form LobbyScreen
      */
     public LobbyScreen() {
         initComponents();
     }
-    
+
     public LobbyScreen(Client client) {
         this.client = client;
         initComponents();
@@ -179,25 +181,23 @@ public class LobbyScreen extends javax.swing.JFrame {
             }
         });
     }
-    
+
     public JScrollPane playersOnline() {
         return this.jScrollPane1;
     }
-    
+
     public JScrollPane messages() {
         return this.jScrollPane2;
     }
-    
+
     public JPanel messagePanel() {
         return this.messagePanel;
     }
-    
+
     public JPanel playerPanel() {
         return this.playerPanel;
     }
-    
-    
-    
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;

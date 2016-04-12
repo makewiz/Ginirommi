@@ -3,20 +3,20 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package markus.ginrummy.userInterface.graphics;
+package markus.ginrummy.useritfce.graphics;
 
 import java.awt.Color;
 import java.awt.Graphics;
-import markus.ginrummy.gameObjects.Card;
+import markus.ginrummy.gameobjects.Card;
 import markus.ginrummy.logic.net.Client;
-import markus.ginrummy.gameObjects.Suit;
+import markus.ginrummy.gameobjects.Suit;
 
 /**
  *
  * @author Markus
  */
 public class PlayingCard extends javax.swing.JPanel {
-    
+
     private Card card;
     private String suit;
     private String value;
@@ -67,9 +67,7 @@ public class PlayingCard extends javax.swing.JPanel {
         value = card.valueString();
         this.client = client;
         idx = 99;
-    }    
-    
-    
+    }
 
     @Override
     public void paintComponent(Graphics g) {
@@ -79,10 +77,8 @@ public class PlayingCard extends javax.swing.JPanel {
         g.drawString(value, 14, 50);
         g.drawString(suit, 10, 100);
         g.setFont(g.getFont().deriveFont(150f));
-        g.drawString(suit, this.getWidth()/2 - 65, this.getHeight()/2 + 55);      
+        g.drawString(suit, this.getWidth() / 2 - 65, this.getHeight() / 2 + 55);
     }
-    
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -118,7 +114,7 @@ public class PlayingCard extends javax.swing.JPanel {
         if (idx != 99) {
             client.print("/" + idx);
         } else {
-            client.print("/1");
+            client.print("/k");
         }
     }//GEN-LAST:event_formMouseClicked
 

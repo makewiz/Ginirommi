@@ -5,7 +5,7 @@
  */
 package markus.ginrummy.logic.net;
 
-import markus.ginrummy.gameObjects.Player;
+import markus.ginrummy.gameobjects.Player;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -23,7 +23,8 @@ import markus.ginrummy.logic.game.GameThread;
  *
  * @author Markus
  */
-public class MultiServerThread extends Thread{
+public class MultiServerThread extends Thread {
+
     private Socket socket = null;
     private List<Player> players;
     private Player player = null;
@@ -37,16 +38,14 @@ public class MultiServerThread extends Thread{
         this.players = players;
         this.threads = threads;
     }
-    
-    public static String newline = System.getProperty("line.separator");    
-    
+
+    public static String newline = System.getProperty("line.separator");
+
     public void run() {
 
-        try (
-            PrintWriter out = new PrintWriter(new OutputStreamWriter(socket.getOutputStream(), "UTF-8"), true);
-            BufferedReader in = new BufferedReader(new InputStreamReader(
-            socket.getInputStream(), "UTF-8"));
-        ) {
+        try (PrintWriter out = new PrintWriter(new OutputStreamWriter(socket.getOutputStream(), "UTF-8"), true);
+                BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream(), "UTF-8"));
+            ) {
             out.println("Tervetuloa ohjelmaan...");
             String name;
             while (true) {
@@ -71,11 +70,11 @@ public class MultiServerThread extends Thread{
             out.println("NameRegistered");
             out.println("Tervetuloa " + name);
             out.println();
-            
-            player = new Player (name, socket);
+
+            player = new Player(name, socket);
             Player playerTwo;
             players.add(player);
-            for (Player p: players) {
+            for (Player p : players) {
                 if (p != this.player) {
                     sendStringTo(p.getSocket(), "Pelaaja: " + this.player.getName() + " liittyi");
                 }
@@ -94,7 +93,7 @@ public class MultiServerThread extends Thread{
                     while (true) {
                         if (player.getState() == 0) {
                             break;
-                        }                        
+                        }
                         String message = in.readLine();
                         if (gameThread != null && message.equals("/xxx")) {
                             synchronized (gameThread) {
@@ -110,23 +109,23 @@ public class MultiServerThread extends Thread{
                 if (connectingThread != null && player.getState() == 1) {
                     synchronized (connectingThread) {
                         connectingThread.wait();
-                    }                           
+                    }
                     while (true) {
                         if (player.getState() == 0) {
                             break;
-                        }                        
+                        }
                         sendMessageTo(connectingThread.getSocket());
                     }
                     continue;
                 } else if (command.startsWith("/")) {
-                    if (command.startsWith("/start")){
+                    if (command.startsWith("/start")) {
                         String playerName = command.substring(7);
                         MultiServerThread connectTo = null;
                         for (MultiServerThread t : threads) {
-                            if (t.getPlayer()!= null && t.getPlayer().getName().equals(playerName)) {
+                            if (t.getPlayer() != null && t.getPlayer().getName().equals(playerName)) {
                                 connectTo = t;
                             }
-                        }                     
+                        }
                         if (connectTo == null) {
                             out.println("Pelaajanimeä ei löytynyt");
                             continue;
@@ -144,11 +143,10 @@ public class MultiServerThread extends Thread{
                             out.println("Lähetetään kutsu...");
                             playerTwo = falsePlayer.getPlayer();
                             try (
-                                Socket connecting = falsePlayer.getSocket();
-                                PrintWriter out2 = new PrintWriter(connecting.getOutputStream(), true);
-                                BufferedReader in2 = new BufferedReader(
-                                new InputStreamReader(connecting.getInputStream()));
-                            ) {
+                                    Socket connecting = falsePlayer.getSocket();
+                                    PrintWriter out2 = new PrintWriter(connecting.getOutputStream(), true);
+                                    BufferedReader in2 = new BufferedReader(
+                                            new InputStreamReader(connecting.getInputStream()));) {
                                 falsePlayer.connect(this);
                                 playerTwo.setState(1);
                                 player.setState(1);
@@ -197,14 +195,14 @@ public class MultiServerThread extends Thread{
                     } else if (command.equals("/update")) {
                         out.println();
                         out.println("Players online:.");
-    //                    for (Player p : players) {
-    //                        out.println("    " + players.indexOf(p) + "    " + p.getName() + "    " + p.status());
-    //                    }
+                        //                    for (Player p : players) {
+                        //                        out.println("    " + players.indexOf(p) + "    " + p.getName() + "    " + p.status());
+                        //                    }
                         printPlayers(out);
                     } else if (command.contains(":")) {
-                        String [] splitCommand = command.split(":");
-                        String playerName = splitCommand [0].substring(1);
-                        String message = splitCommand [1];
+                        String[] splitCommand = command.split(":");
+                        String playerName = splitCommand[0].substring(1);
+                        String message = splitCommand[1];
                         Socket messageSocket = null;
                         for (Player p : players) {
                             if (p.getName().equals(playerName) && p.getSocket() != this.getSocket()) {
@@ -221,19 +219,19 @@ public class MultiServerThread extends Thread{
                         out.println("Väärä komento");
                     }
                 } else {
-                    for (Player p: players) {
+                    for (Player p : players) {
                         if (p != this.player) {
                             sendStringTo(p.getSocket(), this.player.getName() + ": " + command);
                         }
                     }
                 }
             }
-            
+
             out.println("Kiitos! Paina entteriä lopettaaksesi.");
             String lopetus = in.readLine();
             out.println("Bye.");
             players.remove(player);
-            for (Player p: players) {
+            for (Player p : players) {
                 if (p != this.player) {
                     sendStringTo(p.getSocket(), "Pelaaja: " + this.player.getName() + "poistui");
                 }
@@ -242,7 +240,7 @@ public class MultiServerThread extends Thread{
         } catch (IOException e) {
             e.printStackTrace();
             e.getLocalizedMessage();
-            
+
         } catch (InterruptedException ex) {
             Logger.getLogger(MultiServerThread.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -255,24 +253,24 @@ public class MultiServerThread extends Thread{
     public Socket getSocket() {
         return socket;
     }
-    
+
     public void waitingGame(MultiServerThread thread) throws InterruptedException {
         synchronized (thread) {
             thread.wait();
         }
     }
-    
+
     public void connect(MultiServerThread thread) {
         connectingThread = thread;
     }
-    
+
     public void sendMessageTo(Socket connectingSocket) {
-        
+
         try {
             PrintWriter out = new PrintWriter(new OutputStreamWriter(connectingSocket.getOutputStream(), "UTF-8"), true);
             BufferedReader in = new BufferedReader(new InputStreamReader(
-            this.socket.getInputStream(), "UTF-8"));
- 
+                    this.socket.getInputStream(), "UTF-8"));
+
             String message;
             message = in.readLine();
             if (gameThread != null && message.equals("/xxx")) {
@@ -282,23 +280,22 @@ public class MultiServerThread extends Thread{
             } else if (message != null && !message.startsWith("/")) {
                 out.println(this.player.getName() + ": " + message);
             }
-        } catch (Exception e) {            
+        } catch (Exception e) {
         }
-            
-        
+
     }
-    
+
     public void sendStringTo(Socket connection, String string) {
         try {
             PrintWriter out = new PrintWriter(new OutputStreamWriter(connection.getOutputStream(), "UTF-8"), true);
             if (string != null) {
                 out.println(string);
             }
-        } catch (Exception e) { 
+        } catch (Exception e) {
         }
     }
-    
-    public void printPlayers (PrintWriter out) {
+
+    public void printPlayers(PrintWriter out) {
         if (threads != null) {
             for (MultiServerThread t : threads) {
                 if (t != null && t.getPlayer() != null) {
@@ -308,20 +305,19 @@ public class MultiServerThread extends Thread{
             out.println("Loppu");
         }
     }
-    
+
     public void printCommands(PrintWriter out) {
         out.println("Komennot aloitetaan merkillä: '/'"
-            + newline + "Kirjoita ilman etuliitettä lähettääksesi viesti kaikille"
-            + newline + "Yksityisviesti kirjoitetaan komennolla: '/nimi:teksti'"
-            + newline + "Päivitä pelaajalista: '/update'"
-            + newline + "Kutsu peliin: '/start playerName'"
-            + newline + "Komentolista: '/cmdlist'"
-            + newline + "Lopeta: '/stop' ");
+                + newline + "Kirjoita ilman etuliitettä lähettääksesi viesti kaikille"
+                + newline + "Yksityisviesti kirjoitetaan komennolla: '/nimi:teksti'"
+                + newline + "Päivitä pelaajalista: '/update'"
+                + newline + "Kutsu peliin: '/start playerName'"
+                + newline + "Komentolista: '/cmdlist'"
+                + newline + "Lopeta: '/stop' ");
     }
-    
+
     public void setGameThread(GameThread thread) {
         gameThread = thread;
     }
-
 
 }

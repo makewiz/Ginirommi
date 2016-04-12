@@ -17,28 +17,28 @@ import java.net.Socket;
  * @author Markus
  */
 public class Client {
+
     private String hostName;
     private int portNumber;
     private PrintWriter out;
     private BufferedReader in;
     private Socket socket;
 
-
     public Client(String hostName, int port) throws IOException {
         this.hostName = hostName;
         this.portNumber = port;
-        socket = new Socket(hostName,portNumber);
+        socket = new Socket(hostName, portNumber);
         out = new PrintWriter(new OutputStreamWriter(socket.getOutputStream(), "UTF-8"), true);
-        in = new BufferedReader(new InputStreamReader(socket.getInputStream(), "UTF-8"));  
+        in = new BufferedReader(new InputStreamReader(socket.getInputStream(), "UTF-8"));
     }
-    
+
     public String read() throws IOException {
         String read = in.readLine();
         return read;
     }
-    
+
     public void print(String s) {
         out.println(s);
     }
-    
+
 }

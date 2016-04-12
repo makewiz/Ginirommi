@@ -5,32 +5,32 @@
  */
 package markus.ginrummy.logic.game;
 
-import markus.ginrummy.gameObjects.ValueComparator;
-import markus.ginrummy.gameObjects.SuitValueComparator;
-import markus.ginrummy.gameObjects.Suit;
-import markus.ginrummy.gameObjects.Card;
+import markus.ginrummy.gameobjects.ValueComparator;
+import markus.ginrummy.gameobjects.SuitValueComparator;
+import markus.ginrummy.gameobjects.Suit;
+import markus.ginrummy.gameobjects.Card;
 import java.util.ArrayList;
-import markus.ginrummy.gameObjects.Card;
-import markus.ginrummy.gameObjects.Suit;
-import markus.ginrummy.gameObjects.SuitValueComparator;
-import markus.ginrummy.gameObjects.ValueComparator;
+import markus.ginrummy.gameobjects.Card;
+import markus.ginrummy.gameobjects.Suit;
+import markus.ginrummy.gameobjects.SuitValueComparator;
+import markus.ginrummy.gameobjects.ValueComparator;
 
 /**
  *
  * @author Markus
  */
 public class HandTools {
-    
+
     public int calculateMinus(ArrayList<Card> hand) {
         ArrayList<ArrayList<Card>> chosenSets = chooseSets(hand);
         return setValue(hand) - fullValue(chosenSets);
     }
-    
+
     public void loopingMethod(ArrayList<ArrayList<Card>> list, ArrayList<ArrayList<ArrayList<Card>>> permutations, ArrayList<ArrayList<Card>> permutation) {
 
         int size = list.size();
         if (size == 0 || permutation.size() == 3) {
-            
+
             permutations.add((ArrayList<ArrayList<Card>>) permutation.clone());
             permutation.clear();
         } else {
@@ -38,15 +38,15 @@ public class HandTools {
                 ArrayList<ArrayList<Card>> tempList = (ArrayList<ArrayList<Card>>) list.clone();
                 permutation.add(tempList.get(i));
                 tempList.remove(i);
-                loopingMethod(tempList, permutations, permutation);   
+                loopingMethod(tempList, permutations, permutation);
             }
         }
 
     }
-    
+
     public ArrayList<ArrayList<Card>> chooseSets(ArrayList<Card> hand) {
-                ArrayList<ArrayList<Card>> sets = sortSets(hand);
-        ArrayList<ArrayList<Card>> straights = sortStraights(hand);
+        ArrayList<ArrayList<Card>> sets = sortSets(hand, 3);
+        ArrayList<ArrayList<Card>> straights = sortStraights(hand, 3);
         ArrayList<ArrayList<Card>> allSets = new ArrayList<>();
         allSets.addAll(sets);
         allSets.addAll(straights);
@@ -75,14 +75,14 @@ public class HandTools {
         }
         return chosenSets;
     }
-    
+
     public ArrayList<ArrayList<ArrayList<Card>>> listPermutations(ArrayList<ArrayList<Card>> list) {
         ArrayList<ArrayList<ArrayList<Card>>> permutations = new ArrayList<>();
         ArrayList<ArrayList<Card>> permutation = new ArrayList<>();
         loopingMethod(list, permutations, permutation);
         return permutations;
     }
-    
+
     public void sortHand(ArrayList<Card> hand) {
         ArrayList<ArrayList<Card>> chosenSets = chooseSets(hand);
         ArrayList<Card> newHand = new ArrayList<>();
@@ -96,25 +96,25 @@ public class HandTools {
         hand.clear();
         hand.addAll(newHand);
     }
-    
+
     public int setValue(ArrayList<Card> set) {
         int value = 0;
         for (Card c : set) {
-            value+= c.getValue();
+            value += c.getValue();
         }
         return value;
     }
-    
+
     public int fullValue(ArrayList<ArrayList<Card>> sets) {
         int value = 0;
         for (ArrayList<Card> set : sets) {
-            value+= setValue(set);
+            value += setValue(set);
         }
         return value;
     }
-    
+
     public boolean straightCheck(ArrayList<Card> set) {
-        ArrayList<ArrayList<Card>> straights = sortStraights(set);
+        ArrayList<ArrayList<Card>> straights = sortStraights(set, 3);
         if (straights.isEmpty()) {
             return false;
         } else {
@@ -127,7 +127,7 @@ public class HandTools {
             return true;
         }
     }
-    
+
     public boolean setCheck(ArrayList<Card> set) {
         int value = 0;
         int counter = 0;
@@ -146,8 +146,8 @@ public class HandTools {
         }
         return true;
     }
-    
-    public ArrayList<ArrayList<Card>> sortSets(ArrayList<Card> hand) {
+
+    public ArrayList<ArrayList<Card>> sortSets(ArrayList<Card> hand, int size) {
         ArrayList<Card> tempHand = (ArrayList<Card>) hand.clone();
         ArrayList<ArrayList<Card>> sets = new ArrayList<>();
         ValueComparator comp = new ValueComparator();
@@ -162,19 +162,19 @@ public class HandTools {
             if (s.getValue() == c.getValue()) {
                 toAdd.add(s);
             } else {
-                if (toAdd.size() > 2) {
+                if (toAdd.size() >= size) {
                     sets.add(toAdd);
                 }
                 toAdd = new ArrayList<>();
             }
         }
-        if (toAdd.size() > 2) {
+        if (toAdd.size() >= size) {
             sets.add(toAdd);
         }
         return sets;
     }
-    
-    public ArrayList<ArrayList<Card>> sortStraights(ArrayList<Card> hand) {
+
+    public ArrayList<ArrayList<Card>> sortStraights(ArrayList<Card> hand, int size) {
         ArrayList<Card> tempHand = (ArrayList<Card>) hand.clone();
         SuitValueComparator comp = new SuitValueComparator();
         tempHand.sort(comp);
@@ -194,7 +194,7 @@ public class HandTools {
                     lastCard = c.getValue();
                     toAdd.add(c);
                 } else {
-                    if (counter > 2) {
+                    if (counter >= size) {
                         counter = 0;
                         straights.add(toAdd);
                         toAdd = new ArrayList<>();
@@ -212,12 +212,12 @@ public class HandTools {
             }
             counter++;
         }
-        if (counter > 2) {
+        if (counter >= size) {
             straights.add(toAdd);
         }
         return straights;
     }
-    
+
     public boolean removeDuplicates(ArrayList<Card> keep, ArrayList<Card> removeFrom) {
         boolean found = false;
         for (Card c : keep) {
@@ -229,4 +229,3 @@ public class HandTools {
         return found;
     }
 }
-            
