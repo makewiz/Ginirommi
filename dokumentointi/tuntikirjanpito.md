@@ -9,3 +9,5 @@ Päivä | Tunnit | Kuvaus
 27.3.2016 | 9h | Palvelin, logiikka, käyttöliittymä
 28.3.2016 | 10h | Käyttöliittymä toimintavakuntoon
 28.3.2016 | 2h | calculateMinus metodin bugin korjaus
+11.4.2016 | 4h | Luokkien testaus, tekoäly ja pakkaukset
+12.4.2016 | 3h | Tekoäly ja checkstyle
