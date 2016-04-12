@@ -59,9 +59,6 @@ public class HandTools {
             }
             ArrayList<ArrayList<Card>> tempSets = new ArrayList<>();
             int size = permutation.size();
-            if (size > 3) {
-                size = 3;
-            }
             for (int i = 0; i < size; i++) {
                 ArrayList<Card> set = (ArrayList<Card>) permutation.get(i);
                 if (setCheck(set) || straightCheck(set)) {

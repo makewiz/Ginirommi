@@ -302,4 +302,19 @@ public class HandToolTest {
         tool.sortHand(hand);
         assertEquals(10, hand.size());        
     }
+    
+    @Test
+    public void sortSetsWorks() {
+        Card d = new Card(Suit.HERTTA, 4);
+        Card e = new Card(Suit.RISTI, 4);
+        Card f = new Card(Suit.PATA, 4);
+
+        ArrayList<Card> hand = new ArrayList<>();
+
+        hand.add(d);
+        hand.add(e);
+        hand.add(f);
+        ArrayList<ArrayList<Card>> set = tool.sortSets(hand);
+        assertEquals(1, set.size());
+    }
 }

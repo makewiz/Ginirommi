@@ -66,7 +66,7 @@ public class GameThread extends Thread {
             boolean second = false;
             while (true) {
                 otherPlayer().printString("Odotetaan pelaajan: " + currentPlayer().getName() + " päätöstä.");
-                currentPlayer().printString("Nostatko kortin. Vastaa '/k': kyllä, tai '/e': ei.");
+                currentPlayer().printString("Nostatko kortin. Vastaa kyllä, tai ei.");
                 String a = null;
                 currentPlayer().printString("xxx");
                 a = currentPlayer().readString();
@@ -189,7 +189,7 @@ public class GameThread extends Thread {
                                         + otherPlayer().getName() + "lla, joten " + otherPlayer().getName() + " Saa altalyönnistä 25 bonuspistettä + " + (bestMinus - minusTwo) + " jäännöspistettä");
                                         otherPlayer().addPoints(25 + bestMinus - minusTwo);
                                     } else {
-                                        printBoth(currentPlayer() + " Sai " + (minusTwo - bestMinus) + " pistettä.");
+                                        printBoth(currentPlayer().getName() + " Sai " + (minusTwo - bestMinus) + " pistettä.");
                                         currentPlayer().addPoints(minusTwo - bestMinus);
                                     }
                                 }
