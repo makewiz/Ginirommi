@@ -3,17 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package markus.ginrummy.gameObjects;
+package markus.ginrummy.gameobjects;
 
-import markus.ginrummy.gameObjects.SuitComparator;
-import markus.ginrummy.gameObjects.Card;
+import markus.ginrummy.gameobjects.SuitComparator;
+import markus.ginrummy.gameobjects.Card;
 import java.util.Comparator;
 
 /**
  *
  * @author Markus
  */
-public class SuitValueComparator implements Comparator<Card>{
+public class SuitValueComparator implements Comparator<Card> {
 
     @Override
     public int compare(Card o1, Card o2) {
@@ -25,5 +25,5 @@ public class SuitValueComparator implements Comparator<Card>{
             return suits.compare(o1, o2);
         }
     }
-    
+
 }

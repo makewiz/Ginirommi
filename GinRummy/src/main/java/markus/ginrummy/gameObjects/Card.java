@@ -3,13 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package markus.ginrummy.gameObjects;
+package markus.ginrummy.gameobjects;
 
 /**
  *
  * @author Markus
  */
 public class Card {
+
     private final Suit suit;
     private final int value;
 
@@ -33,7 +34,7 @@ public class Card {
     public String toString() {
         return suit + ":" + value;
     }
-    
+
     public String valueString() {
         if (value == 1) {
             return "A";
@@ -52,8 +53,5 @@ public class Card {
     public boolean equals(Object obj) {
         return this.toString().equals(obj.toString());
     }
-    
-    
 
-    
 }

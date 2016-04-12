@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package markus.ginrummy.gameObjects;
+package markus.ginrummy.gameobjects;
 
-import markus.ginrummy.gameObjects.Card;
+import markus.ginrummy.gameobjects.Card;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -20,7 +20,8 @@ import java.util.List;
  *
  * @author Markus
  */
-public class Player implements Serializable{
+public class Player implements Serializable {
+
     private List<Card> hand;
     private String name;
     private int points;
@@ -38,8 +39,8 @@ public class Player implements Serializable{
         try {
             out = new PrintWriter(new OutputStreamWriter(socket.getOutputStream(), "UTF-8"), true);
             in = new BufferedReader(new InputStreamReader(
-            socket.getInputStream(), "UTF-8"));
-        } catch (Exception e) {            
+                    socket.getInputStream(), "UTF-8"));
+        } catch (Exception e) {
         }
 
     }
@@ -47,7 +48,7 @@ public class Player implements Serializable{
     public String getName() {
         return name;
     }
-   
+
     public void addCard(Card c) {
         hand.add(c);
     }
@@ -55,7 +56,7 @@ public class Player implements Serializable{
     public List<Card> getHand() {
         return hand;
     }
-    
+
     public void addPoints(int x) {
         points = points + x;
     }
@@ -63,14 +64,13 @@ public class Player implements Serializable{
     public int getPoints() {
         return points;
     }
-    
+
     public Card removeCard(int index) {
         Card token = hand.get(index);
         hand.remove(token);
         return token;
     }
-    
-    
+
     public void setState(int state) {
         this.state = state;
     }
@@ -78,7 +78,7 @@ public class Player implements Serializable{
     public int getState() {
         return state;
     }
-    
+
     public String status() {
         if (state > 0) {
             return "Pelissä";
@@ -102,11 +102,11 @@ public class Player implements Serializable{
     public BufferedReader getIn() {
         return in;
     }
-    
+
     public void printString(String string) {
         out.println(string);
     }
-    
+
     public String readString() {
         String read = null;
         try {
@@ -115,7 +115,7 @@ public class Player implements Serializable{
         }
         return read;
     }
-    
+
     public void printCards() {
         out.println("Korttisi:");
         for (Card c : hand) {
@@ -123,13 +123,13 @@ public class Player implements Serializable{
         }
         out.println("Loppu");
     }
-    
+
     public void emptyHand() {
         hand.clear();
     }
-    
+
     public void resetPoints() {
         points = 0;
     }
-    
+
 }

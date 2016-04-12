@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package markus.ginrummy.gameObjects;
+package markus.ginrummy.gameobjects;
 
-import markus.ginrummy.gameObjects.Card;
+import markus.ginrummy.gameobjects.Card;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,17 +14,17 @@ import java.util.List;
  * @author Markus
  */
 public class OpenDeck {
-    
+
     private List<Card> cards;
 
     public OpenDeck() {
         cards = new ArrayList<>();
     }
-    
+
     public void addCard(Card c) {
         cards.add(0, c);
     }
-    
+
     public Card topCard() {
         if (cards.isEmpty()) {
             return null;
@@ -32,7 +32,7 @@ public class OpenDeck {
             return cards.get(0);
         }
     }
-    
+
     public Card takeCard() {
         if (cards.isEmpty()) {
             return null;
@@ -46,6 +46,5 @@ public class OpenDeck {
     public List<Card> getCards() {
         return cards;
     }
-    
-    
+
 }
