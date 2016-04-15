@@ -34,6 +34,7 @@ public class FrameController extends Thread {
     private JScrollPane container;
     private JFrame frame;
     private boolean multiPlayer;
+    private GameScreen gameScreen;
 
     public FrameController(Client client, JScrollPane j, JFrame frame) {
         this.client = client;
@@ -42,8 +43,9 @@ public class FrameController extends Thread {
         multiPlayer = true;
     }
 
-    public FrameController(Client client) {
+    public FrameController(Client client, GameScreen screen) {
         multiPlayer = false;
+        gameScreen = screen;
     }
 
     @Override
@@ -115,9 +117,10 @@ public class FrameController extends Thread {
                     Logger.getLogger(FrameController.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
+            gameScreen = new GameScreen(client);
             lobby.setVisible(false);
         }
-        GameScreen gameScreen = new GameScreen(client);
+
         container = gameScreen.getMessageChain();
         container.setViewportView(panel);
         gameScreen.setVisible(true);
@@ -128,12 +131,18 @@ public class FrameController extends Thread {
         while (true) {
             try {
                 String fromServer = client.read();
+                synchronized(this) {
+                    notifyAll();
+                }
                 if (fromServer != null) {
                     if (fromServer.equals("Korttisi:")) {
                         handPanel.removeAll();
                         int idx = 0;
                         while (true) {
                             fromServer = client.read();
+                            synchronized(this) {
+                                notifyAll();
+                            }
                             if (fromServer.equals("Loppu")) {
                                 break;
                             } else {

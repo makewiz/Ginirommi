@@ -5,12 +5,7 @@
  */
 package markus.ginrummy.logic.game;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.io.PrintWriter;
-import java.net.Socket;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -19,7 +14,6 @@ import markus.ginrummy.gameobjects.OpenDeck;
 import markus.ginrummy.gameobjects.Suit;
 import markus.ginrummy.gameobjects.ValueComparator;
 import markus.ginrummy.logic.net.Client;
-import markus.ginrummy.useritfce.graphics.PlayingCard;
 
 /**
  *
@@ -32,7 +26,7 @@ public class Bot extends Thread {
     private OpenDeck open;
     private HandTools tool;
 
-    public Bot(Client client) throws IOException {
+    public Bot(Client client) {
         String host = "localhost";
         this.client = client;
         hand = new ArrayList<>();
@@ -44,10 +38,16 @@ public class Bot extends Thread {
         while (true) {
             try {
                 String fromServer = client.read();
+                synchronized(this) {
+                    notifyAll();
+                }
                 if (fromServer.equals("Korttisi:")) {
                     hand.clear();
                     while (true) {
                         fromServer = client.read();
+                        synchronized(this) {
+                            notifyAll();
+                        }
                         if (fromServer.equals("Loppu")) {
                             break;
                         } else {
@@ -81,6 +81,9 @@ public class Bot extends Thread {
                     } else {
                         client.print("/k");
                     }
+                    synchronized(this) {
+                        notifyAll();
+                    }
                 }
                 if (fromServer.equals("Valitse poistettava kortti komennolla: '/numero'")) {
                     ArrayList<ArrayList<Card>> sets = tool.chooseSets(hand);
@@ -93,9 +96,15 @@ public class Bot extends Thread {
                     Card toRemove = clonedHand.get(clonedHand.size() - 1);
                     int idx = hand.indexOf(toRemove);
                     client.print("/" + idx);
+                    synchronized(this) {
+                        notifyAll();
+                    }
                 }
                 if (fromServer.startsWith("Jos poistat kortin: ")) {
                     client.print("/k");
+                    synchronized(this) {
+                        notifyAll();
+                    }
                 }
                 if (fromServer.startsWith("Kierros: ")) {
                     open = new OpenDeck();

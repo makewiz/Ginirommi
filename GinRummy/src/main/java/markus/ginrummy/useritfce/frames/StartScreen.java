@@ -124,25 +124,19 @@ public class StartScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-
-        try {
-            ServerSocket sSocket = new ServerSocket(5555);
-            Client playerClient = new Client("localhost", 5555);
-            Socket playerSocket = sSocket.accept();
-            Client botClient = new Client("localhost", 5555);
-            Socket botSocket = sSocket.accept();
-            FrameController controller = new FrameController(playerClient);
-            Bot bot = new Bot(botClient);
-            Player player = new Player("You", playerSocket);
-            Player botPlayer = new Player("Bot", botSocket);
-            GameThread gameThread = new GameThread(player, botPlayer);
-            controller.start();
-            gameThread.start();
-
-        } catch (IOException ex) {
-            Logger.getLogger(StartScreen.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
+        
+        Client playerClient = new Client();
+        Client botClient = new Client();
+        GameScreen screen = new GameScreen(playerClient);
+        FrameController controller = new FrameController(playerClient, screen);
+        Player player = new Player("Player", controller, playerClient, screen);
+        Bot botController = new Bot(botClient);
+        Player bot = new Player("Bot", botClient, botController);
+        GameThread game = new GameThread(player, bot);
+        botController.start();
+        controller.start();
+        game.start();
+        
     }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
