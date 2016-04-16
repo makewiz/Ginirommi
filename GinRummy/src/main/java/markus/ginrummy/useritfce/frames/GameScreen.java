@@ -220,6 +220,7 @@ public class GameScreen extends javax.swing.JFrame {
 
     private void yesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_yesButtonActionPerformed
         // TODO add your handling code here:
+        client.print("/xxx");
         client.print("/k");
         synchronized(this) {
             notifyAll();
@@ -228,6 +229,7 @@ public class GameScreen extends javax.swing.JFrame {
 
     private void noButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_noButtonActionPerformed
         // TODO add your handling code here:
+        client.print("/xxx");
         client.print("/e");
         synchronized(this) {
             notifyAll();
@@ -245,6 +247,7 @@ public class GameScreen extends javax.swing.JFrame {
 
     private void openDeckPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_openDeckPanelMouseClicked
         // TODO add your handling code here:
+        client.print("/xxx");
         client.print("/k");
         synchronized(this) {
             notifyAll();
@@ -253,6 +256,7 @@ public class GameScreen extends javax.swing.JFrame {
 
     private void deckPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deckPanelMouseClicked
         // TODO add your handling code here:
+        client.print("/xxx");
         client.print("/e");
         synchronized(this) {
             notifyAll();

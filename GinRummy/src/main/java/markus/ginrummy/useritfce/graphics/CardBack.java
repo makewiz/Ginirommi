@@ -6,79 +6,39 @@
 package markus.ginrummy.useritfce.graphics;
 
 import java.awt.Color;
+import static java.awt.Color.MAGENTA;
 import java.awt.Graphics;
-import markus.ginrummy.gameobjects.Card;
 import markus.ginrummy.logic.net.Client;
-import markus.ginrummy.gameobjects.Suit;
 
 /**
  *
  * @author Markus
  */
-public class PlayingCard extends javax.swing.JPanel {
-
-    private Card card;
-    private String suit;
-    private String value;
+public class CardBack extends javax.swing.JPanel {
+    
     private Client client;
-    private int idx;
-    private Color color;
 
     /**
-     * Creates new form PalyingCard
+     * Creates new form CardBack
      */
-    public PlayingCard(Card card, Client client, int idx) {
+    public CardBack(Client client) {
         initComponents();
-        this.card = card;
-        if (card.getSuit().equals(Suit.HERTTA)) {
-            suit = "\u2665";
-            color = Color.RED;
-        } else if (card.getSuit().equals(Suit.PATA)) {
-            suit = "\u2660";
-            color = Color.BLACK;
-        } else if (card.getSuit().equals(Suit.RISTI)) {
-            suit = "\u2663";
-            color = Color.BLACK;
-        } else {
-            suit = "\u2666";
-            color = Color.RED;
-        }
-        value = card.valueString();
         this.client = client;
-        this.idx = idx;
-    }
-
-    public PlayingCard(Card card, Client client) {
-        initComponents();
-        this.card = card;
-        if (card.getSuit().equals(Suit.HERTTA)) {
-            suit = "\u2665";
-            color = Color.RED;
-        } else if (card.getSuit().equals(Suit.PATA)) {
-            suit = "\u2660";
-            color = Color.BLACK;
-        } else if (card.getSuit().equals(Suit.RISTI)) {
-            suit = "\u2663";
-            color = Color.BLACK;
-        } else {
-            suit = "\u2666";
-            color = Color.RED;
-        }
-        value = card.valueString();
-        this.client = client;
-        idx = 99;
     }
 
     @Override
-    public void paintComponent(Graphics g) {
+    protected void paintComponent(Graphics g) {
         super.paintComponent(g); //To change body of generated methods, choose Tools | Templates.
         g.setFont(g.getFont().deriveFont(50f));
+        Color color = Color.MAGENTA;
         g.setColor(color);
-        g.drawString(value, 14, 50);
-        g.drawString(suit, 10, 100);
+        g.drawString("?", 14, 50);
+        g.drawString("?", 10, 100);
         g.setFont(g.getFont().deriveFont(150f));
-        g.drawString(suit, this.getWidth() / 2 - 65, this.getHeight() / 2 + 55);
+        g.drawString("?", this.getWidth() / 2 - 65, this.getHeight() / 2 + 55);        
     }
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -89,7 +49,7 @@ public class PlayingCard extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setBorder(javax.swing.BorderFactory.createMatteBorder(3, 3, 3, 3, new java.awt.Color(0, 0, 0)));
+        setBorder(new javax.swing.border.MatteBorder(null));
         setPreferredSize(new java.awt.Dimension(200, 280));
         addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -101,22 +61,19 @@ public class PlayingCard extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 194, Short.MAX_VALUE)
+            .addGap(0, 398, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 274, Short.MAX_VALUE)
+            .addGap(0, 298, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
         // TODO add your handling code here:
         client.print("/xxx");
-        if (idx != 99) {
-            client.print("/" + idx);
-        } else {
-            client.print("/k");
-        }
+        client.print("/e");
+        
     }//GEN-LAST:event_formMouseClicked
 
 

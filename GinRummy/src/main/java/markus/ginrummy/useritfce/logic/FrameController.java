@@ -20,6 +20,7 @@ import markus.ginrummy.gameobjects.Suit;
 import markus.ginrummy.useritfce.frames.GameScreen;
 import markus.ginrummy.useritfce.frames.LobbyScreen;
 import markus.ginrummy.useritfce.frames.LoginScreen;
+import markus.ginrummy.useritfce.graphics.CardBack;
 import markus.ginrummy.useritfce.graphics.PlayingCard;
 
 /**
@@ -89,12 +90,18 @@ public class FrameController extends Thread {
                             }
                         }
                         lobby.validate();
-                    }
-                    JLabel label = new JLabel(fromServer);
-                    label.setFont(label.getFont().deriveFont(24.0f));
+                    } else {
+                        if (panel.getComponentCount() >= 30) {
+                            panel.remove(0);
+                        }                        
+                        JLabel label = new JLabel(fromServer);
+                        label.setFont(label.getFont().deriveFont(24.0f));
 
-                    panel.add(label);
-                    lobby.validate();
+                        panel.add(label);
+                        lobby.validate();
+                        panel.scrollRectToVisible(label.getBounds());
+                        lobby.validate();
+                    }
                     if (fromServer.equals("Tervetuloa peliin.")) {
                         break;
                     }
@@ -118,6 +125,10 @@ public class FrameController extends Thread {
         handPanel.setLayout(new BoxLayout(handPanel, BoxLayout.X_AXIS));
         JPanel openDeckPanel = gameScreen.getOpenDeckPanel();
         openDeckPanel.setLayout(new FlowLayout());
+        JPanel deckPanel = gameScreen.getDeckPanel();
+        deckPanel.setLayout(new FlowLayout());
+        CardBack cardBack = new CardBack(client);
+        deckPanel.add(cardBack);
         while (true) {
             try {
                 String fromServer = client.read();
@@ -159,11 +170,15 @@ public class FrameController extends Thread {
                         openDeckPanel.validate();
                         gameScreen.validate();
                     } else if (fromServer.equals("xxx")) {
-                        client.print("/xxx");
                     } else {
+                        if (panel.getComponentCount() >= 30) {
+                            panel.remove(0);
+                        }
                         JLabel label = new JLabel(fromServer);
                         label.setFont(label.getFont().deriveFont(24.0f));
                         panel.add(label);
+                        gameScreen.validate();
+                        panel.scrollRectToVisible(label.getBounds());
                         gameScreen.validate();
                     }
                 }

@@ -111,7 +111,15 @@ public class MultiServerThread extends Thread {
                         if (player.getState() == 0) {
                             break;
                         }
-                        sendMessageTo(connectingThread.getSocket());
+                        String message = in.readLine();
+                        if (message != null && message.equals("/xxx")) {
+                            synchronized(gameThread) {
+                                gameThread.wait();
+                            }
+                        } else if (message != null && !message.startsWith("/")) {
+                                sendStringTo(connectingThread.getSocket(), this.player.getName() + ": " + message);
+                                sendStringTo(socket, this.player.getName() + ": " + message);
+                        }
                     }
                     continue;
                 } else if (command.startsWith("/")) {
@@ -177,7 +185,16 @@ public class MultiServerThread extends Thread {
                                         if (player.getState() == 0) {
                                             break;
                                         }
-                                        sendMessageTo(connecting);
+                                        String message = in.readLine();
+                                        if (message != null && message.equals("/xxx")) {
+                                            synchronized(gameThread) {
+                                                gameThread.wait();
+                                            }
+                                        } else if (message != null && !message.startsWith("/")) {
+                                                sendStringTo(connecting, this.player.getName() + ": " + message);
+                                                sendStringTo(socket, this.player.getName() + ": " + message);
+                                        }
+                                                                        
                                     }
                                 }
 
@@ -222,9 +239,7 @@ public class MultiServerThread extends Thread {
                     }
                 } else {
                     for (Player p : players) {
-                        if (p != this.player) {
-                            sendStringTo(p.getSocket(), this.player.getName() + ": " + command);
-                        }
+                        sendStringTo(p.getSocket(), this.player.getName() + ": " + command);                        
                     }
                 }
             }
