@@ -5,8 +5,6 @@
  */
 package markus.ginrummy.useritfce.logic;
 
-import java.awt.CardLayout;
-import java.awt.Container;
 import java.awt.FlowLayout;
 import java.io.IOException;
 import java.util.logging.Level;
@@ -16,12 +14,12 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.text.DefaultCaret;
 import markus.ginrummy.gameobjects.Card;
 import markus.ginrummy.logic.net.Client;
 import markus.ginrummy.gameobjects.Suit;
 import markus.ginrummy.useritfce.frames.GameScreen;
 import markus.ginrummy.useritfce.frames.LobbyScreen;
+import markus.ginrummy.useritfce.frames.LoginScreen;
 import markus.ginrummy.useritfce.graphics.PlayingCard;
 
 /**
@@ -31,98 +29,90 @@ import markus.ginrummy.useritfce.graphics.PlayingCard;
 public class FrameController extends Thread {
 
     private Client client;
-    private JScrollPane container;
-    private JFrame frame;
-    private boolean multiPlayer;
-    private GameScreen gameScreen;
 
-    public FrameController(Client client, JScrollPane j, JFrame frame) {
+    public FrameController(Client client) {
         this.client = client;
-        container = j;
-        this.frame = frame;
-        multiPlayer = true;
-    }
-
-    public FrameController(Client client, GameScreen screen) {
-        multiPlayer = false;
-        gameScreen = screen;
     }
 
     @Override
     public void run() {
+        LoginScreen login = new LoginScreen(client);
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-        if (multiPlayer) {
 
-            container.setViewportView(panel);
+        login.getTheContainer().setViewportView(panel);
+        login.setVisible(true);
 
-            while (true) {
-                try {
-                    String fromServer = client.read();
-                    if (fromServer != null) {
+        while (true) {
+            try {
+                String fromServer = client.read();
+                if (fromServer != null) {
 
-                        JLabel label = new JLabel(fromServer);
-                        label.setFont(label.getFont().deriveFont(24.0f));
+                    JLabel label = new JLabel(fromServer);
+                    label.setFont(label.getFont().deriveFont(24.0f));
 
-                        panel.add(label);
-                        frame.validate();
-                        if (fromServer.equals("NameRegistered")) {
-                            break;
-                        }
+                    panel.add(label);
+                    login.validate();
+                    if (fromServer.equals("NameRegistered")) {
+                        break;
                     }
-                } catch (IOException ex) {
-                    Logger.getLogger(FrameController.class.getName()).log(Level.SEVERE, null, ex);
                 }
+            } catch (IOException ex) {
+                Logger.getLogger(FrameController.class.getName()).log(Level.SEVERE, null, ex);
             }
-
-            LobbyScreen lobby = new LobbyScreen(client);
-            panel = lobby.messagePanel();
-            JPanel playerPanel = lobby.playerPanel();
-
-            panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-            playerPanel.setLayout(new BoxLayout(playerPanel, BoxLayout.Y_AXIS));
-
-            frame.setVisible(false);
-            lobby.setVisible(true);
-
-            while (true) {
-                try {
-                    String fromServer = client.read();
-                    if (fromServer != null) {
-                        if (fromServer.equals("Players online:.")) {
-                            playerPanel.removeAll();
-                            while (true) {
-                                fromServer = client.read();
-                                if (fromServer.equals("Loppu")) {
-                                    break;
-                                } else {
-                                    JLabel label = new JLabel(fromServer);
-                                    label.setFont(label.getFont().deriveFont(24.0f));
-                                    playerPanel.add(label);
-                                }
-                            }
-                            lobby.validate();
-                        }
-                        JLabel label = new JLabel(fromServer);
-                        label.setFont(label.getFont().deriveFont(24.0f));
-
-                        panel.add(label);
-                        lobby.validate();
-                        if (fromServer.equals("Tervetuloa peliin.")) {
-                            break;
-                        }
-
-                    }
-                } catch (IOException ex) {
-                    Logger.getLogger(FrameController.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-            gameScreen = new GameScreen(client);
-            lobby.setVisible(false);
         }
 
-        container = gameScreen.getMessageChain();
+        LobbyScreen lobby = new LobbyScreen(client);
+        panel = lobby.messagePanel();
+        JPanel playerPanel = lobby.playerPanel();
+
+        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+        playerPanel.setLayout(new BoxLayout(playerPanel, BoxLayout.Y_AXIS));
+
+        login.setVisible(false);
+        lobby.setVisible(true);
+
+        while (true) {
+            try {
+                String fromServer = client.read();
+                if (fromServer != null) {
+                    if (fromServer.equals("Players online:.")) {
+                        playerPanel.removeAll();
+                        while (true) {
+                            fromServer = client.read();
+                            if (fromServer.equals("Loppu")) {
+                                break;
+                            } else {
+                                JLabel label = new JLabel(fromServer);
+                                label.setFont(label.getFont().deriveFont(24.0f));
+                                playerPanel.add(label);
+                            }
+                        }
+                        lobby.validate();
+                    }
+                    JLabel label = new JLabel(fromServer);
+                    label.setFont(label.getFont().deriveFont(24.0f));
+
+                    panel.add(label);
+                    lobby.validate();
+                    if (fromServer.equals("Tervetuloa peliin.")) {
+                        break;
+                    }
+                    if (fromServer.equals("stcmd")) {
+                        client.print("stcmd");
+                    }
+
+                }
+            } catch (IOException ex) {
+                Logger.getLogger(FrameController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        GameScreen gameScreen = new GameScreen(client);
+        lobby.setVisible(false);
+
+        JScrollPane container = gameScreen.getMessageChain();
         container.setViewportView(panel);
+        container.setAutoscrolls(true);
         gameScreen.setVisible(true);
         JPanel handPanel = gameScreen.getHandPanel();
         handPanel.setLayout(new BoxLayout(handPanel, BoxLayout.X_AXIS));
@@ -131,18 +121,12 @@ public class FrameController extends Thread {
         while (true) {
             try {
                 String fromServer = client.read();
-                synchronized(this) {
-                    notifyAll();
-                }
                 if (fromServer != null) {
                     if (fromServer.equals("Korttisi:")) {
                         handPanel.removeAll();
                         int idx = 0;
                         while (true) {
                             fromServer = client.read();
-                            synchronized(this) {
-                                notifyAll();
-                            }
                             if (fromServer.equals("Loppu")) {
                                 break;
                             } else {
@@ -161,7 +145,7 @@ public class FrameController extends Thread {
                         }
                         handPanel.validate();
                         gameScreen.validate();
-                    } else if (fromServer.startsWith("Pöytäkortti: &")) {
+                    } else if (fromServer.startsWith("Poytakortti: &")) {
                         String[] messageSplit = fromServer.split("&");
                         String[] cardSplit = messageSplit[1].split(":");
                         String suit = cardSplit[0];

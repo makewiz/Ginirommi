@@ -11,10 +11,6 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.net.Socket;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import markus.ginrummy.gameobjects.Player;
-import markus.ginrummy.logic.game.GameThread;
 
 /**
  *
@@ -27,9 +23,6 @@ public class Client {
     private PrintWriter out;
     private BufferedReader in;
     private Socket socket;
-    private boolean local;
-    private String fromGame;
-    private String fromClient;
 
     public Client(String hostName, int port) throws IOException {
         this.hostName = hostName;
@@ -37,48 +30,14 @@ public class Client {
         socket = new Socket(hostName, portNumber);
         out = new PrintWriter(new OutputStreamWriter(socket.getOutputStream(), "UTF-8"), true);
         in = new BufferedReader(new InputStreamReader(socket.getInputStream(), "UTF-8"));
-        local = false;
-    }
-    
-    public Client() {
-        local = true;
     }
 
     public String read() throws IOException {
-        if (local) {
-            String read = fromGame;
-            return read;
-        } else {
-            String read = in.readLine();
-            return read;
-        }
+        return in.readLine();
     }
 
     public void print(String s) {
-        if (local) {
-            fromClient = s;
-        } else {
-            out.println(s);            
-        }
-
+        out.println(s);
     }
-
-    public void setFromGame(String fromGame) {
-        this.fromGame = fromGame;
-    }
-
-    public void setFromClient(String fromClient) {
-        this.fromClient = fromClient;
-    }
-
-    public String getFromClient() {
-        return fromClient;
-    }
-    
-    
-
-
-    
-    
 
 }

@@ -87,9 +87,6 @@ public class MultiServerThread extends Thread {
             out.println();
             while (true) {
                 if (connectingThread != null && player.getState() == 1) {
-                    synchronized (connectingThread) {
-                        connectingThread.wait();
-                    }
                     while (true) {
                         if (player.getState() == 0) {
                             break;
@@ -152,8 +149,9 @@ public class MultiServerThread extends Thread {
                                 player.setState(1);
                                 String test;
                                 while (true) {
-                                    out2.println("Pelaaja " + player.getName() + " tahtoo aloittaa pelin. Hyväksytäänkö pyyntö?");
+                                    out2.println("Pelaaja " + player.getName() + " tahtoo aloittaa pelin. Hyväksytaanko pyynto?");
                                     out2.println("Komennot: 1: kyllä, 2: ei:");
+                                    out2.println("stcmd");
                                     test = in2.readLine();
                                     if (test.equals("1") || test.equals("2")) {
                                         break;
@@ -217,6 +215,10 @@ public class MultiServerThread extends Thread {
                         sendStringTo(messageSocket, toSend);
                     } else {
                         out.println("Väärä komento");
+                    }
+                } else if (command.equals("stcmd")) {
+                    synchronized(connectingThread) {
+                        connectingThread.wait();
                     }
                 } else {
                     for (Player p : players) {

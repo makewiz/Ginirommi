@@ -64,7 +64,7 @@ public class GameThread extends Thread {
 
             open.addCard(deck.takeCard());
             printBoth("Kierros: " + round);
-            printBoth("Pöytäkortti: &" + open.topCard().toString());
+            printBoth("Poytakortti: &" + open.topCard().toString());
 
             boolean second = false;
             while (true) {
@@ -115,7 +115,7 @@ public class GameThread extends Thread {
 
             while (true) {
                 printBoth("Pelaajan " + currentPlayer().getName() + " vuoro");
-                printBoth("Pöytäkortti: &" + open.topCard().toString());
+                printBoth("Poytakortti: &" + open.topCard().toString());
                 currentPlayer().printString("Nostatko avopakasta vai umpipakasta?.");
                 while (true) {
                     currentPlayer().printString("xxx");

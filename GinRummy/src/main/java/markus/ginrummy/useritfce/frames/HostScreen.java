@@ -86,11 +86,9 @@ public class HostScreen extends javax.swing.JFrame {
         this.setVisible(false);
         try {
             Client client = new Client("localhost", portNumber);
-            LoginScreen screen = new LoginScreen(client);
-            JScrollPane c = screen.getTheContainer();
-            FrameController writer = new FrameController(client, c, screen);
+            FrameController writer = new FrameController(client);
+            this.setVisible(false);
             writer.start();
-            screen.setVisible(true);
         } catch (IOException ex) {
             Logger.getLogger(HostScreen.class.getName()).log(Level.SEVERE, null, ex);
         }

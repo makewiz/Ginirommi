@@ -31,6 +31,7 @@ public class Bot extends Thread {
         this.client = client;
         hand = new ArrayList<>();
         tool = new HandTools();
+        open = new OpenDeck();
     }
 
     @Override
@@ -38,16 +39,17 @@ public class Bot extends Thread {
         while (true) {
             try {
                 String fromServer = client.read();
-                synchronized(this) {
-                    notifyAll();
+                if (fromServer.equals("Anna pelaajalle nimi:")) {
+                    client.print("Botti");
+                }
+                if (fromServer.equals("stcmd")) {
+                    client.print("stcmd");
+                    client.print("1");
                 }
                 if (fromServer.equals("Korttisi:")) {
                     hand.clear();
                     while (true) {
                         fromServer = client.read();
-                        synchronized(this) {
-                            notifyAll();
-                        }
                         if (fromServer.equals("Loppu")) {
                             break;
                         } else {
@@ -62,7 +64,7 @@ public class Bot extends Thread {
                         }
                     }
                 }
-                if (fromServer.equals("Pöytäkortti: &")) {
+                if (fromServer.startsWith("Poytakortti: &")) {
                     String[] messageSplit = fromServer.split("&");
                     String[] cardSplit = messageSplit[1].split(":");
                     String suit = cardSplit[0];
@@ -76,13 +78,11 @@ public class Bot extends Thread {
                     int firstMinus = tool.calculateMinus(hand);
                     hand.add(open.topCard());
                     int secondMinus = tool.calculateMinus(hand);
-                    if (firstMinus > secondMinus) {
+                    client.print("/xxx");
+                    if (firstMinus < secondMinus) {
                         client.print("/e");
                     } else {
                         client.print("/k");
-                    }
-                    synchronized(this) {
-                        notifyAll();
                     }
                 }
                 if (fromServer.equals("Valitse poistettava kortti komennolla: '/numero'")) {
@@ -95,16 +95,12 @@ public class Bot extends Thread {
                     clonedHand.sort(comp);
                     Card toRemove = clonedHand.get(clonedHand.size() - 1);
                     int idx = hand.indexOf(toRemove);
+                    client.print("/xxx");
                     client.print("/" + idx);
-                    synchronized(this) {
-                        notifyAll();
-                    }
                 }
                 if (fromServer.startsWith("Jos poistat kortin: ")) {
+                    client.print("/xxx");
                     client.print("/k");
-                    synchronized(this) {
-                        notifyAll();
-                    }
                 }
                 if (fromServer.startsWith("Kierros: ")) {
                     open = new OpenDeck();
