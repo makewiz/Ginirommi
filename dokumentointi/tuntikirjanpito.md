@@ -12,3 +12,4 @@ Päivä | Tunnit | Kuvaus
 11.4.2016 | 4h | Luokkien testaus, tekoäly ja pakkaukset
 12.4.2016 | 3h | Tekoäly ja checkstyle
 16.4.2016 | 1.5h | Tekoäly
+22.4.2016 | 4h | Sievennystä ja dokumentointia
