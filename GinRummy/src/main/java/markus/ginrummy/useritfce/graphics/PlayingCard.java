@@ -8,7 +8,7 @@ package markus.ginrummy.useritfce.graphics;
 import java.awt.Color;
 import java.awt.Graphics;
 import markus.ginrummy.gameobjects.Card;
-import markus.ginrummy.logic.net.Client;
+import markus.ginrummy.logic.net.ReaderWriter;
 import markus.ginrummy.gameobjects.Suit;
 
 /**
@@ -20,14 +20,14 @@ public class PlayingCard extends javax.swing.JPanel {
     private Card card;
     private String suit;
     private String value;
-    private Client client;
+    private ReaderWriter client;
     private int idx;
     private Color color;
 
     /**
      * Creates new form PalyingCard
      */
-    public PlayingCard(Card card, Client client, int idx) {
+    public PlayingCard(Card card, ReaderWriter client, int idx) {
         initComponents();
         this.card = card;
         if (card.getSuit().equals(Suit.HERTTA)) {
@@ -48,7 +48,7 @@ public class PlayingCard extends javax.swing.JPanel {
         this.idx = idx;
     }
 
-    public PlayingCard(Card card, Client client) {
+    public PlayingCard(Card card, ReaderWriter client) {
         initComponents();
         this.card = card;
         if (card.getSuit().equals(Suit.HERTTA)) {

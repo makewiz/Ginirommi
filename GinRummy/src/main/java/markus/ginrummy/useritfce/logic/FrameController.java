@@ -15,7 +15,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import markus.ginrummy.gameobjects.Card;
-import markus.ginrummy.logic.net.Client;
+import markus.ginrummy.logic.net.ReaderWriter;
 import markus.ginrummy.gameobjects.Suit;
 import markus.ginrummy.useritfce.frames.GameScreen;
 import markus.ginrummy.useritfce.frames.LobbyScreen;
@@ -29,9 +29,9 @@ import markus.ginrummy.useritfce.graphics.PlayingCard;
  */
 public class FrameController extends Thread {
 
-    private Client client;
+    private ReaderWriter client;
 
-    public FrameController(Client client) {
+    public FrameController(ReaderWriter client) {
         this.client = client;
     }
 
@@ -169,7 +169,6 @@ public class FrameController extends Thread {
                         openDeckPanel.add(card);
                         openDeckPanel.validate();
                         gameScreen.validate();
-                    } else if (fromServer.equals("xxx")) {
                     } else {
                         if (panel.getComponentCount() >= 30) {
                             panel.remove(0);

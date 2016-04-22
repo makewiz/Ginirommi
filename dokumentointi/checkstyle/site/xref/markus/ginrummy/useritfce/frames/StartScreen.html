@@ -21,7 +21,7 @@
 <a class="jxr_linenumber" name="L13" href="#L13">13</a>  <strong class="jxr_keyword">import</strong> markus.ginrummy.gameobjects.Player;
 <a class="jxr_linenumber" name="L14" href="#L14">14</a>  <strong class="jxr_keyword">import</strong> markus.ginrummy.logic.game.Bot;
 <a class="jxr_linenumber" name="L15" href="#L15">15</a>  <strong class="jxr_keyword">import</strong> markus.ginrummy.logic.game.GameThread;
-<a class="jxr_linenumber" name="L16" href="#L16">16</a>  <strong class="jxr_keyword">import</strong> markus.ginrummy.logic.net.Client;
+<a class="jxr_linenumber" name="L16" href="#L16">16</a>  <strong class="jxr_keyword">import</strong> markus.ginrummy.logic.net.ReaderWriter;
 <a class="jxr_linenumber" name="L17" href="#L17">17</a>  <strong class="jxr_keyword">import</strong> markus.ginrummy.logic.net.Server;
 <a class="jxr_linenumber" name="L18" href="#L18">18</a>  <strong class="jxr_keyword">import</strong> markus.ginrummy.useritfce.logic.FrameController;
 <a class="jxr_linenumber" name="L19" href="#L19">19</a>  
@@ -132,70 +132,69 @@
 <a class="jxr_linenumber" name="L124" href="#L124">124</a>     }<em class="jxr_comment">//GEN-LAST:event_jButton2ActionPerformed</em>
 <a class="jxr_linenumber" name="L125" href="#L125">125</a> 
 <a class="jxr_linenumber" name="L126" href="#L126">126</a>     <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">void</strong> jButton3ActionPerformed(java.awt.event.ActionEvent evt) {<em class="jxr_comment">//GEN-FIRST:event_jButton3ActionPerformed</em>
-<a class="jxr_linenumber" name="L127" href="#L127">127</a> 
-<a class="jxr_linenumber" name="L128" href="#L128">128</a>         <strong class="jxr_keyword">try</strong> {
-<a class="jxr_linenumber" name="L129" href="#L129">129</a>             ServerSocket sSocket = <strong class="jxr_keyword">new</strong> ServerSocket(5555);
-<a class="jxr_linenumber" name="L130" href="#L130">130</a>             <a href="../../../../markus/ginrummy/logic/net/Client.html">Client</a> playerClient = <strong class="jxr_keyword">new</strong> <a href="../../../../markus/ginrummy/logic/net/Client.html">Client</a>(<span class="jxr_string">"localhost"</span>, 5555);
-<a class="jxr_linenumber" name="L131" href="#L131">131</a>             Socket playerSocket = sSocket.accept();
-<a class="jxr_linenumber" name="L132" href="#L132">132</a>             <a href="../../../../markus/ginrummy/logic/net/Client.html">Client</a> botClient = <strong class="jxr_keyword">new</strong> <a href="../../../../markus/ginrummy/logic/net/Client.html">Client</a>(<span class="jxr_string">"localhost"</span>, 5555);
-<a class="jxr_linenumber" name="L133" href="#L133">133</a>             Socket botSocket = sSocket.accept();
-<a class="jxr_linenumber" name="L134" href="#L134">134</a>             <a href="../../../../markus/ginrummy/useritfce/logic/FrameController.html">FrameController</a> controller = <strong class="jxr_keyword">new</strong> <a href="../../../../markus/ginrummy/useritfce/logic/FrameController.html">FrameController</a>(playerClient);
-<a class="jxr_linenumber" name="L135" href="#L135">135</a>             <a href="../../../../markus/ginrummy/logic/game/Bot.html">Bot</a> bot = <strong class="jxr_keyword">new</strong> <a href="../../../../markus/ginrummy/logic/game/Bot.html">Bot</a>(botClient);
-<a class="jxr_linenumber" name="L136" href="#L136">136</a>             <a href="../../../../markus/ginrummy/gameobjects/Player.html">Player</a> player = <strong class="jxr_keyword">new</strong> <a href="../../../../markus/ginrummy/gameobjects/Player.html">Player</a>(<span class="jxr_string">"You"</span>, playerSocket);
-<a class="jxr_linenumber" name="L137" href="#L137">137</a>             <a href="../../../../markus/ginrummy/gameobjects/Player.html">Player</a> botPlayer = <strong class="jxr_keyword">new</strong> <a href="../../../../markus/ginrummy/gameobjects/Player.html">Player</a>(<span class="jxr_string">"Bot"</span>, botSocket);
-<a class="jxr_linenumber" name="L138" href="#L138">138</a>             <a href="../../../../markus/ginrummy/logic/game/GameThread.html">GameThread</a> gameThread = <strong class="jxr_keyword">new</strong> <a href="../../../../markus/ginrummy/logic/game/GameThread.html">GameThread</a>(player, botPlayer);
-<a class="jxr_linenumber" name="L139" href="#L139">139</a>             controller.start();
-<a class="jxr_linenumber" name="L140" href="#L140">140</a>             gameThread.start();
-<a class="jxr_linenumber" name="L141" href="#L141">141</a> 
-<a class="jxr_linenumber" name="L142" href="#L142">142</a>         } <strong class="jxr_keyword">catch</strong> (IOException ex) {
-<a class="jxr_linenumber" name="L143" href="#L143">143</a>             Logger.getLogger(StartScreen.<strong class="jxr_keyword">class</strong>.getName()).log(Level.SEVERE, <strong class="jxr_keyword">null</strong>, ex);
-<a class="jxr_linenumber" name="L144" href="#L144">144</a>         }
-<a class="jxr_linenumber" name="L145" href="#L145">145</a> 
-<a class="jxr_linenumber" name="L146" href="#L146">146</a>     }<em class="jxr_comment">//GEN-LAST:event_jButton3ActionPerformed</em>
-<a class="jxr_linenumber" name="L147" href="#L147">147</a> 
-<a class="jxr_linenumber" name="L148" href="#L148">148</a>     <em class="jxr_javadoccomment">/**</em>
-<a class="jxr_linenumber" name="L149" href="#L149">149</a> <em class="jxr_javadoccomment">     * @param args the command line arguments</em>
-<a class="jxr_linenumber" name="L150" href="#L150">150</a> <em class="jxr_javadoccomment">     */</em>
-<a class="jxr_linenumber" name="L151" href="#L151">151</a>     <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">void</strong> main(String args[]) {
-<a class="jxr_linenumber" name="L152" href="#L152">152</a>         <em class="jxr_comment">/* Set the Nimbus look and feel */</em>
-<a class="jxr_linenumber" name="L153" href="#L153">153</a>         <em class="jxr_comment">//&lt;editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) "&gt;</em>
-<a class="jxr_linenumber" name="L154" href="#L154">154</a>         <em class="jxr_comment">/* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.</em>
-<a class="jxr_linenumber" name="L155" href="#L155">155</a> <em class="jxr_comment">         * For details see <a href="http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html" target="alexandria_uri">http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html</a> </em>
-<a class="jxr_linenumber" name="L156" href="#L156">156</a> <em class="jxr_comment">         */</em>
-<a class="jxr_linenumber" name="L157" href="#L157">157</a>         <strong class="jxr_keyword">try</strong> {
-<a class="jxr_linenumber" name="L158" href="#L158">158</a>             <strong class="jxr_keyword">for</strong> (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-<a class="jxr_linenumber" name="L159" href="#L159">159</a>                 <strong class="jxr_keyword">if</strong> (<span class="jxr_string">"Nimbus"</span>.equals(info.getName())) {
-<a class="jxr_linenumber" name="L160" href="#L160">160</a>                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
-<a class="jxr_linenumber" name="L161" href="#L161">161</a>                     <strong class="jxr_keyword">break</strong>;
-<a class="jxr_linenumber" name="L162" href="#L162">162</a>                 }
-<a class="jxr_linenumber" name="L163" href="#L163">163</a>             }
-<a class="jxr_linenumber" name="L164" href="#L164">164</a>         } <strong class="jxr_keyword">catch</strong> (ClassNotFoundException ex) {
-<a class="jxr_linenumber" name="L165" href="#L165">165</a>             java.util.logging.Logger.getLogger(StartScreen.<strong class="jxr_keyword">class</strong>.getName()).log(java.util.logging.Level.SEVERE, <strong class="jxr_keyword">null</strong>, ex);
-<a class="jxr_linenumber" name="L166" href="#L166">166</a>         } <strong class="jxr_keyword">catch</strong> (InstantiationException ex) {
-<a class="jxr_linenumber" name="L167" href="#L167">167</a>             java.util.logging.Logger.getLogger(StartScreen.<strong class="jxr_keyword">class</strong>.getName()).log(java.util.logging.Level.SEVERE, <strong class="jxr_keyword">null</strong>, ex);
-<a class="jxr_linenumber" name="L168" href="#L168">168</a>         } <strong class="jxr_keyword">catch</strong> (IllegalAccessException ex) {
-<a class="jxr_linenumber" name="L169" href="#L169">169</a>             java.util.logging.Logger.getLogger(StartScreen.<strong class="jxr_keyword">class</strong>.getName()).log(java.util.logging.Level.SEVERE, <strong class="jxr_keyword">null</strong>, ex);
-<a class="jxr_linenumber" name="L170" href="#L170">170</a>         } <strong class="jxr_keyword">catch</strong> (javax.swing.UnsupportedLookAndFeelException ex) {
-<a class="jxr_linenumber" name="L171" href="#L171">171</a>             java.util.logging.Logger.getLogger(StartScreen.<strong class="jxr_keyword">class</strong>.getName()).log(java.util.logging.Level.SEVERE, <strong class="jxr_keyword">null</strong>, ex);
-<a class="jxr_linenumber" name="L172" href="#L172">172</a>         }
+<a class="jxr_linenumber" name="L127" href="#L127">127</a>         
+<a class="jxr_linenumber" name="L128" href="#L128">128</a> 
+<a class="jxr_linenumber" name="L129" href="#L129">129</a>         <strong class="jxr_keyword">try</strong> {
+<a class="jxr_linenumber" name="L130" href="#L130">130</a>             <a href="../../../../markus/ginrummy/logic/net/Server.html">Server</a> server = <strong class="jxr_keyword">new</strong> <a href="../../../../markus/ginrummy/logic/net/Server.html">Server</a>(0);
+<a class="jxr_linenumber" name="L131" href="#L131">131</a>             server.start();
+<a class="jxr_linenumber" name="L132" href="#L132">132</a>             Socket playerSocket = <strong class="jxr_keyword">new</strong> Socket(<span class="jxr_string">"localhost"</span>, server.getPort());
+<a class="jxr_linenumber" name="L133" href="#L133">133</a>             Socket botSocket = <strong class="jxr_keyword">new</strong> Socket(<span class="jxr_string">"localhost"</span>, server.getPort());
+<a class="jxr_linenumber" name="L134" href="#L134">134</a>             <a href="../../../../markus/ginrummy/logic/net/ReaderWriter.html">ReaderWriter</a> playerClient = <strong class="jxr_keyword">new</strong> <a href="../../../../markus/ginrummy/logic/net/ReaderWriter.html">ReaderWriter</a>(playerSocket);
+<a class="jxr_linenumber" name="L135" href="#L135">135</a>             <a href="../../../../markus/ginrummy/logic/net/ReaderWriter.html">ReaderWriter</a> botClient = <strong class="jxr_keyword">new</strong> <a href="../../../../markus/ginrummy/logic/net/ReaderWriter.html">ReaderWriter</a>(botSocket);
+<a class="jxr_linenumber" name="L136" href="#L136">136</a>             <a href="../../../../markus/ginrummy/logic/game/Bot.html">Bot</a> bot = <strong class="jxr_keyword">new</strong> <a href="../../../../markus/ginrummy/logic/game/Bot.html">Bot</a>(botClient);
+<a class="jxr_linenumber" name="L137" href="#L137">137</a>             bot.start();
+<a class="jxr_linenumber" name="L138" href="#L138">138</a>             <a href="../../../../markus/ginrummy/useritfce/logic/FrameController.html">FrameController</a> controller = <strong class="jxr_keyword">new</strong> <a href="../../../../markus/ginrummy/useritfce/logic/FrameController.html">FrameController</a>(playerClient);
+<a class="jxr_linenumber" name="L139" href="#L139">139</a>             <strong class="jxr_keyword">this</strong>.setVisible(false);
+<a class="jxr_linenumber" name="L140" href="#L140">140</a>             controller.start();
+<a class="jxr_linenumber" name="L141" href="#L141">141</a>         } <strong class="jxr_keyword">catch</strong> (IOException ex) {
+<a class="jxr_linenumber" name="L142" href="#L142">142</a>             Logger.getLogger(StartScreen.<strong class="jxr_keyword">class</strong>.getName()).log(Level.SEVERE, <strong class="jxr_keyword">null</strong>, ex);
+<a class="jxr_linenumber" name="L143" href="#L143">143</a>         }
+<a class="jxr_linenumber" name="L144" href="#L144">144</a>         
+<a class="jxr_linenumber" name="L145" href="#L145">145</a>     }<em class="jxr_comment">//GEN-LAST:event_jButton3ActionPerformed</em>
+<a class="jxr_linenumber" name="L146" href="#L146">146</a> 
+<a class="jxr_linenumber" name="L147" href="#L147">147</a>     <em class="jxr_javadoccomment">/**</em>
+<a class="jxr_linenumber" name="L148" href="#L148">148</a> <em class="jxr_javadoccomment">     * @param args the command line arguments</em>
+<a class="jxr_linenumber" name="L149" href="#L149">149</a> <em class="jxr_javadoccomment">     */</em>
+<a class="jxr_linenumber" name="L150" href="#L150">150</a>     <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">void</strong> main(String args[]) {
+<a class="jxr_linenumber" name="L151" href="#L151">151</a>         <em class="jxr_comment">/* Set the Nimbus look and feel */</em>
+<a class="jxr_linenumber" name="L152" href="#L152">152</a>         <em class="jxr_comment">//&lt;editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) "&gt;</em>
+<a class="jxr_linenumber" name="L153" href="#L153">153</a>         <em class="jxr_comment">/* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.</em>
+<a class="jxr_linenumber" name="L154" href="#L154">154</a> <em class="jxr_comment">         * For details see <a href="http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html" target="alexandria_uri">http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html</a> </em>
+<a class="jxr_linenumber" name="L155" href="#L155">155</a> <em class="jxr_comment">         */</em>
+<a class="jxr_linenumber" name="L156" href="#L156">156</a>         <strong class="jxr_keyword">try</strong> {
+<a class="jxr_linenumber" name="L157" href="#L157">157</a>             <strong class="jxr_keyword">for</strong> (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+<a class="jxr_linenumber" name="L158" href="#L158">158</a>                 <strong class="jxr_keyword">if</strong> (<span class="jxr_string">"Nimbus"</span>.equals(info.getName())) {
+<a class="jxr_linenumber" name="L159" href="#L159">159</a>                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
+<a class="jxr_linenumber" name="L160" href="#L160">160</a>                     <strong class="jxr_keyword">break</strong>;
+<a class="jxr_linenumber" name="L161" href="#L161">161</a>                 }
+<a class="jxr_linenumber" name="L162" href="#L162">162</a>             }
+<a class="jxr_linenumber" name="L163" href="#L163">163</a>         } <strong class="jxr_keyword">catch</strong> (ClassNotFoundException ex) {
+<a class="jxr_linenumber" name="L164" href="#L164">164</a>             java.util.logging.Logger.getLogger(StartScreen.<strong class="jxr_keyword">class</strong>.getName()).log(java.util.logging.Level.SEVERE, <strong class="jxr_keyword">null</strong>, ex);
+<a class="jxr_linenumber" name="L165" href="#L165">165</a>         } <strong class="jxr_keyword">catch</strong> (InstantiationException ex) {
+<a class="jxr_linenumber" name="L166" href="#L166">166</a>             java.util.logging.Logger.getLogger(StartScreen.<strong class="jxr_keyword">class</strong>.getName()).log(java.util.logging.Level.SEVERE, <strong class="jxr_keyword">null</strong>, ex);
+<a class="jxr_linenumber" name="L167" href="#L167">167</a>         } <strong class="jxr_keyword">catch</strong> (IllegalAccessException ex) {
+<a class="jxr_linenumber" name="L168" href="#L168">168</a>             java.util.logging.Logger.getLogger(StartScreen.<strong class="jxr_keyword">class</strong>.getName()).log(java.util.logging.Level.SEVERE, <strong class="jxr_keyword">null</strong>, ex);
+<a class="jxr_linenumber" name="L169" href="#L169">169</a>         } <strong class="jxr_keyword">catch</strong> (javax.swing.UnsupportedLookAndFeelException ex) {
+<a class="jxr_linenumber" name="L170" href="#L170">170</a>             java.util.logging.Logger.getLogger(StartScreen.<strong class="jxr_keyword">class</strong>.getName()).log(java.util.logging.Level.SEVERE, <strong class="jxr_keyword">null</strong>, ex);
+<a class="jxr_linenumber" name="L171" href="#L171">171</a>         }
+<a class="jxr_linenumber" name="L172" href="#L172">172</a>         <em class="jxr_comment">//&lt;/editor-fold&gt;</em>
 <a class="jxr_linenumber" name="L173" href="#L173">173</a>         <em class="jxr_comment">//&lt;/editor-fold&gt;</em>
-<a class="jxr_linenumber" name="L174" href="#L174">174</a>         <em class="jxr_comment">//&lt;/editor-fold&gt;</em>
-<a class="jxr_linenumber" name="L175" href="#L175">175</a> 
-<a class="jxr_linenumber" name="L176" href="#L176">176</a>         <em class="jxr_comment">/* Create and display the form */</em>
-<a class="jxr_linenumber" name="L177" href="#L177">177</a>         java.awt.EventQueue.invokeLater(<strong class="jxr_keyword">new</strong> Runnable() {
-<a class="jxr_linenumber" name="L178" href="#L178">178</a>             <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> run() {
-<a class="jxr_linenumber" name="L179" href="#L179">179</a>                 <strong class="jxr_keyword">new</strong> <a href="../../../../markus/ginrummy/useritfce/frames/StartScreen.html">StartScreen</a>().setVisible(<strong class="jxr_keyword">true</strong>);
-<a class="jxr_linenumber" name="L180" href="#L180">180</a>             }
-<a class="jxr_linenumber" name="L181" href="#L181">181</a>         });
-<a class="jxr_linenumber" name="L182" href="#L182">182</a>     }
-<a class="jxr_linenumber" name="L183" href="#L183">183</a> 
-<a class="jxr_linenumber" name="L184" href="#L184">184</a>     <em class="jxr_comment">// Variables declaration - do not modify//GEN-BEGIN:variables</em>
-<a class="jxr_linenumber" name="L185" href="#L185">185</a>     <strong class="jxr_keyword">private</strong> javax.swing.JButton jButton1;
-<a class="jxr_linenumber" name="L186" href="#L186">186</a>     <strong class="jxr_keyword">private</strong> javax.swing.JButton jButton2;
-<a class="jxr_linenumber" name="L187" href="#L187">187</a>     <strong class="jxr_keyword">private</strong> javax.swing.JButton jButton3;
-<a class="jxr_linenumber" name="L188" href="#L188">188</a>     <strong class="jxr_keyword">private</strong> javax.swing.JTextField jTextField1;
-<a class="jxr_linenumber" name="L189" href="#L189">189</a>     <em class="jxr_comment">// End of variables declaration//GEN-END:variables</em>
-<a class="jxr_linenumber" name="L190" href="#L190">190</a> }
+<a class="jxr_linenumber" name="L174" href="#L174">174</a> 
+<a class="jxr_linenumber" name="L175" href="#L175">175</a>         <em class="jxr_comment">/* Create and display the form */</em>
+<a class="jxr_linenumber" name="L176" href="#L176">176</a>         java.awt.EventQueue.invokeLater(<strong class="jxr_keyword">new</strong> Runnable() {
+<a class="jxr_linenumber" name="L177" href="#L177">177</a>             <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> run() {
+<a class="jxr_linenumber" name="L178" href="#L178">178</a>                 <strong class="jxr_keyword">new</strong> <a href="../../../../markus/ginrummy/useritfce/frames/StartScreen.html">StartScreen</a>().setVisible(<strong class="jxr_keyword">true</strong>);
+<a class="jxr_linenumber" name="L179" href="#L179">179</a>             }
+<a class="jxr_linenumber" name="L180" href="#L180">180</a>         });
+<a class="jxr_linenumber" name="L181" href="#L181">181</a>     }
+<a class="jxr_linenumber" name="L182" href="#L182">182</a> 
+<a class="jxr_linenumber" name="L183" href="#L183">183</a>     <em class="jxr_comment">// Variables declaration - do not modify//GEN-BEGIN:variables</em>
+<a class="jxr_linenumber" name="L184" href="#L184">184</a>     <strong class="jxr_keyword">private</strong> javax.swing.JButton jButton1;
+<a class="jxr_linenumber" name="L185" href="#L185">185</a>     <strong class="jxr_keyword">private</strong> javax.swing.JButton jButton2;
+<a class="jxr_linenumber" name="L186" href="#L186">186</a>     <strong class="jxr_keyword">private</strong> javax.swing.JButton jButton3;
+<a class="jxr_linenumber" name="L187" href="#L187">187</a>     <strong class="jxr_keyword">private</strong> javax.swing.JTextField jTextField1;
+<a class="jxr_linenumber" name="L188" href="#L188">188</a>     <em class="jxr_comment">// End of variables declaration//GEN-END:variables</em>
+<a class="jxr_linenumber" name="L189" href="#L189">189</a> }
 </pre>
 <hr/>
 <div id="footer">Copyright &#169; 2016. All rights reserved.</div>

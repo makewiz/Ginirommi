@@ -25,8 +25,8 @@ under the License.
     <language>en-us</language>
     <copyright>&#169;2016</copyright>
     <item>
-      <title>File: 23,
-             Errors: 25,
+      <title>File: 24,
+             Errors: 137,
              Warnings: 0,
              Infos: 0
       </title>
@@ -55,12 +55,12 @@ under the License.
                   0
                 </td>
                 <td>
-                  3
+                  6
                 </td>
               </tr>
                           <tr>
                 <td>
-                  <a href="${project.url}/checkstyle.html#markus.ginrummy.gameobjects.SuitComparator.java">markus/ginrummy/gameobjects/SuitComparator.java</a>
+                  <a href="${project.url}/checkstyle.html#markus.ginrummy.gameObjects.Suit.java">markus/ginrummy/gameObjects/Suit.java</a>
                 </td>
                 <td>
                   0
@@ -69,12 +69,12 @@ under the License.
                   0
                 </td>
                 <td>
-                  0
+                  1
                 </td>
               </tr>
                           <tr>
                 <td>
-                  <a href="${project.url}/checkstyle.html#markus.ginrummy.gameobjects.Deck.java">markus/ginrummy/gameobjects/Deck.java</a>
+                  <a href="${project.url}/checkstyle.html#markus.ginrummy.gameObjects.SuitComparator.java">markus/ginrummy/gameObjects/SuitComparator.java</a>
                 </td>
                 <td>
                   0
@@ -83,12 +83,12 @@ under the License.
                   0
                 </td>
                 <td>
-                  0
+                  1
                 </td>
               </tr>
                           <tr>
                 <td>
-                  <a href="${project.url}/checkstyle.html#markus.ginrummy.gameobjects.Suit.java">markus/ginrummy/gameobjects/Suit.java</a>
+                  <a href="${project.url}/checkstyle.html#markus.ginrummy.gameObjects.SuitValueComparator.java">markus/ginrummy/gameObjects/SuitValueComparator.java</a>
                 </td>
                 <td>
                   0
@@ -97,7 +97,7 @@ under the License.
                   0
                 </td>
                 <td>
-                  0
+                  1
                 </td>
               </tr>
                           <tr>
@@ -111,7 +111,35 @@ under the License.
                   0
                 </td>
                 <td>
+                  3
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#markus.ginrummy.logic.net.ReaderWriter.java">markus/ginrummy/logic/net/ReaderWriter.java</a>
+                </td>
+                <td>
                   0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  4
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#markus.ginrummy.useritfce.graphics.CardBack.java">markus/ginrummy/useritfce/graphics/CardBack.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  4
                 </td>
               </tr>
                           <tr>
@@ -125,7 +153,7 @@ under the License.
                   0
                 </td>
                 <td>
-                  1
+                  4
                 </td>
               </tr>
                           <tr>
@@ -139,12 +167,12 @@ under the License.
                   0
                 </td>
                 <td>
-                  6
+                  15
                 </td>
               </tr>
                           <tr>
                 <td>
-                  <a href="${project.url}/checkstyle.html#markus.ginrummy.gameobjects.Card.java">markus/ginrummy/gameobjects/Card.java</a>
+                  <a href="${project.url}/checkstyle.html#markus.ginrummy.gameObjects.Player.java">markus/ginrummy/gameObjects/Player.java</a>
                 </td>
                 <td>
                   0
@@ -153,82 +181,12 @@ under the License.
                   0
                 </td>
                 <td>
-                  0
+                  11
                 </td>
               </tr>
                           <tr>
                 <td>
-                  <a href="${project.url}/checkstyle.html#markus.ginrummy.gameobjects.SuitValueComparator.java">markus/ginrummy/gameobjects/SuitValueComparator.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="${project.url}/checkstyle.html#markus.ginrummy.gameobjects.ValueComparator.java">markus/ginrummy/gameobjects/ValueComparator.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="${project.url}/checkstyle.html#markus.ginrummy.useritfce.StartApplication.java">markus/ginrummy/useritfce/StartApplication.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="${project.url}/checkstyle.html#markus.ginrummy.logic.net.Server.java">markus/ginrummy/logic/net/Server.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="${project.url}/checkstyle.html#markus.ginrummy.gameobjects.OpenDeck.java">markus/ginrummy/gameobjects/OpenDeck.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="${project.url}/checkstyle.html#markus.ginrummy.useritfce.frames.LoginScreen.java">markus/ginrummy/useritfce/frames/LoginScreen.java</a>
+                  <a href="${project.url}/checkstyle.html#markus.ginrummy.gameObjects.ValueComparator.java">markus/ginrummy/gameObjects/ValueComparator.java</a>
                 </td>
                 <td>
                   0
@@ -242,105 +200,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="${project.url}/checkstyle.html#markus.ginrummy.useritfce.frames.LobbyScreen.java">markus/ginrummy/useritfce/frames/LobbyScreen.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  2
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="${project.url}/checkstyle.html#markus.ginrummy.useritfce.graphics.PlayingCard.java">markus/ginrummy/useritfce/graphics/PlayingCard.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  1
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="${project.url}/checkstyle.html#markus.ginrummy.logic.game.HandTools.java">markus/ginrummy/logic/game/HandTools.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  1
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="${project.url}/checkstyle.html#markus.ginrummy.useritfce.frames.HostScreen.java">markus/ginrummy/useritfce/frames/HostScreen.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  1
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="${project.url}/checkstyle.html#markus.ginrummy.logic.net.Client.java">markus/ginrummy/logic/net/Client.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="${project.url}/checkstyle.html#markus.ginrummy.gameobjects.Player.java">markus/ginrummy/gameobjects/Player.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="${project.url}/checkstyle.html#markus.ginrummy.useritfce.frames.JoinScreen.java">markus/ginrummy/useritfce/frames/JoinScreen.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  1
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="${project.url}/checkstyle.html#markus.ginrummy.logic.game.GameThread.java">markus/ginrummy/logic/game/GameThread.java</a>
+                  <a href="${project.url}/checkstyle.html#markus.ginrummy.gameObjects.Card.java">markus/ginrummy/gameObjects/Card.java</a>
                 </td>
                 <td>
                   0
@@ -354,7 +214,21 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="${project.url}/checkstyle.html#markus.ginrummy.logic.net.MultiServerThread.java">markus/ginrummy/logic/net/MultiServerThread.java</a>
+                  <a href="${project.url}/checkstyle.html#markus.ginrummy.useritfce.StartApplication.java">markus/ginrummy/useritfce/StartApplication.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  2
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#markus.ginrummy.gameObjects.OpenDeck.java">markus/ginrummy/gameObjects/OpenDeck.java</a>
                 </td>
                 <td>
                   0
@@ -364,6 +238,146 @@ under the License.
                 </td>
                 <td>
                   5
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#markus.ginrummy.logic.net.Server.java">markus/ginrummy/logic/net/Server.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  2
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#markus.ginrummy.useritfce.frames.LoginScreen.java">markus/ginrummy/useritfce/frames/LoginScreen.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  5
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#markus.ginrummy.useritfce.frames.LobbyScreen.java">markus/ginrummy/useritfce/frames/LobbyScreen.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  10
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#markus.ginrummy.useritfce.graphics.PlayingCard.java">markus/ginrummy/useritfce/graphics/PlayingCard.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  7
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#markus.ginrummy.logic.game.HandTools.java">markus/ginrummy/logic/game/HandTools.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  10
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#markus.ginrummy.useritfce.frames.HostScreen.java">markus/ginrummy/useritfce/frames/HostScreen.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  4
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#markus.ginrummy.gameObjects.Deck.java">markus/ginrummy/gameObjects/Deck.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  4
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#markus.ginrummy.useritfce.frames.JoinScreen.java">markus/ginrummy/useritfce/frames/JoinScreen.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  4
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#markus.ginrummy.logic.game.GameThread.java">markus/ginrummy/logic/game/GameThread.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  10
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#markus.ginrummy.logic.net.MultiServerThread.java">markus/ginrummy/logic/net/MultiServerThread.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  20
                 </td>
               </tr>
                       </tbody>

@@ -19,9 +19,11 @@ import java.util.ArrayList;
 public class Server extends Thread {
 
     private int portNumber;
+    private ServerSocket serverSocket;
 
-    public Server(int portNumber) {
+    public Server(int portNumber) throws IOException {
         this.portNumber = portNumber;
+        serverSocket = new ServerSocket(portNumber);
     }
 
     @Override
@@ -31,7 +33,7 @@ public class Server extends Thread {
         ArrayList<MultiServerThread> threads = new ArrayList<>();
         ArrayList<Player> players = new ArrayList<>();
 
-        try (ServerSocket serverSocket = new ServerSocket(portNumber)) {
+        try {
             while (listening) {
                 Socket socket = serverSocket.accept();
                 MultiServerThread thread = new MultiServerThread(socket, players, threads);
@@ -42,6 +44,10 @@ public class Server extends Thread {
             System.err.println("Could not listen on port " + portNumber);
             System.exit(-1);
         }
+    }
+    
+    public int getPort() {
+        return serverSocket.getLocalPort();
     }
 
 }

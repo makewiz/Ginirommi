@@ -8,7 +8,7 @@ package markus.ginrummy.useritfce.graphics;
 import java.awt.Color;
 import static java.awt.Color.MAGENTA;
 import java.awt.Graphics;
-import markus.ginrummy.logic.net.Client;
+import markus.ginrummy.logic.net.ReaderWriter;
 
 /**
  *
@@ -16,12 +16,12 @@ import markus.ginrummy.logic.net.Client;
  */
 public class CardBack extends javax.swing.JPanel {
     
-    private Client client;
+    private ReaderWriter client;
 
     /**
      * Creates new form CardBack
      */
-    public CardBack(Client client) {
+    public CardBack(ReaderWriter client) {
         initComponents();
         this.client = client;
     }

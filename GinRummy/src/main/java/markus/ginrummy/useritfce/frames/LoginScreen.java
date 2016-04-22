@@ -11,7 +11,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JScrollPane;
 import jdk.nashorn.internal.codegen.CompilerConstants;
-import markus.ginrummy.logic.net.Client;
+import markus.ginrummy.logic.net.ReaderWriter;
 
 /**
  *
@@ -19,7 +19,7 @@ import markus.ginrummy.logic.net.Client;
  */
 public class LoginScreen extends javax.swing.JFrame {
 
-    private Client client;
+    private ReaderWriter client;
 
     /**
      * Creates new form LoginScreen
@@ -28,7 +28,7 @@ public class LoginScreen extends javax.swing.JFrame {
         initComponents();
     }
 
-    public LoginScreen(Client client) {
+    public LoginScreen(ReaderWriter client) {
         this.client = client;
         initComponents();
     }

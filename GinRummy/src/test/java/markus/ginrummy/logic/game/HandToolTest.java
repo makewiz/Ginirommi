@@ -7,7 +7,6 @@ package markus.ginrummy.logic.game;
 
 import java.util.ArrayList;
 import markus.ginrummy.gameobjects.Card;
-import markus.ginrummy.logic.game.HandTools;
 import markus.ginrummy.gameobjects.Suit;
 import org.junit.After;
 import org.junit.AfterClass;

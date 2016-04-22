@@ -8,10 +8,11 @@ package markus.ginrummy.useritfce.frames;
 import markus.ginrummy.useritfce.logic.FrameController;
 import java.awt.Container;
 import java.io.IOException;
+import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JScrollPane;
-import markus.ginrummy.logic.net.Client;
+import markus.ginrummy.logic.net.ReaderWriter;
 import markus.ginrummy.logic.net.Server;
 
 /**
@@ -81,14 +82,15 @@ public class HostScreen extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         int portNumber = Integer.parseInt(this.jTextField1.getText());
-        Server server = new Server(portNumber);
-        server.start();
-        this.setVisible(false);
+
         try {
-            Client client = new Client("localhost", portNumber);
-            FrameController writer = new FrameController(client);
+            Server server = new Server(portNumber);
+            server.start();
+            Socket socket = new Socket("localhost", portNumber);
+            ReaderWriter reader = new ReaderWriter(socket);
+            FrameController controller = new FrameController(reader);
             this.setVisible(false);
-            writer.start();
+            controller.start();
         } catch (IOException ex) {
             Logger.getLogger(HostScreen.class.getName()).log(Level.SEVERE, null, ex);
         }

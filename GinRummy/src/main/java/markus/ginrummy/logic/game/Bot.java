@@ -13,7 +13,7 @@ import markus.ginrummy.gameobjects.Card;
 import markus.ginrummy.gameobjects.OpenDeck;
 import markus.ginrummy.gameobjects.Suit;
 import markus.ginrummy.gameobjects.ValueComparator;
-import markus.ginrummy.logic.net.Client;
+import markus.ginrummy.logic.net.ReaderWriter;
 
 /**
  *
@@ -21,12 +21,12 @@ import markus.ginrummy.logic.net.Client;
  */
 public class Bot extends Thread {
 
-    private Client client;
+    private ReaderWriter client;
     private ArrayList<Card> hand;
     private OpenDeck open;
     private HandTools tool;
 
-    public Bot(Client client) {
+    public Bot(ReaderWriter client) {
         String host = "localhost";
         this.client = client;
         hand = new ArrayList<>();

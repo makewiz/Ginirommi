@@ -13,7 +13,7 @@ import java.util.logging.Logger;
 import markus.ginrummy.gameobjects.Player;
 import markus.ginrummy.logic.game.Bot;
 import markus.ginrummy.logic.game.GameThread;
-import markus.ginrummy.logic.net.Client;
+import markus.ginrummy.logic.net.ReaderWriter;
 import markus.ginrummy.logic.net.Server;
 import markus.ginrummy.useritfce.logic.FrameController;
 
@@ -125,11 +125,14 @@ public class StartScreen extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         
-        Server server = new Server(5555);
-        server.start();
+
         try {
-            Client playerClient = new Client("localhost", 5555);
-            Client botClient = new Client("localhost", 5555);
+            Server server = new Server(0);
+            server.start();
+            Socket playerSocket = new Socket("localhost", server.getPort());
+            Socket botSocket = new Socket("localhost", server.getPort());
+            ReaderWriter playerClient = new ReaderWriter(playerSocket);
+            ReaderWriter botClient = new ReaderWriter(botSocket);
             Bot bot = new Bot(botClient);
             bot.start();
             FrameController controller = new FrameController(playerClient);

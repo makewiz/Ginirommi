@@ -31,21 +31,27 @@ public class MultiServerThread extends Thread {
     private ArrayList<MultiServerThread> threads;
     private MultiServerThread connectingThread;
     private GameThread gameThread;
+    private ReaderWriter reader;
 
     public MultiServerThread(Socket socket, ArrayList<Player> players, ArrayList<MultiServerThread> threads) {
         super("MultiServerThread");
         this.socket = socket;
         this.players = players;
         this.threads = threads;
+        try {
+            reader = new ReaderWriter(socket);
+        } catch (IOException ex) {
+            Logger.getLogger(MultiServerThread.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     public static String newline = System.getProperty("line.separator");
 
     public void run() {
 
-        try (PrintWriter out = new PrintWriter(new OutputStreamWriter(socket.getOutputStream(), "UTF-8"), true);
-                BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream(), "UTF-8"));
-            ) {
+        try {
+            PrintWriter out = reader.getOut();
+            BufferedReader in = reader.getIn();
             out.println("Tervetuloa ohjelmaan...");
             String name;
             while (true) {
@@ -86,22 +92,6 @@ public class MultiServerThread extends Thread {
             printCommands(out);
             out.println();
             while (true) {
-                if (connectingThread != null && player.getState() == 1) {
-                    while (true) {
-                        if (player.getState() == 0) {
-                            break;
-                        }
-                        String message = in.readLine();
-                        if (gameThread != null && message.equals("/xxx")) {
-                            synchronized (gameThread) {
-                                gameThread.wait();
-                            }
-                        }
-                        if (message != null && !message.startsWith("/")) {
-                            connectingThread.getPlayer().printString(this.player.getName() + ": " + message);
-                        }
-                    }
-                }
                 String command = in.readLine();
                 if (connectingThread != null && player.getState() == 1) {
                     synchronized (connectingThread) {
@@ -255,7 +245,6 @@ public class MultiServerThread extends Thread {
             }
             socket.close();
         } catch (IOException e) {
-            e.printStackTrace();
             e.getLocalizedMessage();
 
         } catch (InterruptedException ex) {
@@ -281,33 +270,10 @@ public class MultiServerThread extends Thread {
         connectingThread = thread;
     }
 
-    public void sendMessageTo(Socket connectingSocket) {
-
-        try {
-            PrintWriter out = new PrintWriter(new OutputStreamWriter(connectingSocket.getOutputStream(), "UTF-8"), true);
-            BufferedReader in = new BufferedReader(new InputStreamReader(
-                    this.socket.getInputStream(), "UTF-8"));
-
-            String message;
-            message = in.readLine();
-            if (gameThread != null && message.equals("/xxx")) {
-                synchronized (gameThread) {
-                    gameThread.wait();
-                }
-            } else if (message != null && !message.startsWith("/")) {
-                out.println(this.player.getName() + ": " + message);
-            }
-        } catch (Exception e) {
-        }
-
-    }
-
     public void sendStringTo(Socket connection, String string) {
         try {
-            PrintWriter out = new PrintWriter(new OutputStreamWriter(connection.getOutputStream(), "UTF-8"), true);
-            if (string != null) {
-                out.println(string);
-            }
+            ReaderWriter r = new ReaderWriter(connection);
+            r.print(string);
         } catch (Exception e) {
         }
     }

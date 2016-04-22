@@ -7,10 +7,11 @@ package markus.ginrummy.useritfce.frames;
 
 import markus.ginrummy.useritfce.logic.FrameController;
 import java.io.IOException;
+import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JScrollPane;
-import markus.ginrummy.logic.net.Client;
+import markus.ginrummy.logic.net.ReaderWriter;
 
 /**
  *
@@ -84,10 +85,11 @@ public class JoinScreen extends javax.swing.JFrame {
         int portNumber = Integer.parseInt(this.jTextField2.getText());
         this.setVisible(false);
         try {
-            Client client = new Client(host, portNumber);
-            FrameController writer = new FrameController(client);
+            Socket socket = new Socket(host, portNumber);
+            ReaderWriter reader = new ReaderWriter(socket);
+            FrameController controller = new FrameController(reader);
             this.setVisible(false);
-            writer.start();
+            controller.start();
         } catch (IOException ex) {
             Logger.getLogger(HostScreen.class.getName()).log(Level.SEVERE, null, ex);
         }

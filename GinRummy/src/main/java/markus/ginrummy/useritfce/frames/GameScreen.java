@@ -7,7 +7,7 @@ package markus.ginrummy.useritfce.frames;
 
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import markus.ginrummy.logic.net.Client;
+import markus.ginrummy.logic.net.ReaderWriter;
 
 /**
  *
@@ -15,7 +15,7 @@ import markus.ginrummy.logic.net.Client;
  */
 public class GameScreen extends javax.swing.JFrame {
 
-    private Client client;
+    private ReaderWriter client;
 
     /**
      * Creates new form GameScreen
@@ -24,7 +24,7 @@ public class GameScreen extends javax.swing.JFrame {
         initComponents();
     }
 
-    public GameScreen(Client client) {
+    public GameScreen(ReaderWriter client) {
         this.client = client;
         initComponents();
     }

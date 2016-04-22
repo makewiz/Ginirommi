@@ -7,7 +7,7 @@ package markus.ginrummy.useritfce.frames;
 
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import markus.ginrummy.logic.net.Client;
+import markus.ginrummy.logic.net.ReaderWriter;
 
 /**
  *
@@ -15,7 +15,7 @@ import markus.ginrummy.logic.net.Client;
  */
 public class LobbyScreen extends javax.swing.JFrame {
 
-    private Client client;
+    private ReaderWriter client;
 
     /**
      * Creates new form LobbyScreen
@@ -24,7 +24,7 @@ public class LobbyScreen extends javax.swing.JFrame {
         initComponents();
     }
 
-    public LobbyScreen(Client client) {
+    public LobbyScreen(ReaderWriter client) {
         this.client = client;
         initComponents();
     }

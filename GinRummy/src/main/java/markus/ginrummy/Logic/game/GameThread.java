@@ -34,6 +34,7 @@ public class GameThread extends Thread {
         players.add(second);
         random = new Random();
         tool = new HandTools();
+        playerInt = 0;
     }
 
     public static String newline = System.getProperty("line.separator");
@@ -43,9 +44,8 @@ public class GameThread extends Thread {
 
         printBoth("Tervetuloa peliin.");
         printBoth("Voit lähettää viestin kirjoittamalla tavallisesti.");
-        int starter = random.nextInt(1);
+        int starter = random.nextInt(2);
         int round = 1;
-        playerInt = starter;
         printBoth("Aloittajaksi arvottiin: " + currentPlayer().getName());
         while (true) {
             playerInt = starter;
@@ -71,7 +71,6 @@ public class GameThread extends Thread {
                 otherPlayer().printString("Odotetaan pelaajan: " + currentPlayer().getName() + " päätöstä.");
                 currentPlayer().printString("Nostatko kortin.");
                 String a = null;
-                currentPlayer().printString("xxx");
                 a = currentPlayer().readString();
                 synchronized (this) {
                     notifyAll();
@@ -99,7 +98,6 @@ public class GameThread extends Thread {
             currentPlayer().printString("Valitse poistettava kortti komennolla: '/numero'");
             String a = null;
             while (true) {
-                currentPlayer().printString("xxx");
                 a = currentPlayer().readString();
                 synchronized (this) {
                     notifyAll();
@@ -118,7 +116,6 @@ public class GameThread extends Thread {
                 printBoth("Poytakortti: &" + open.topCard().toString());
                 currentPlayer().printString("Nostatko avopakasta vai umpipakasta?.");
                 while (true) {
-                    currentPlayer().printString("xxx");
                     String option = currentPlayer().readString();
                     synchronized (this) {
                         notifyAll();
@@ -173,7 +170,6 @@ public class GameThread extends Thread {
                                 + " Haluatko lopettaa?");
                         boolean stop = false;
                         while (true) {
-                            currentPlayer().printString("xxx");
                             String option = currentPlayer().readString();
                             synchronized (this) {
                                 notifyAll();
@@ -211,7 +207,6 @@ public class GameThread extends Thread {
                 currentPlayer().printString("Valitse poistettava kortti komennolla: '/numero'");
                 a = null;
                 while (true) {
-                    currentPlayer().printString("xxx");
                     a = currentPlayer().readString();
                     synchronized (this) {
                         notifyAll();

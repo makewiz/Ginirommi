@@ -21,6 +21,12 @@ import markus.ginrummy.gameobjects.ValueComparator;
  */
 public class HandTools {
 
+    /**
+     * Metodi kertoo käden miinuspisteet,
+     * eli setteihin kuulumattomien korttien arvojen summan.
+     * @param hand käsi, josta miinuspisteet lasketaan
+     * @return Käden miinuspisteet
+     */
     public int calculateMinus(ArrayList<Card> hand) {
         ArrayList<ArrayList<Card>> chosenSets = chooseSets(hand);
         return setValue(hand) - fullValue(chosenSets);
@@ -44,6 +50,12 @@ public class HandTools {
 
     }
 
+    /**
+     * Metodi valitsee kädestä arvokkaimman settien yhdistelmän.
+     * Seteissä on aina vähintään kolme korttia.
+     * @param hand Käsi josta kortit valitaan.
+     * @return ArrayList, joka sisältää valitut setit.
+     */
     public ArrayList<ArrayList<Card>> chooseSets(ArrayList<Card> hand) {
         ArrayList<ArrayList<Card>> sets = sortSets(hand, 3);
         ArrayList<ArrayList<Card>> straights = sortStraights(hand, 3);
@@ -76,6 +88,11 @@ public class HandTools {
         return chosenSets;
     }
 
+    /**
+     * Metodi palauttaa syötteenä annetun listan kaikki enintään kolmen muuttujan permutaatiot.
+     * @param list Syötteenä lista, joka sisältää korttien settejä
+     * @return Palauttaa listan joka sisältää syötetyn listan esiintymiä, kun muuttujat ovat eri järjestyksessä
+     */
     public ArrayList<ArrayList<ArrayList<Card>>> listPermutations(ArrayList<ArrayList<Card>> list) {
         ArrayList<ArrayList<ArrayList<Card>>> permutations = new ArrayList<>();
         ArrayList<ArrayList<Card>> permutation = new ArrayList<>();
@@ -83,6 +100,10 @@ public class HandTools {
         return permutations;
     }
 
+    /**
+     * Metodi muuttaa syötteenä annetun listan korttien järjestystä arvojen ja maitten mukaan.
+     * @param hand Syötteenä lista korteista
+     */
     public void sortHand(ArrayList<Card> hand) {
         ArrayList<ArrayList<Card>> chosenSets = chooseSets(hand);
         ArrayList<Card> newHand = new ArrayList<>();
