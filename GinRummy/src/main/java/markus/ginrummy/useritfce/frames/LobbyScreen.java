@@ -5,6 +5,7 @@
  */
 package markus.ginrummy.useritfce.frames;
 
+import static java.awt.event.KeyEvent.VK_ENTER;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import markus.ginrummy.logic.net.ReaderWriter;
@@ -88,6 +89,16 @@ public class LobbyScreen extends javax.swing.JFrame {
 
         jTextField1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jTextField1.setText("Message");
+        jTextField1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTextField1MouseClicked(evt);
+            }
+        });
+        jTextField1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTextField1KeyPressed(evt);
+            }
+        });
 
         jButton1.setText("SEND");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -146,6 +157,22 @@ public class LobbyScreen extends javax.swing.JFrame {
         String message = this.jTextField1.getText();
         client.print(message);
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jTextField1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField1MouseClicked
+        // TODO add your handling code here:
+        this.jTextField1.selectAll();
+        this.validate();
+    }//GEN-LAST:event_jTextField1MouseClicked
+
+    private void jTextField1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyPressed
+        // TODO add your handling code here:
+        if (evt.getKeyCode() == VK_ENTER) {
+            String message = this.jTextField1.getText();
+            client.print(message);
+            this.jTextField1.setText("");
+            this.validate();
+        }
+    }//GEN-LAST:event_jTextField1KeyPressed
 
     /**
      * @param args the command line arguments

@@ -78,11 +78,13 @@ public class Bot extends Thread {
                     int firstMinus = tool.calculateMinus(hand);
                     hand.add(open.topCard());
                     int secondMinus = tool.calculateMinus(hand);
-                    client.print("/xxx");
-                    if (firstMinus < secondMinus) {
-                        client.print("/e");
-                    } else {
-                        client.print("/k");
+                    for (int i = 0; i < 3; i++) {
+                        client.print("/xxx");
+                        if (firstMinus < secondMinus) {
+                            client.print("/e");
+                        } else {
+                            client.print("/k");
+                        }
                     }
                 }
                 if (fromServer.equals("Valitse poistettava kortti komennolla: '/numero'")) {
@@ -95,12 +97,16 @@ public class Bot extends Thread {
                     clonedHand.sort(comp);
                     Card toRemove = clonedHand.get(clonedHand.size() - 1);
                     int idx = hand.indexOf(toRemove);
-                    client.print("/xxx");
-                    client.print("/" + idx);
+                    for (int i = 0; i < 3; i++) {
+                        client.print("/xxx");
+                        client.print("/" + idx);
+                    }
                 }
                 if (fromServer.startsWith("Jos poistat kortin: ")) {
-                    client.print("/xxx");
-                    client.print("/k");
+                    for (int i = 0; i < 3; i++) {
+                        client.print("/xxx");
+                        client.print("/k");
+                    }
                 }
                 if (fromServer.startsWith("Kierros: ")) {
                     open = new OpenDeck();

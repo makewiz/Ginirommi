@@ -116,7 +116,7 @@ public class GameThread extends Thread {
                 printBoth("Poytakortti: &" + open.topCard().toString());
                 currentPlayer().printString("Nostatko avopakasta vai umpipakasta?.");
                 while (true) {
-                    String option = currentPlayer().readString();
+                    String option = currentPlayer().readString();                 
                     synchronized (this) {
                         notifyAll();
                     }
@@ -170,7 +170,7 @@ public class GameThread extends Thread {
                                 + " Haluatko lopettaa?");
                         boolean stop = false;
                         while (true) {
-                            String option = currentPlayer().readString();
+                            String option = currentPlayer().readString();                        
                             synchronized (this) {
                                 notifyAll();
                             }
@@ -207,7 +207,7 @@ public class GameThread extends Thread {
                 currentPlayer().printString("Valitse poistettava kortti komennolla: '/numero'");
                 a = null;
                 while (true) {
-                    a = currentPlayer().readString();
+                    a = currentPlayer().readString();              
                     synchronized (this) {
                         notifyAll();
                     }

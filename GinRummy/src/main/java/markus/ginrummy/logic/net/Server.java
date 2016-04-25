@@ -5,7 +5,6 @@
  */
 package markus.ginrummy.logic.net;
 
-import markus.ginrummy.logic.net.MultiServerThread;
 import markus.ginrummy.gameobjects.Player;
 import java.io.IOException;
 import java.net.ServerSocket;
