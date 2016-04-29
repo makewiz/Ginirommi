@@ -11,10 +11,10 @@ import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import markus.ginrummy.gameobjects.Player;
-import markus.ginrummy.logic.game.Bot;
-import markus.ginrummy.logic.game.GameThread;
-import markus.ginrummy.logic.net.ReaderWriter;
-import markus.ginrummy.logic.net.Server;
+import markus.ginrummy.gameLogic.Bot;
+import markus.ginrummy.gameLogic.GameThread;
+import markus.ginrummy.net.ReaderWriter;
+import markus.ginrummy.net.Server;
 import markus.ginrummy.useritfce.logic.FrameController;
 
 /**

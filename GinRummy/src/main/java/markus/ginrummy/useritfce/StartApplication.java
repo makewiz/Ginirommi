@@ -8,7 +8,7 @@ package markus.ginrummy.useritfce;
 import markus.ginrummy.useritfce.frames.StartScreen;
 
 /**
- *
+ * Pääluokka, josta ohjelma käynnistetään.
  * @author Markus
  */
 public class StartApplication {

@@ -10,21 +10,32 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
+ * Pelin avopakka olio.
  * @author Markus
  */
 public class OpenDeck {
 
     private List<Card> cards;
 
+    /**
+     * Luo uuden avopakan.
+     */
     public OpenDeck() {
         cards = new ArrayList<>();
     }
 
+    /**
+     * Metodi lisää pakan päälle uuden kortin.
+     * @param c Parametrina annettava pakkaan lisättävä kortti.
+     */
     public void addCard(Card c) {
         cards.add(0, c);
     }
 
+    /**
+     * Palautta pakan päälimmäisen koprtin.
+     * @return
+     */
     public Card topCard() {
         if (cards.isEmpty()) {
             return null;
@@ -33,6 +44,10 @@ public class OpenDeck {
         }
     }
 
+    /**
+     * Palauttaa pakan päälimmäisen kortin poistaen sen samalla.
+     * @return
+     */
     public Card takeCard() {
         if (cards.isEmpty()) {
             return null;

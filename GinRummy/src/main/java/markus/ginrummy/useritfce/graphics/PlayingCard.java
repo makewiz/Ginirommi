@@ -8,7 +8,7 @@ package markus.ginrummy.useritfce.graphics;
 import java.awt.Color;
 import java.awt.Graphics;
 import markus.ginrummy.gameobjects.Card;
-import markus.ginrummy.logic.net.ReaderWriter;
+import markus.ginrummy.net.ReaderWriter;
 import markus.ginrummy.gameobjects.Suit;
 
 /**
@@ -26,6 +26,9 @@ public class PlayingCard extends javax.swing.JPanel {
 
     /**
      * Creates new form PalyingCard
+     * @param card
+     * @param idx
+     * @param client
      */
     public PlayingCard(Card card, ReaderWriter client, int idx) {
         initComponents();
@@ -48,6 +51,11 @@ public class PlayingCard extends javax.swing.JPanel {
         this.idx = idx;
     }
 
+    /**
+     *
+     * @param card
+     * @param client
+     */
     public PlayingCard(Card card, ReaderWriter client) {
         initComponents();
         this.card = card;

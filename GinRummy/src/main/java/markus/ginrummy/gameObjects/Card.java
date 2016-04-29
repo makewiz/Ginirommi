@@ -6,7 +6,7 @@
 package markus.ginrummy.gameobjects;
 
 /**
- *
+ * Pelin korttiolio.
  * @author Markus
  */
 public class Card {
@@ -14,6 +14,12 @@ public class Card {
     private final Suit suit;
     private final int value;
 
+    /**
+     * Luo uuden määritellyn kortin.
+     * Heittää IllegalArgumentExceptionin, jos kortin arvoa ei tueta.
+     * @param suit Kortin maa.
+     * @param value Kortin arvo.
+     */
     public Card(Suit suit, int value) {
         this.suit = suit;
         this.value = value;
@@ -35,6 +41,11 @@ public class Card {
         return suit + ":" + value;
     }
 
+    /**
+     * Palauttaa kortin arvon merkkijonomuodossa.
+     * Tunnistaa A:n, J:n, jne.
+     * @return kortin arvo merkkijonomuodossa.
+     */
     public String valueString() {
         if (value == 1) {
             return "A";

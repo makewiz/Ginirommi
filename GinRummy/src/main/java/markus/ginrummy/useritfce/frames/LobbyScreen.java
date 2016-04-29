@@ -8,7 +8,7 @@ package markus.ginrummy.useritfce.frames;
 import static java.awt.event.KeyEvent.VK_ENTER;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import markus.ginrummy.logic.net.ReaderWriter;
+import markus.ginrummy.net.ReaderWriter;
 
 /**
  *

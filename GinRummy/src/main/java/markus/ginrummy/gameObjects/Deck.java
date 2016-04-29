@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Random;
 
 /**
- *
+ * Pelin pakka olio, joka koostuu kortti olioista.
  * @author Markus
  */
 public class Deck {
@@ -19,6 +19,9 @@ public class Deck {
     private List<Card> cards;
     Random random = new Random();
 
+    /**
+     * Luo uuden pakan, joka sisältää kaikki 52 korttia.
+     */
     public Deck() {
         cards = new ArrayList<>();
         for (Suit s : Suit.values()) {
@@ -29,6 +32,11 @@ public class Deck {
         }
     }
 
+    /**
+     * Sekoittaa pakan parametrilla määrätyt kerrat.
+     * Pakan sekaisuus voidaan taata sekoittamalla useita kertoja.
+     * @param times Pakan sekoituskerrat.
+     */
     public void shuffle(int times) {
         for (int i = 0; i < times; i++) {
             ArrayList<Card> shuffled = new ArrayList<>();
@@ -41,6 +49,10 @@ public class Deck {
         }
     }
 
+    /**
+     * Palauttaa pakan päälimmäisen kortin ja poistaa pakasta saman kortin.
+     * @return Paluttaa kortti olion.
+     */
     public Card takeCard() {
         if (cards.isEmpty()) {
             return null;

@@ -15,7 +15,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import markus.ginrummy.gameobjects.Card;
-import markus.ginrummy.logic.net.ReaderWriter;
+import markus.ginrummy.net.ReaderWriter;
 import markus.ginrummy.gameobjects.Suit;
 import markus.ginrummy.useritfce.frames.GameScreen;
 import markus.ginrummy.useritfce.frames.LobbyScreen;
@@ -24,13 +24,17 @@ import markus.ginrummy.useritfce.graphics.CardBack;
 import markus.ginrummy.useritfce.graphics.PlayingCard;
 
 /**
- *
+ * Clientin ruutuja hallitseva ajettava säie.
  * @author Markus
  */
 public class FrameController extends Thread {
 
     private ReaderWriter client;
 
+    /**
+     * Luo uuden ruudunhallintasäikeen määrätyllä palvelinyhteydellä.
+     * @param client
+     */
     public FrameController(ReaderWriter client) {
         this.client = client;
     }
@@ -105,8 +109,11 @@ public class FrameController extends Thread {
                     if (fromServer.equals("Tervetuloa peliin.")) {
                         break;
                     }
-                    if (fromServer.equals("stcmd")) {
-                        client.print("stcmd");
+                    if (fromServer.equals("/stcmd")) {
+                        client.print("/stcmd");
+                    }
+                    if (fromServer.endsWith("liittyi")) {
+                        client.print("/update");
                     }
 
                 }
@@ -188,6 +195,11 @@ public class FrameController extends Thread {
 
     }
 
+    /**
+     * Muuntaa maan merkkijonosta enum muotoon.
+     * @param suit maa merkkijonomuodossa.
+     * @return
+     */
     public Suit importSuit(String suit) {
         Suit s;
         if (suit.equals("PATA")) {

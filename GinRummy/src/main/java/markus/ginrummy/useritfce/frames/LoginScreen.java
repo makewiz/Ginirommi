@@ -11,7 +11,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JScrollPane;
 import jdk.nashorn.internal.codegen.CompilerConstants;
-import markus.ginrummy.logic.net.ReaderWriter;
+import markus.ginrummy.net.ReaderWriter;
 
 /**
  *
