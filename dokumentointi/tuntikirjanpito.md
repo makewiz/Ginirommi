@@ -13,3 +13,5 @@ Päivä | Tunnit | Kuvaus
 12.4.2016 | 3h | Tekoäly ja checkstyle
 16.4.2016 | 1.5h | Tekoäly
 22.4.2016 | 4h | Sievennystä ja dokumentointia
+26.4.2016 | 1h | Graafisen käyttöliittymän päivittelyä
+29.4.2016 | 3h | Pikkufiksailua ja javadocin tekemistä
