@@ -6,13 +6,18 @@
 package markus.ginrummy.useritfce.logic;
 
 import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.BoxLayout;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
 import markus.ginrummy.gameobjects.Card;
 import markus.ginrummy.net.ReaderWriter;
@@ -25,6 +30,7 @@ import markus.ginrummy.useritfce.graphics.PlayingCard;
 
 /**
  * Clientin ruutuja hallitseva ajettava säie.
+ *
  * @author Markus
  */
 public class FrameController extends Thread {
@@ -33,6 +39,7 @@ public class FrameController extends Thread {
 
     /**
      * Luo uuden ruudunhallintasäikeen määrätyllä palvelinyhteydellä.
+     *
      * @param client
      */
     public FrameController(ReaderWriter client) {
@@ -82,22 +89,14 @@ public class FrameController extends Thread {
                 String fromServer = client.read();
                 if (fromServer != null) {
                     if (fromServer.equals("Players online:.")) {
-                        playerPanel.removeAll();
-                        while (true) {
-                            fromServer = client.read();
-                            if (fromServer.equals("Loppu")) {
-                                break;
-                            } else {
-                                JLabel label = new JLabel(fromServer);
-                                label.setFont(label.getFont().deriveFont(24.0f));
-                                playerPanel.add(label);
-                            }
-                        }
+                        updatePlayerPanel(playerPanel, lobby);
                         lobby.validate();
+                    } else if (fromServer.equals("/stcmd")) {
+                        client.print("/stcmd");
                     } else {
                         if (panel.getComponentCount() >= 30) {
                             panel.remove(0);
-                        }                        
+                        }
                         JLabel label = new JLabel(fromServer);
                         label.setFont(label.getFont().deriveFont(24.0f));
 
@@ -109,9 +108,7 @@ public class FrameController extends Thread {
                     if (fromServer.equals("Tervetuloa peliin.")) {
                         break;
                     }
-                    if (fromServer.equals("/stcmd")) {
-                        client.print("/stcmd");
-                    }
+
                     if (fromServer.endsWith("liittyi")) {
                         client.print("/update");
                     }
@@ -197,6 +194,7 @@ public class FrameController extends Thread {
 
     /**
      * Muuntaa maan merkkijonosta enum muotoon.
+     *
      * @param suit maa merkkijonomuodossa.
      * @return
      */
@@ -212,6 +210,64 @@ public class FrameController extends Thread {
             s = Suit.RISTI;
         }
         return s;
+    }
+
+    private void updatePlayerPanel(JPanel playerPanel, LobbyScreen lobby) throws IOException {
+        playerPanel.removeAll();
+        while (true) {
+            String fromServer = client.read();
+            if (fromServer.equals("Loppu")) {
+                break;
+            } else {
+                JLabel label = new JLabel(fromServer);
+                label.setFont(label.getFont().deriveFont(24.0f));
+                String s = fromServer;
+
+                JPopupMenu menu = new JPopupMenu();
+                JMenuItem startItem = new JMenuItem("Aloita peli pelaajan " + fromServer + " kanssa");
+                startItem.addActionListener(new ActionListener() {
+
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        client.print("/start " + s);
+                    }
+                });
+
+                JMenuItem messageItem = new JMenuItem("Lähetä yksityisviesti");
+                messageItem.addActionListener(new ActionListener() {
+
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        client.print("/" + s + ":" + lobby.messageField().getText());
+                    }
+                });
+                menu.add(messageItem);
+                menu.add(startItem);
+                label.add(menu);
+                label.addMouseListener(new MouseAdapter() {
+
+                    @Override
+                    public void mousePressed(MouseEvent e) {
+                        if (e.isPopupTrigger()) {
+                            doPop(e);
+                        }
+                    }
+
+                    @Override
+                    public void mouseReleased(MouseEvent e) {
+                        if (e.isPopupTrigger()) {
+                            doPop(e);
+                        }
+                    }
+
+                    private void doPop(MouseEvent e) {
+                        menu.show(e.getComponent(), e.getX(), e.getY());
+                    }
+
+                });
+                playerPanel.add(label);
+            }
+        }
     }
 
 }

@@ -8,6 +8,7 @@ package markus.ginrummy.useritfce.frames;
 import static java.awt.event.KeyEvent.VK_ENTER;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTextField;
 import markus.ginrummy.net.ReaderWriter;
 
 /**
@@ -46,7 +47,7 @@ public class LobbyScreen extends javax.swing.JFrame {
         messagePanel = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        messageField = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
 
         jLabel3.setText("jLabel3");
@@ -87,16 +88,16 @@ public class LobbyScreen extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel2.setText("Players online");
 
-        jTextField1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jTextField1.setText("Message");
-        jTextField1.addMouseListener(new java.awt.event.MouseAdapter() {
+        messageField.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        messageField.setText("Message");
+        messageField.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTextField1MouseClicked(evt);
+                messageFieldMouseClicked(evt);
             }
         });
-        jTextField1.addKeyListener(new java.awt.event.KeyAdapter() {
+        messageField.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
-                jTextField1KeyPressed(evt);
+                messageFieldKeyPressed(evt);
             }
         });
 
@@ -126,7 +127,7 @@ public class LobbyScreen extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 365, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jTextField1)
+                                .addComponent(messageField)
                                 .addGap(18, 18, 18)
                                 .addComponent(jButton1)))
                         .addContainerGap())))
@@ -145,7 +146,7 @@ public class LobbyScreen extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 72, Short.MAX_VALUE))
+                    .addComponent(messageField, javax.swing.GroupLayout.DEFAULT_SIZE, 72, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -154,25 +155,25 @@ public class LobbyScreen extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        String message = this.jTextField1.getText();
+        String message = this.messageField.getText();
         client.print(message);
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jTextField1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField1MouseClicked
+    private void messageFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_messageFieldMouseClicked
         // TODO add your handling code here:
-        this.jTextField1.selectAll();
+        this.messageField.selectAll();
         this.validate();
-    }//GEN-LAST:event_jTextField1MouseClicked
+    }//GEN-LAST:event_messageFieldMouseClicked
 
-    private void jTextField1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyPressed
+    private void messageFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_messageFieldKeyPressed
         // TODO add your handling code here:
         if (evt.getKeyCode() == VK_ENTER) {
-            String message = this.jTextField1.getText();
+            String message = this.messageField.getText();
             client.print(message);
-            this.jTextField1.setText("");
+            this.messageField.setText("");
             this.validate();
         }
-    }//GEN-LAST:event_jTextField1KeyPressed
+    }//GEN-LAST:event_messageFieldKeyPressed
 
     /**
      * @param args the command line arguments
@@ -224,6 +225,10 @@ public class LobbyScreen extends javax.swing.JFrame {
     public JPanel playerPanel() {
         return this.playerPanel;
     }
+    
+    public JTextField messageField() {
+       return this.messageField; 
+    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -233,7 +238,7 @@ public class LobbyScreen extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField messageField;
     private javax.swing.JPanel messagePanel;
     private javax.swing.JPanel playerPanel;
     // End of variables declaration//GEN-END:variables

@@ -95,7 +95,6 @@ public class MultiServerThread extends Thread {
                 }
             }
             //printing players
-            out.println("Players online:.");
             printPlayers(out);
             out.println();
             printCommands(out);
@@ -205,10 +204,6 @@ public class MultiServerThread extends Thread {
                         break;
                     } else if (command.equals("/update")) {
                         out.println();
-                        out.println("Players online:.");
-                        //                    for (Player p : players) {
-                        //                        out.println("    " + players.indexOf(p) + "    " + p.getName() + "    " + p.status());
-                        //                    }
                         printPlayers(out);
                     } else if (command.contains(":")) {
                         String[] splitCommand = command.split(":");
@@ -308,9 +303,10 @@ public class MultiServerThread extends Thread {
      */
     public void printPlayers(PrintWriter out) {
         if (threads != null) {
+            out.println("Players online:.");
             for (MultiServerThread t : threads) {
                 if (t != null && t.getPlayer() != null) {
-                    out.println("    " + threads.indexOf(t) + "    " + t.getPlayer().getName() + "    " + t.getPlayer().status());
+                    out.println(t.getPlayer().getName());
                 }
             }
             out.println("Loppu");
