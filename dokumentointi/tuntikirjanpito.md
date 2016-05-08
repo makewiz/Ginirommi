@@ -15,3 +15,4 @@ Päivä | Tunnit | Kuvaus
 22.4.2016 | 4h | Sievennystä ja dokumentointia
 26.4.2016 | 1h | Graafisen käyttöliittymän päivittelyä
 29.4.2016 | 3h | Pikkufiksailua ja javadocin tekemistä
+08.5.2016 | 3h | Pelaajalistan hienostelua ja ohjekirjan teko
