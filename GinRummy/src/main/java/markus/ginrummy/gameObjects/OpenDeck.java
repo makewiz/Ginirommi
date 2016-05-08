@@ -5,12 +5,12 @@
  */
 package markus.ginrummy.gameobjects;
 
-import markus.ginrummy.gameobjects.Card;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Pelin avopakka olio.
+ *
  * @author Markus
  */
 public class OpenDeck {
@@ -26,6 +26,7 @@ public class OpenDeck {
 
     /**
      * Metodi lisää pakan päälle uuden kortin.
+     *
      * @param c Parametrina annettava pakkaan lisättävä kortti.
      */
     public void addCard(Card c) {
@@ -34,6 +35,7 @@ public class OpenDeck {
 
     /**
      * Palautta pakan päälimmäisen koprtin.
+     *
      * @return
      */
     public Card topCard() {
@@ -46,6 +48,7 @@ public class OpenDeck {
 
     /**
      * Palauttaa pakan päälimmäisen kortin poistaen sen samalla.
+     *
      * @return
      */
     public Card takeCard() {

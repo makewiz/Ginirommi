@@ -5,11 +5,8 @@
  */
 package markus.ginrummy.gameobjects;
 
-import markus.ginrummy.gameobjects.Card;
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.io.Serializable;
 import java.net.Socket;
@@ -18,7 +15,9 @@ import java.util.List;
 import markus.ginrummy.net.ReaderWriter;
 
 /**
- * Pelin pelaaja olio, joka koostuu Palvelinta lukevasta ja kirjoittavasta oliosta.
+ * Pelin pelaaja olio, joka koostuu Palvelinta lukevasta ja kirjoittavasta
+ * oliosta.
+ *
  * @author Markus
  */
 public class Player implements Serializable {
@@ -33,6 +32,7 @@ public class Player implements Serializable {
 
     /**
      * Luo pelaajan halutulla nimnellä ja socket yhteydellä palvelimeen.
+     *
      * @param name Pelaajan nimi.
      * @param socket Palvelinyhteys.
      */
@@ -56,6 +56,7 @@ public class Player implements Serializable {
 
     /**
      * Lisää pelaajan käteen annetun kortin.
+     *
      * @param c Käteen lisättävä kortti.
      */
     public void addCard(Card c) {
@@ -68,6 +69,7 @@ public class Player implements Serializable {
 
     /**
      * Lisää pelaajan pistetilille halutun määrän pisteitä.
+     *
      * @param x Lisättävien pisteiden määrä kokonaislukuna.
      */
     public void addPoints(int x) {
@@ -80,6 +82,7 @@ public class Player implements Serializable {
 
     /**
      * Poistaa pelaajan kädestä halutusta kohdasta kortin.
+     *
      * @param index Poistettavan kortin indeksi.
      * @return Palauttaa poistetun kortin.
      */
@@ -91,6 +94,7 @@ public class Player implements Serializable {
 
     /**
      * Asettaa pelaajan tilan kokonaislukuarvona.
+     *
      * @param state pelaajan tilaa kuvaava kokonaislukuarvo.
      */
     public void setState(int state) {
@@ -103,6 +107,7 @@ public class Player implements Serializable {
 
     /**
      * Palauttaa pelaajan tilan merkkijonona.
+     *
      * @return pelaajan tila merkkijonona.
      */
     public String status() {
@@ -119,6 +124,7 @@ public class Player implements Serializable {
 
     /**
      * Asettaa pelaajan nimen.
+     *
      * @param name pelaajan nimi.
      */
     public void setName(String name) {
@@ -127,6 +133,7 @@ public class Player implements Serializable {
 
     /**
      * Palauttaa Palvelinkirjoittimen.
+     *
      * @return palvelinkirjoitin PrintWriter muodossa.
      */
     public PrintWriter getOut() {
@@ -135,6 +142,7 @@ public class Player implements Serializable {
 
     /**
      * Palauttaa palvelinlukijan.
+     *
      * @return Lukjija BufferedReader muodossa.
      */
     public BufferedReader getIn() {
@@ -143,6 +151,7 @@ public class Player implements Serializable {
 
     /**
      * Kirjoittaa clientille halutun merkkijonon.
+     *
      * @param string Kirjoitettava merkkijono.
      */
     public void printString(String string) {
@@ -151,6 +160,7 @@ public class Player implements Serializable {
 
     /**
      * Lukee clientiltä merkkijonon.
+     *
      * @return Palauttaa luetun merkkijonon.
      */
     public String readString() {

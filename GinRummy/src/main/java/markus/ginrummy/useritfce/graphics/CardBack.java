@@ -15,11 +15,12 @@ import markus.ginrummy.net.ReaderWriter;
  * @author Markus
  */
 public class CardBack extends javax.swing.JPanel {
-    
+
     private ReaderWriter client;
 
     /**
      * Creates new form CardBack
+     *
      * @param client
      */
     public CardBack(ReaderWriter client) {
@@ -36,10 +37,8 @@ public class CardBack extends javax.swing.JPanel {
         g.drawString("?", 14, 50);
         g.drawString("?", 10, 100);
         g.setFont(g.getFont().deriveFont(150f));
-        g.drawString("?", this.getWidth() / 2 - 65, this.getHeight() / 2 + 55);        
+        g.drawString("?", this.getWidth() / 2 - 65, this.getHeight() / 2 + 55);
     }
-    
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -72,9 +71,9 @@ public class CardBack extends javax.swing.JPanel {
 
     private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
         // TODO add your handling code here:
-        client.print("/xxx");
         client.print("/e");
-        
+        client.print("/e");
+
     }//GEN-LAST:event_formMouseClicked
 
 

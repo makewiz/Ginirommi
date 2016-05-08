@@ -13,6 +13,7 @@ import java.util.ArrayList;
 
 /**
  * Palvelin, joka hallitsee kaikkia yhteyksiä.
+ *
  * @author Markus
  */
 public class Server extends Thread {
@@ -49,9 +50,10 @@ public class Server extends Thread {
             System.exit(-1);
         }
     }
-    
+
     /**
      * Palauttaa palvelimen paikallisen portin.
+     *
      * @return
      */
     public int getPort() {

@@ -14,6 +14,7 @@ import java.net.Socket;
 
 /**
  * Palvelinyhteyden lukija ja kirjoittaja.
+ *
  * @author Markus
  */
 public class ReaderWriter {
@@ -35,8 +36,7 @@ public class ReaderWriter {
 
     /**
      *
-     * @return
-     * @throws IOException
+     * @return @throws IOException
      */
     public String read() throws IOException {
         return in.readLine();
@@ -65,7 +65,5 @@ public class ReaderWriter {
     public PrintWriter getOut() {
         return out;
     }
-    
-    
 
 }

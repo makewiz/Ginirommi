@@ -235,13 +235,13 @@ public class GameScreen extends javax.swing.JFrame {
 
     private void yesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_yesButtonActionPerformed
         // TODO add your handling code here:
-        client.print("/xxx");
+        client.print("/k");
         client.print("/k");
     }//GEN-LAST:event_yesButtonActionPerformed
 
     private void noButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_noButtonActionPerformed
         // TODO add your handling code here:
-        client.print("/xxx");
+        client.print("/e");
         client.print("/e");
     }//GEN-LAST:event_noButtonActionPerformed
 
@@ -249,17 +249,18 @@ public class GameScreen extends javax.swing.JFrame {
         // TODO add your handling code here:
         String message = this.jTextField1.getText();
         client.print(message);
+        client.print(message);
     }//GEN-LAST:event_sendButtonActionPerformed
 
     private void openDeckPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_openDeckPanelMouseClicked
         // TODO add your handling code here:
-        client.print("/xxx");
+        client.print("/k");
         client.print("/k");  
     }//GEN-LAST:event_openDeckPanelMouseClicked
 
     private void deckPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deckPanelMouseClicked
         // TODO add your handling code here:
-        client.print("/xxx");
+        client.print("/e");
         client.print("/e");
     }//GEN-LAST:event_deckPanelMouseClicked
 

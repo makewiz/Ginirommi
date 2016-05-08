@@ -5,11 +5,11 @@
  */
 package markus.ginrummy.gameobjects;
 
-import markus.ginrummy.gameobjects.Card;
 import java.util.Comparator;
 
 /**
  * Maan perusteella kortteja vertaava vertailija.
+ *
  * @author Markus
  */
 public class SuitComparator implements Comparator<Card> {

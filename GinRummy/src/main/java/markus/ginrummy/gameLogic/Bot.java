@@ -17,6 +17,7 @@ import markus.ginrummy.net.ReaderWriter;
 
 /**
  * Tekoälyn oma käynnistettävä säie.
+ *
  * @author Markus
  */
 public class Bot extends Thread {
@@ -28,6 +29,7 @@ public class Bot extends Thread {
 
     /**
      * Tekoälyn konstruktori
+     *
      * @param client Palvelimen lukija ja kirjoittaja.
      */
     public Bot(ReaderWriter client) {
@@ -45,9 +47,8 @@ public class Bot extends Thread {
                 if (fromServer.equals("Anna pelaajalle nimi:")) {
                     client.print("Botti");
                 }
-                if (fromServer.equals("/stcmd")) {
-                    for (int i = 0; i < 3; i++) {
-                        client.print("/stcmd");
+                if (fromServer.startsWith("/kutsu:")) {
+                    for (int i = 0; i < 2; i++) {
                         client.print("/1");
                     }
 
@@ -85,7 +86,6 @@ public class Bot extends Thread {
                     hand.add(open.topCard());
                     int secondMinus = tool.calculateMinus(hand);
                     for (int i = 0; i < 3; i++) {
-                        client.print("/xxx");
                         if (firstMinus < secondMinus) {
                             client.print("/e");
                         } else {
@@ -104,13 +104,11 @@ public class Bot extends Thread {
                     Card toRemove = clonedHand.get(clonedHand.size() - 1);
                     int idx = hand.indexOf(toRemove);
                     for (int i = 0; i < 3; i++) {
-                        client.print("/xxx");
                         client.print("/" + idx);
                     }
                 }
                 if (fromServer.startsWith("Jos poistat kortin: ")) {
                     for (int i = 0; i < 3; i++) {
-                        client.print("/xxx");
                         client.print("/k");
                     }
                 }
@@ -125,6 +123,7 @@ public class Bot extends Thread {
 
     /**
      * Metodi muuntaa maan merkkijonosta "enum" muotoon.
+     *
      * @param suit maa merkkijonomuodossa
      * @return maa enum muodossa.
      */

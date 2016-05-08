@@ -5,10 +5,6 @@
  */
 package markus.ginrummy.gameLogic;
 
-import markus.ginrummy.gameobjects.ValueComparator;
-import markus.ginrummy.gameobjects.SuitValueComparator;
-import markus.ginrummy.gameobjects.Suit;
-import markus.ginrummy.gameobjects.Card;
 import java.util.ArrayList;
 import markus.ginrummy.gameobjects.Card;
 import markus.ginrummy.gameobjects.Suit;
@@ -17,13 +13,15 @@ import markus.ginrummy.gameobjects.ValueComparator;
 
 /**
  * Työkalut pokerikäden tutkimiseen ja käsittelyyn.
+ *
  * @author Markus
  */
 public class HandTools {
 
     /**
-     * Metodi kertoo käden miinuspisteet,
-     * eli setteihin kuulumattomien korttien arvojen summan.
+     * Metodi kertoo käden miinuspisteet, eli setteihin kuulumattomien korttien
+     * arvojen summan.
+     *
      * @param hand käsi, josta miinuspisteet lasketaan
      * @return Käden miinuspisteet
      */
@@ -33,8 +31,9 @@ public class HandTools {
     }
 
     /**
-     * Vaihtelevan kokoisen listan permutaatioiden laskussa käytettävä apumetodi.
-     * Käytetään sisäkkäisten looppien luomiseen.
+     * Vaihtelevan kokoisen listan permutaatioiden laskussa käytettävä
+     * apumetodi. Käytetään sisäkkäisten looppien luomiseen.
+     *
      * @param list Lista, josta permutaatiot lasketaan.
      * @param permutations Lista, johon permutaatiot lisätään.
      * @param permutation Käsiteltävä permutaatio.
@@ -58,8 +57,9 @@ public class HandTools {
     }
 
     /**
-     * Metodi valitsee kädestä arvokkaimman settien yhdistelmän.
-     * Seteissä on aina vähintään kolme korttia.
+     * Metodi valitsee kädestä arvokkaimman settien yhdistelmän. Seteissä on
+     * aina vähintään kolme korttia.
+     *
      * @param hand Käsi josta kortit valitaan.
      * @return ArrayList, joka sisältää valitut setit.
      */
@@ -96,9 +96,12 @@ public class HandTools {
     }
 
     /**
-     * Metodi palauttaa syötteenä annetun listan kaikki enintään kolmen muuttujan permutaatiot.
+     * Metodi palauttaa syötteenä annetun listan kaikki enintään kolmen
+     * muuttujan permutaatiot.
+     *
      * @param list Syötteenä lista, joka sisältää korttien settejä
-     * @return Palauttaa listan joka sisältää syötetyn listan esiintymiä, kun muuttujat ovat eri järjestyksessä
+     * @return Palauttaa listan joka sisältää syötetyn listan esiintymiä, kun
+     * muuttujat ovat eri järjestyksessä
      */
     public ArrayList<ArrayList<ArrayList<Card>>> listPermutations(ArrayList<ArrayList<Card>> list) {
         ArrayList<ArrayList<ArrayList<Card>>> permutations = new ArrayList<>();
@@ -108,7 +111,9 @@ public class HandTools {
     }
 
     /**
-     * Metodi muuttaa syötteenä annetun listan korttien järjestystä arvojen ja maitten mukaan.
+     * Metodi muuttaa syötteenä annetun listan korttien järjestystä arvojen ja
+     * maitten mukaan.
+     *
      * @param hand Syötteenä lista korteista
      */
     public void sortHand(ArrayList<Card> hand) {
@@ -127,6 +132,7 @@ public class HandTools {
 
     /**
      * Laskee setin korttien arvojen summan.
+     *
      * @param set korttien setti.
      * @return summa kokonaisluku.
      */
@@ -140,6 +146,7 @@ public class HandTools {
 
     /**
      * Palauttaa korttisettien kokoelman summan.
+     *
      * @param sets korttisettien kokoelma
      * @return Summa kokonaisluku.
      */
@@ -153,8 +160,10 @@ public class HandTools {
 
     /**
      * Tarkistaa onko muodostavatko listan kortit värisuoran.
+     *
      * @param set
-     * @return Jos kortit muodostavat värisuoran palauttaa arvon tosi, muuten epätosi.
+     * @return Jos kortit muodostavat värisuoran palauttaa arvon tosi, muuten
+     * epätosi.
      */
     public boolean straightCheck(ArrayList<Card> set) {
         ArrayList<ArrayList<Card>> straights = sortStraights(set, 3);
@@ -173,6 +182,7 @@ public class HandTools {
 
     /**
      * Tarkistaa muodostavatko listan kortit samanarvoisten korttien sarjan.
+     *
      * @param set Tarkistettava setti.
      * @return Jos muodostaa sarjan palauttaa arvon tosi, muuten epätosi.
      */
@@ -197,6 +207,7 @@ public class HandTools {
 
     /**
      * Järjestää kortit samanarvoisten korttien sarjoihin.
+     *
      * @param hand Järjestettävä korttien lista.
      * @param size Sarjojen minimikoko.
      * @return Palauttaa Listan joka sisältää kaikki listasta löytyneet sarjat.
@@ -230,6 +241,7 @@ public class HandTools {
 
     /**
      * Järjestää listan kortit värisuoriin.
+     *
      * @param hand Järjestettävä korttien lista.
      * @param size Suorien minimikoko.
      * @return Palauttaa Listan joka sisältää kaikki löytyneet suorat.
@@ -280,9 +292,11 @@ public class HandTools {
 
     /**
      * Poistaa määrätystä listasta annetun listan kanssa yhteiset kortit.
+     *
      * @param keep Lista jonka kortit säilytetään.
      * @param removeFrom Lista josta kortit poistetaan.
-     * @return Palauttaa arvon tosi, jos listoissa oli yhteisiä kortteja ja kortteja poistettiin.
+     * @return Palauttaa arvon tosi, jos listoissa oli yhteisiä kortteja ja
+     * kortteja poistettiin.
      */
     public boolean removeDuplicates(ArrayList<Card> keep, ArrayList<Card> removeFrom) {
         boolean found = false;

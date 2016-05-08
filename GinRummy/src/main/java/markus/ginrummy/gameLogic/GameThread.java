@@ -14,6 +14,7 @@ import java.util.Random;
 
 /**
  * Peliä palvelimella hallinnoiva säie.
+ *
  * @author Markus
  */
 public class GameThread extends Thread {
@@ -27,6 +28,7 @@ public class GameThread extends Thread {
 
     /**
      * Peliä hallinnoiva säie.
+     *
      * @param first Ensimmäinen pelaaja.
      * @param second Toinen pelaaja.
      */
@@ -124,7 +126,7 @@ public class GameThread extends Thread {
                 printBoth("Poytakortti: &" + open.topCard().toString());
                 currentPlayer().printString("Nostatko avopakasta vai umpipakasta?.");
                 while (true) {
-                    String option = currentPlayer().readString();                 
+                    String option = currentPlayer().readString();
                     synchronized (this) {
                         notifyAll();
                     }
@@ -178,7 +180,7 @@ public class GameThread extends Thread {
                                 + " Haluatko lopettaa?");
                         boolean stop = false;
                         while (true) {
-                            String option = currentPlayer().readString();                        
+                            String option = currentPlayer().readString();
                             synchronized (this) {
                                 notifyAll();
                             }
@@ -215,7 +217,7 @@ public class GameThread extends Thread {
                 currentPlayer().printString("Valitse poistettava kortti komennolla: '/numero'");
                 a = null;
                 while (true) {
-                    a = currentPlayer().readString();              
+                    a = currentPlayer().readString();
                     synchronized (this) {
                         notifyAll();
                     }
@@ -262,6 +264,7 @@ public class GameThread extends Thread {
 
     /**
      * Molemmille pelaajille merkkijonon tulostava metodi.
+     *
      * @param string tulostettava merkkijono.
      */
     public void printBoth(String string) {
@@ -272,6 +275,7 @@ public class GameThread extends Thread {
 
     /**
      * Metodi vaihtaa lukua yhden ja nollan välillä.
+     *
      * @param current Tämän hetkinen kokonaisluku.
      * @return
      */
@@ -285,6 +289,7 @@ public class GameThread extends Thread {
 
     /**
      * Palauttaa vuorossa olevan pelaajan.
+     *
      * @return pelaaja.
      */
     public Player currentPlayer() {
@@ -293,6 +298,7 @@ public class GameThread extends Thread {
 
     /**
      * Palauttaa pelaajan joka ei ole vuorossa.
+     *
      * @return Pelaaja.
      */
     public Player otherPlayer() {

@@ -5,13 +5,13 @@
  */
 package markus.ginrummy.gameobjects;
 
-import markus.ginrummy.gameobjects.Card;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
 /**
  * Pelin pakka olio, joka koostuu kortti olioista.
+ *
  * @author Markus
  */
 public class Deck {
@@ -33,8 +33,9 @@ public class Deck {
     }
 
     /**
-     * Sekoittaa pakan parametrilla määrätyt kerrat.
-     * Pakan sekaisuus voidaan taata sekoittamalla useita kertoja.
+     * Sekoittaa pakan parametrilla määrätyt kerrat. Pakan sekaisuus voidaan
+     * taata sekoittamalla useita kertoja.
+     *
      * @param times Pakan sekoituskerrat.
      */
     public void shuffle(int times) {
@@ -51,6 +52,7 @@ public class Deck {
 
     /**
      * Palauttaa pakan päälimmäisen kortin ja poistaa pakasta saman kortin.
+     *
      * @return Paluttaa kortti olion.
      */
     public Card takeCard() {

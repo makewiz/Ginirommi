@@ -5,6 +5,7 @@
  */
 package markus.ginrummy.useritfce.logic;
 
+import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -29,7 +30,7 @@ import markus.ginrummy.useritfce.graphics.CardBack;
 import markus.ginrummy.useritfce.graphics.PlayingCard;
 
 /**
- * Clientin ruutuja hallitseva ajettava säie.
+ * Clientin ruutuja hallitseva ajettava sÃ¤ie.
  *
  * @author Markus
  */
@@ -38,7 +39,7 @@ public class FrameController extends Thread {
     private ReaderWriter client;
 
     /**
-     * Luo uuden ruudunhallintasäikeen määrätyllä palvelinyhteydellä.
+     * Luo uuden ruudunhallintasÃ¤ikeen mÃ¤Ã¤rÃ¤tyllÃ¤ palvelinyhteydellÃ¤.
      *
      * @param client
      */
@@ -91,8 +92,43 @@ public class FrameController extends Thread {
                     if (fromServer.equals("Players online:.")) {
                         updatePlayerPanel(playerPanel, lobby);
                         lobby.validate();
-                    } else if (fromServer.equals("/stcmd")) {
-                        client.print("/stcmd");
+                    } else if (fromServer.startsWith("/kutsu:")) {
+                        String name = fromServer.substring(7);
+                        JPanel invite = new JPanel();
+                        invite.setLayout(new FlowLayout());
+                        JLabel inviteText = new JLabel("Pelaaja " + name + " lähetti pelikutsun. Hyväksytäänkö");
+                        JLabel acceptLabel = new JLabel("Kyllä");
+                        JLabel denyLabel = new JLabel("Ei");
+                        inviteText.setFont(inviteText.getFont().deriveFont(24.0f));
+                        acceptLabel.setFont(acceptLabel.getFont().deriveFont(24.0f));
+                        denyLabel.setFont(denyLabel.getFont().deriveFont(24.0f));
+                        acceptLabel.addMouseListener(new MouseAdapter() {
+
+                            @Override
+                            public void mouseClicked(MouseEvent e) {
+                                client.print("/1");
+                                client.print("/1");
+                            }
+
+                        });
+                        denyLabel.addMouseListener(new MouseAdapter() {
+
+                            @Override
+                            public void mouseClicked(MouseEvent e) {
+                                client.print("/2");
+                                client.print("/2");
+                            }
+
+                        });
+                        acceptLabel.setForeground(Color.green);
+                        denyLabel.setForeground(Color.red);
+                        invite.add(acceptLabel);
+                        invite.add(denyLabel);
+                        panel.add(inviteText);
+                        panel.add(invite);
+                        lobby.validate();
+                        panel.scrollRectToVisible(invite.getBounds());
+                        lobby.validate();
                     } else {
                         if (panel.getComponentCount() >= 30) {
                             panel.remove(0);
@@ -233,7 +269,7 @@ public class FrameController extends Thread {
                     }
                 });
 
-                JMenuItem messageItem = new JMenuItem("Lähetä yksityisviesti");
+                JMenuItem messageItem = new JMenuItem("LÃ¤hetÃ¤ yksityisviesti");
                 messageItem.addActionListener(new ActionListener() {
 
                     @Override

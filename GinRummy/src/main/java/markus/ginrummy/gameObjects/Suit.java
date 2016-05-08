@@ -7,6 +7,7 @@ package markus.ginrummy.gameobjects;
 
 /**
  * Kortin maata kuvaava enumi.
+ *
  * @author Markus
  */
 public enum Suit {
@@ -15,17 +16,14 @@ public enum Suit {
      *
      */
     PATA,
-
     /**
      *
      */
     HERTTA,
-
     /**
      *
      */
     RUUTU,
-
     /**
      *
      */

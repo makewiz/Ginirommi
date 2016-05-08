@@ -9,8 +9,6 @@ import markus.ginrummy.gameobjects.Player;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.ObjectInputStream;
-import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.ArrayList;
@@ -21,6 +19,7 @@ import markus.ginrummy.gameLogic.GameThread;
 
 /**
  * Palvelimen tiettyä clienttiä palveleva säie.
+ *
  * @author Markus
  */
 public class MultiServerThread extends Thread {
@@ -107,16 +106,11 @@ public class MultiServerThread extends Thread {
                             break;
                         }
                         String message = in.readLine();
-                        if (message != null && message.equals("/xxx")) {
-                            synchronized(gameThread) {
-                                gameThread.wait();
-                            }
-                        } else if (message != null && !message.startsWith("/")) {
-                                sendStringTo(connectingThread.getSocket(), this.player.getName() + ": " + message);
-                                sendStringTo(socket, this.player.getName() + ": " + message);
+                        if (message != null && !message.startsWith("/")) {
+                            sendStringTo(connectingThread.getSocket(), this.player.getName() + ": " + message);
+                            sendStringTo(socket, this.player.getName() + ": " + message);
                         }
                     }
-                    continue;
                 } else if (command.startsWith("/")) {
                     if (command.startsWith("/start")) {
                         String playerName = command.substring(7);
@@ -150,19 +144,15 @@ public class MultiServerThread extends Thread {
                                 falsePlayer.connect(this);
                                 playerTwo.setState(1);
                                 player.setState(1);
-                                String test;
+                                String reply;
                                 while (true) {
-                                    out2.println("Pelaaja " + player.getName() + " tahtoo aloittaa pelin. Hyväksytaanko pyynto?");
-                                    out2.println("Komennot: /1: kyllä, /2: ei:");
-                                    out2.println("/stcmd");
-                                    test = in2.readLine();
-                                    if (test.equals("/1") || test.equals("/2")) {
+                                    out2.println("/kutsu:" + player.getName());
+                                    reply = in2.readLine();
+                                    if (reply.equals("/1") || reply.equals("/2")) {
                                         break;
-                                    } else {
-                                        out2.println("Väärä komento.");
                                     }
                                 }
-                                if (test.equals("/2")) {
+                                if (reply.equals("/2")) {
                                     playerTwo.setState(0);
                                     player.setState(0);
                                     out.println("Ei hyväksytty.");
@@ -181,15 +171,10 @@ public class MultiServerThread extends Thread {
                                             break;
                                         }
                                         String message = in.readLine();
-                                        if (message != null && message.equals("/xxx")) {
-                                            synchronized(gameThread) {
-                                                gameThread.wait();
-                                            }
-                                        } else if (message != null && !message.startsWith("/")) {
-                                                sendStringTo(connecting, this.player.getName() + ": " + message);
-                                                sendStringTo(socket, this.player.getName() + ": " + message);
+                                        if (message != null && !message.startsWith("/")) {
+                                            sendStringTo(connecting, this.player.getName() + ": " + message);
+                                            sendStringTo(socket, this.player.getName() + ": " + message);
                                         }
-                                                                        
                                     }
                                 }
 
@@ -226,7 +211,7 @@ public class MultiServerThread extends Thread {
                     }
                 } else {
                     for (Player p : players) {
-                        sendStringTo(p.getSocket(), this.player.getName() + ": " + command);                        
+                        sendStringTo(p.getSocket(), this.player.getName() + ": " + command);
                     }
                 }
             }
@@ -244,8 +229,6 @@ public class MultiServerThread extends Thread {
         } catch (IOException e) {
             e.getLocalizedMessage();
 
-        } catch (InterruptedException ex) {
-            Logger.getLogger(MultiServerThread.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

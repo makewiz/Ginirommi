@@ -26,6 +26,7 @@ public class PlayingCard extends javax.swing.JPanel {
 
     /**
      * Creates new form PalyingCard
+     *
      * @param card
      * @param idx
      * @param client
@@ -119,10 +120,11 @@ public class PlayingCard extends javax.swing.JPanel {
 
     private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
         // TODO add your handling code here:
-        client.print("/xxx");
         if (idx != 99) {
             client.print("/" + idx);
+            client.print("/" + idx);
         } else {
+            client.print("/k");
             client.print("/k");
         }
     }//GEN-LAST:event_formMouseClicked
