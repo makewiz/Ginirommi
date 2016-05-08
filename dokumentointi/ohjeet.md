@@ -1,3 +1,6 @@
+*Pelin käynnistäminen:*
+* Pelin voi käynnistää dist kansiosta löytyvästä jar-tiedostosta.
+
 *Aloitusruudun ohjeet:*
 * Tekoälyä vastaan voi pelata valitsemalla alimman painikkeen "local game".
 * Verkkopalvelin avataan "host game"-painikkeesta.
