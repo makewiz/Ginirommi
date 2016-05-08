@@ -18,7 +18,7 @@
 * Avopakasta, tai umpipakasta voi nostaa niitä klikkaamalla.
 * Poistettavan kortin voi valita klikkaamalla sitä.
 * Pikaviestejä pelitoverille voi lähettää kirjoittamalla ne vasemmassa alareunassa sijaitsevaan viestipalkkiin.
-Ginirommin ohjeet löytyvät korttipelioppaasta: (http://www.korttipeliopas.fi/ginirommi)
+* Ginirommin ohjeet löytyvät korttipelioppaasta: (http://www.korttipeliopas.fi/ginirommi)
 
 *Bugit:*
 * Pelistä löytyy muutamia bugeja.
